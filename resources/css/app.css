@@ -1,0 +1,35 @@
+@import 'tailwindcss';
+@import './gacha.css';
+@import './catalog.css';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@keyframes chestRumble {
+    0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    20% { transform: translate(-3px, 2px) rotate(-2.5deg) scale(1.04); }
+    40% { transform: translate(3px, -2px) rotate(2.5deg) scale(1.06); }
+    60% { transform: translate(-4px, -1px) rotate(-3.5deg) scale(1.08); }
+    80% { transform: translate(4px, 1px) rotate(3.5deg) scale(1.1); }
+    100% { transform: translate(0, 0) rotate(0deg) scale(1.05); }
+}
+
+@keyframes glowPulse {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.4)); }
+    50% { filter: drop-shadow(0 0 45px rgba(236, 72, 153, 0.85)); }
+}
+
+.animate-chest-rumble {
+    animation: chestRumble 0.25s infinite ease-in-out !important;
+}
+
+.animate-glow-pulse {
+    animation: glowPulse 2.5s infinite ease-in-out;
+}

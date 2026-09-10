@@ -1,0 +1,1 @@
+@extends('layouts.app') @section('content')<article class="mx-auto max-w-3xl"><h1 class="text-3xl font-bold">{{$news->title}}</h1><p class="my-3 text-slate-400">{{$news->published_at?->copy()->timezone('Asia/Bangkok')->format('d/m/Y')}}</p><div class="whitespace-pre-line leading-8">{{$news->content}}</div></article>@endsection

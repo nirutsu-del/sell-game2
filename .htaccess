@@ -1,0 +1,9 @@
+# Defense in depth when Apache mistakenly exposes the project directory.
+# Production DocumentRoot MUST point to public/. Requires AllowOverride enabled.
+Options -Indexes
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(?:app|bootstrap|config|database|docs|node_modules|resources|routes|scripts|storage|tests|vendor)(?:/|$) - [F,L,NC]
+    RewriteRule (^|/)\. - [F,L]
+    RewriteRule ^(?:artisan|composer\.(?:json|lock)|package(?:-lock)?\.json|phpunit\.xml|vite\.config\..*|README\.md)$ - [F,L,NC]
+</IfModule>
