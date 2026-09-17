@@ -4,7 +4,7 @@ require __DIR__.'/../vendor/autoload.php';
 $app = require __DIR__.'/../bootstrap/app.php';
 $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 use Illuminate\Support\Facades\{DB, Artisan, File};
-use App\Models\{User, Category, GameAccount, TopupTransaction, PurchaseHistory, WalletTransaction, TopupReview};
+use App\Models\{User, Category, GameAccount, TopupTransaction, PurchaseHistory, WalletTransaction, TopupReview, GachaBox, GachaItem, GachaSpin};
 use Symfony\Component\Process\Process;
 
 $id = bin2hex(random_bytes(6));
@@ -34,7 +34,7 @@ try {
         DB::purge($connectionName);
         config(['database.connections.'.$connectionName=>$config]);
     }
-    config(['database.connections.race'=>$config,'database.default'=>'race','mail.default'=>'array','cache.default'=>'array','queue.default'=>'sync']);
+    config(['database.connections.race'=>$config,'database.default'=>'race','mail.default'=>'array','cache.default'=>'array','queue.default'=>'sync','hashing.bcrypt.rounds'=>4]);
     \Illuminate\Support\Facades\Schema::clearResolvedInstance('db.schema');
     $app->forgetInstance('db.schema');
     if (DB::connection()->getDatabaseName() !== $schema) throw new RuntimeException('Isolation check failed');
@@ -46,16 +46,20 @@ try {
     $category = Category::create(['name'=>'Race category','slug'=>'race-category']);
     $passed = true;
     for ($round=1;$round<=2;$round++) {
-        foreach (['buy','approve','same_reference','retry','same_slip'] as $kind) {
+        foreach (['buy','approve','same_reference','retry','same_slip','spin_retry'] as $kind) {
             $tasks = []; $users = [];
-            foreach (range(0,3) as $n) $users[] = User::create(['name'=>'Race user','email'=>"$round-$kind-$n@example.test",'password'=>bin2hex(random_bytes(16)),'balance'=>$kind==='buy'?300:0]);
+            foreach (range(0,3) as $n) $users[] = User::create(['name'=>'Race user','email'=>"$round-$kind-$n@example.test",'password'=>bin2hex(random_bytes(16)),'balance'=>$kind==='buy'?300:($kind==='spin_retry'?100:0)]);
             $target = null;
             if ($kind==='buy') $target = GameAccount::create(['category_id'=>$category->id,'title'=>'Race account','price'=>199,'status'=>'available','credentials_data'=>['username'=>'test-only']])->id;
             if ($kind==='approve') $target = TopupTransaction::create(['user_id'=>$users[0]->id,'amount'=>150,'payment_method'=>'promptpay_slip','reference_no'=>"RACE-$round-$kind"])->id;
+            if ($kind==='spin_retry') {
+                $target = GachaBox::create(['name'=>'Race box','price_per_spin'=>30,'is_active'=>true])->id;
+                GachaItem::create(['gacha_box_id'=>$target,'reward_type'=>'credit','credit_amount'=>5,'drop_rate'=>100]);
+            }
             $requestId = (string) Illuminate\Support\Str::uuid();
             foreach (range(0,3) as $n) {
-                $body = in_array($kind,['approve','same_reference'],true) ? ['funds_received'=>1,'received_amount'=>150,'transfer_reference'=>"RACE-$round-$kind"] : ['request_id'=>$kind==='retry'?$requestId:(string)Illuminate\Support\Str::uuid(),'amount'=>100,'payment_method'=>'promptpay_slip'];
-                $tasks[] = ['kind'=>$kind,'user'=>in_array($kind,['approve','same_reference'],true)?$admin->id:($kind==='retry'?$users[0]->id:$users[$n]->id),'target'=>$kind==='same_reference' ? TopupTransaction::create(['user_id'=>$users[$n]->id,'amount'=>150,'payment_method'=>'promptpay_slip','reference_no'=>"REF-$round-$n"])->id : $target,'body'=>$body];
+                $body = in_array($kind,['approve','same_reference'],true) ? ['funds_received'=>1,'received_amount'=>150,'transfer_reference'=>"RACE-$round-$kind"] : ['request_id'=>in_array($kind,['retry','spin_retry'],true)?$requestId:(string)Illuminate\Support\Str::uuid(),'amount'=>100,'payment_method'=>'promptpay_slip'];
+                $tasks[] = ['kind'=>$kind,'user'=>in_array($kind,['approve','same_reference'],true)?$admin->id:(in_array($kind,['retry','spin_retry'],true)?$users[0]->id:$users[$n]->id),'target'=>$kind==='same_reference' ? TopupTransaction::create(['user_id'=>$users[$n]->id,'amount'=>150,'payment_method'=>'promptpay_slip','reference_no'=>"REF-$round-$n"])->id : $target,'body'=>$body];
             }
             foreach (range(0,3) as $n) if (is_file($dir.'/ready-'.$n)) unlink($dir.'/ready-'.$n);
             if (is_file($dir.'/release')) unlink($dir.'/release');
@@ -93,6 +97,7 @@ try {
                 'same_reference' => $ok===1 && $validation===3 && $credits===1 && $debits===0 && (float)array_sum($balances)===150.0 && TopupTransaction::whereIn('user_id',$ids)->where('status','success')->count()===1,
                 'retry' => $ok===4 && $topups===1 && count(array_unique(array_column($outputs,'id')))===1 && $credits===0 && (float)array_sum($balances)===0.0,
                 'same_slip' => $ok===1 && $validation===3 && $topups===1 && $credits===0 && (float)array_sum($balances)===0.0,
+                'spin_retry' => $ok===4 && count(array_unique(array_column($outputs,'id')))===1 && $debits===1 && $credits===1 && $balances[0]==='75.00' && GachaSpin::where('gacha_box_id',$target)->count()===1,
             };
             $report['cases'][] = ['round'=>$round,'case'=>$kind,'passed'=>$casePass,'workers'=>$outputs,'balances'=>$balances,'topups'=>$topups,'credits'=>$credits,'debits'=>$debits];
             $passed = $passed && $casePass;

@@ -39,6 +39,9 @@ try {
     if ($task['kind'] === 'buy') {
         $result = app(App\Services\StoreService::class)->buy($user,$task['target']);
         $id = $result->id;
+    } elseif ($task['kind'] === 'spin_retry') {
+        $result = app(App\Services\StoreService::class)->spin($user,$task['target'],$task['body']['request_id']);
+        $id = $result['spin_id'];
     } elseif (in_array($task['kind'], ['approve','same_reference'], true)) {
         app(App\Http\Controllers\Admin\TopupController::class)->approve($request,App\Models\TopupTransaction::findOrFail($task['target']));
         $id = $task['target'];
