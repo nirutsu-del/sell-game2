@@ -13,7 +13,7 @@ class StoreService
         return DB::transaction(function () use ($user, $accountId) {
             $user = User::lockForUpdate()->findOrFail($user->id);
             $account = GameAccount::lockForUpdate()->findOrFail($accountId);
-            if ($account->status !== 'available') {
+            if ($account->status !== 'available' || $account->purchase()->exists()) {
                 throw ValidationException::withMessages(['account' => 'ไอดีนี้ถูกขายไปแล้ว']);
             }
             if ($user->balance < $account->price) {

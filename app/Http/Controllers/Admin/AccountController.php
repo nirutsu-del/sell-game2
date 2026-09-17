@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\GameAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class AccountController extends Controller
 {
@@ -82,25 +84,47 @@ class AccountController extends Controller
             'images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
         ]);
 
-        $attributes = collect($data)->only(['category_id', 'title', 'description', 'price', 'status'])->all();
-        if ($request->hasFile('images')) {
-            $newImages = collect($request->file('images'))
-                ->map(fn ($image) => $image->store('game-accounts', 'public'))
-                ->all();
-            Storage::disk('public')->delete($account->images ?? []);
-            $attributes['images'] = $newImages;
-        }
+        $newImages = [];
+        $oldImages = [];
+        try {
+            DB::transaction(function () use ($request, $data, $account, &$newImages, &$oldImages) {
+                // Serialize admin edits with checkout; route binding may contain stale data.
+                $lockedAccount = GameAccount::lockForUpdate()->findOrFail($account->id);
+                if ($data['status'] === 'available' && $lockedAccount->purchase()->exists()) {
+                    throw ValidationException::withMessages([
+                        'status' => 'ไอดีนี้มีประวัติการขายแล้ว ไม่สามารถเปิดขายซ้ำได้',
+                    ]);
+                }
 
-        if ($data['username'] ?? null || $data['password_value'] ?? null || $data['code'] ?? null) {
-            $credentials = $account->credentials();
-            $attributes['credentials_data'] = [
-                'username' => $data['username'] ?: $credentials['username'],
-                'password' => $data['password_value'] ?: $credentials['password'],
-                'code' => $data['code'] ?: ($credentials['code'] ?? null),
-            ];
-        }
+                $attributes = collect($data)->only(['category_id', 'title', 'description', 'price', 'status'])->all();
+                if ($request->hasFile('images')) {
+                    // Reuse staged uploads if a deadlock causes the transaction to retry.
+                    if (!$newImages) {
+                        foreach ($request->file('images') as $image) {
+                            $newImages[] = $image->store('game-accounts', 'public');
+                        }
+                    }
+                    $oldImages = $lockedAccount->images ?? [];
+                    $attributes['images'] = $newImages;
+                }
 
-        $account->update($attributes);
+                if (($data['username'] ?? null) || ($data['password_value'] ?? null) || ($data['code'] ?? null)) {
+                    $credentials = $lockedAccount->credentials();
+                    $attributes['credentials_data'] = [
+                        'username' => ($data['username'] ?? null) ?: $credentials['username'],
+                        'password' => ($data['password_value'] ?? null) ?: $credentials['password'],
+                        'code' => ($data['code'] ?? null) ?: ($credentials['code'] ?? null),
+                    ];
+                }
+
+                $lockedAccount->update($attributes);
+            }, 3);
+        } catch (\Throwable $exception) {
+            Storage::disk('public')->delete($newImages);
+            throw $exception;
+        }
+        // Keep existing images available until the database update has committed.
+        Storage::disk('public')->delete($oldImages);
 
         return redirect()->route('admin.accounts.index')->with('success', 'บันทึกการแก้ไขไอดีเกมแล้ว');
     }

@@ -39,7 +39,7 @@
             <button id="gacha-sound" type="button" aria-pressed="false" class="rounded-full border border-violet-400/30 px-3 py-2">เสียง: ปิด</button>
         </div>
         <div class="gacha-modes" role="group" aria-label="รูปแบบการสุ่ม"><button type="button" data-gacha-mode="cards" aria-pressed="true">✦ เลือกการ์ด</button><button type="button" data-gacha-mode="wheel" aria-pressed="false">◉ วงล้อ</button><button type="button" data-gacha-mode="box" aria-pressed="false">◇ เปิดกล่อง</button></div>
-        <div id="gacha-cards-scene" class="gacha-cards-scene"><p>เลือกการ์ด 1 ใบ แล้วกดปุ่มสุ่มด้านล่าง</p><div class="gacha-card-choices">@for($i=0;$i<5;$i++)<button type="button" class="gacha-choice" data-card-index="{{ $i }}" aria-pressed="false" aria-label="เลือกการ์ดใบที่ {{ $i+1 }}"><span class="gacha-choice-back"><b>✦</b><small>MIZUKI</small><span>0{{ $i+1 }}</span></span><span class="gacha-choice-front"></span></button>@endfor</div></div>
+        <div id="gacha-cards-scene" class="gacha-cards-scene"><p>เลือกการ์ด 1 ใบ แล้วกดปุ่มสุ่มด้านล่าง</p><p class="mt-2 text-xs text-slate-400">การเลือกใบไม่เปลี่ยนโอกาสได้รับรางวัล ผลรางวัลกำหนดโดยเซิร์ฟเวอร์</p><div class="gacha-card-choices">@for($i=0;$i<5;$i++)<button type="button" class="gacha-choice" data-card-index="{{ $i }}" aria-pressed="false" aria-label="เลือกการ์ดใบที่ {{ $i+1 }}"><span class="gacha-choice-back"><b>✦</b><small>MIZUKI</small><span>0{{ $i+1 }}</span></span><span class="gacha-choice-front"></span></button>@endfor</div></div>
         <div id="gacha-wheel-scene" class="gacha-wheel-scene" hidden><div class="gacha-wheel-wrap"><span class="gacha-wheel-pointer" aria-hidden="true">▼</span><div id="gacha-wheel" class="gacha-wheel" aria-hidden="true"></div><span class="gacha-wheel-hub" aria-hidden="true">✦</span></div><p>วงล้อเป็นภาพแสดงผล ช่องมีขนาดเท่ากันและไม่ใช่สัดส่วนโอกาสได้รับ</p><ol id="gacha-wheel-legend" class="gacha-wheel-legend"></ol></div>
         <div id="gacha-chest" class="gacha-chest" hidden>
             <div class="gacha-orbit"></div>
@@ -49,6 +49,7 @@
                 <div class="gacha-cube" aria-hidden="true"><span>✦</span></div>
             @endif
         </div>
+        <p id="gacha-box-note" class="relative mt-3 text-center text-xs text-slate-400" hidden>ภาพเปิดกล่องเป็นแอนิเมชันแสดงผลรางวัลจากเซิร์ฟเวอร์เท่านั้น</p>
         <div id="gacha-reel" class="gacha-reel" hidden>
             <div class="gacha-pointer" aria-hidden="true">▼</div>
             <div id="gacha-track" class="gacha-track"></div>

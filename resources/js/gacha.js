@@ -29,6 +29,7 @@ if (root) {
     function resetScene() {
         el('reel').hidden = true;
         el('chest').hidden = mode !== 'box';
+        el('box-note').hidden = mode !== 'box';
         el('cards-scene').hidden = mode !== 'cards';
         el('wheel-scene').hidden = mode !== 'wheel';
         choices.forEach(button => { button.classList.remove('is-revealed'); button.querySelector('.gacha-choice-front').replaceChildren(); });

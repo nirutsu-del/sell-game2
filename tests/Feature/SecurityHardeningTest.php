@@ -63,6 +63,44 @@ class SecurityHardeningTest extends TestCase
         $this->artisan('store:security-check')->expectsOutput('[FAIL] APP_DEBUG is disabled')->assertExitCode(1);
     }
 
+    public function test_csp_for_built_assets_restricts_sources_and_preserves_inline_compatibility(): void
+    {
+        $this->withoutVite();
+        $policy = $this->get('/login')->assertOk()->headers->get('Content-Security-Policy');
+        foreach (["default-src 'self'", "script-src 'self' 'unsafe-inline'", "connect-src 'self'",
+            "object-src 'none'", "base-uri 'self'", "form-action 'self'", "frame-ancestors 'self'"] as $directive) {
+            $this->assertContains($directive, explode('; ', $policy));
+        }
+        $this->assertStringNotContainsString('localhost:', $policy);
+    }
+
+    public function test_csp_allows_active_vite_origin_only_in_local_environment(): void
+    {
+        $vite = app(\Illuminate\Foundation\Vite::class);
+        $originalHotFile = $vite->hotFile();
+        $hotFile = tempnam(sys_get_temp_dir(), 'mizuki-vite-');
+        file_put_contents($hotFile, 'http://localhost:5173');
+        $vite->useHotFile($hotFile);
+        $middleware = new \App\Http\Middleware\SecurityHeaders();
+        try {
+            $this->app->instance('env', 'local');
+            $policy = $middleware->handle(\Illuminate\Http\Request::create('/'), fn () => response('test'))
+                ->headers->get('Content-Security-Policy');
+            $this->assertStringContainsString("script-src 'self' 'unsafe-inline' http://localhost:5173;", $policy);
+            $this->assertStringContainsString("style-src 'self' 'unsafe-inline' http://localhost:5173;", $policy);
+            $this->assertStringContainsString("connect-src 'self' http://localhost:5173 ws://localhost:5173;", $policy);
+
+            $this->app->instance('env', 'production');
+            $policy = $middleware->handle(\Illuminate\Http\Request::create('/'), fn () => response('test'))
+                ->headers->get('Content-Security-Policy');
+            $this->assertStringNotContainsString('localhost:5173', $policy);
+        } finally {
+            $this->app->instance('env', 'testing');
+            $vite->useHotFile($originalHotFile);
+            unlink($hotFile);
+        }
+    }
+
     public function test_backup_refuses_public_output_without_creating_files(): void
     {
         $before = glob(public_path('store_*'));
