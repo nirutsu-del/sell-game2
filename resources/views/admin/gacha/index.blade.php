@@ -86,7 +86,7 @@
                                 <a href="{{ route('admin.gacha.edit', $box) }}" class="rounded bg-slate-800 px-3 py-1.5 text-xs font-medium text-slate-300 hover:bg-slate-700">
                                     แก้ไข
                                 </a>
-                                <form action="{{ route('admin.gacha.destroy', $box) }}" method="POST" onsubmit="return confirm('ยืนยันลบกล่องสุ่มนี้? ข้อมูลการสุ่มทั้งหมดจะถูกลบด้วย')">
+                                <form action="{{ route('admin.gacha.destroy', $box) }}" method="POST" onsubmit="return confirm('ยืนยันลบกล่องสุ่มนี้? กล่องจะหยุดเปิดให้สุ่ม โดยยังเก็บประวัติการสุ่มเดิมไว้')">
                                     @csrf
                                     @method('DELETE')
                                     <button class="rounded bg-rose-600/10 border border-rose-500/20 px-3 py-1.5 text-xs font-medium text-rose-400 hover:bg-rose-600/20">

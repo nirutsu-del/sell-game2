@@ -7,6 +7,14 @@ use Tests\TestCase;
 class CatalogTest extends TestCase {
     use RefreshDatabase;
     protected function setUp(): void { parent::setUp(); config(['store.service_catalog_enabled'=>true]); }
+    public function test_home_features_only_an_active_box_with_its_real_price_and_availability(): void {
+        $box = \App\Models\GachaBox::create(['name'=>'Homepage mystery box','price_per_spin'=>17.50,'is_active'=>false]);
+        $this->get('/')->assertOk()->assertDontSee('home-gacha-title');
+        $box->update(['is_active'=>true]);
+        $this->get('/')->assertOk()->assertSee('Homepage mystery box')->assertSee('฿17.50')->assertSee('รางวัลหมดชั่วคราว')->assertSee(route('gacha.show',$box));
+        $box->items()->create(['reward_type'=>'credit','credit_amount'=>5,'drop_rate'=>100]);
+        $this->get('/')->assertOk()->assertSee('มีรางวัลพร้อมสุ่ม');
+    }
     private function fixture(): array {
         $category = Category::create(['name'=>'Game','slug'=>'game']);
         $product = Product::create(['category_id'=>$category->id,'name'=>'Gift service','is_active'=>true]);

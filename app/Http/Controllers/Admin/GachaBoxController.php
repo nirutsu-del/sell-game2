@@ -7,6 +7,7 @@ use App\Models\GachaBox;
 use App\Models\GachaItem;
 use App\Models\GameAccount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class GachaBoxController extends Controller
@@ -88,15 +89,16 @@ class GachaBoxController extends Controller
 
         $gacha->update($attributes);
 
-        return redirect()->route('admin.gacha.index')->with('success', 'บันทึกการแก้ไขกล่องสุ่มแล้ว');
+        return redirect()->route('admin.gacha.edit', $gacha)->with('success', 'บันทึกการแก้ไขกล่องสุ่มแล้ว');
     }
 
     public function destroy(GachaBox $gacha)
     {
-        if ($gacha->image) {
-            Storage::disk('public')->delete($gacha->image);
-        }
-        $gacha->delete();
+        DB::transaction(function () use ($gacha) {
+            $box = GachaBox::lockForUpdate()->findOrFail($gacha->id);
+            $box->items()->delete();
+            $box->delete();
+        });
 
         return redirect()->route('admin.gacha.index')->with('success', 'ลบกล่องสุ่มเรียบร้อยแล้ว');
     }
@@ -130,7 +132,8 @@ class GachaBoxController extends Controller
         if ($data['reward_type'] === 'game_account') {
             $account = GameAccount::findOrFail($data['game_account_id']);
             if ($account->status !== 'available') {
-                return back()->withErrors(['game_account_id' => 'ไอดีนี้ไม่ได้อยู่ในสถานะพร้อมขาย']);
+                return redirect()->route('admin.gacha.items', $gacha)->withInput()
+                    ->withErrors(['game_account_id' => 'ไอดีนี้ไม่ได้อยู่ในสถานะพร้อมขาย']);
             }
         }
 
@@ -142,7 +145,7 @@ class GachaBoxController extends Controller
             'drop_rate' => $data['drop_rate'],
         ]);
 
-        return back()->with('success', 'เพิ่มของรางวัลลงในกล่องสำเร็จ');
+        return redirect()->route('admin.gacha.items', $gacha)->with('success', 'เพิ่มของรางวัลลงในกล่องสำเร็จ');
     }
 
     public function deleteItem(GachaBox $gacha, GachaItem $item)
@@ -150,7 +153,8 @@ class GachaBoxController extends Controller
         abort_if($item->gacha_box_id !== $gacha->id, 404);
         $item->delete();
 
-        return back()->with('success', 'ลบของรางวัลออกจากกล่องแล้ว');
+        return redirect()->route('admin.gacha.items', $gacha)
+            ->with('success', 'ลบของรางวัลออกจากกล่องแล้ว');
     }
 
     public function updateDropRates(Request $request, GachaBox $gacha)
@@ -166,6 +170,6 @@ class GachaBoxController extends Controller
                 ->update(['drop_rate' => $rate]);
         }
 
-        return back()->with('success', 'อัปเดตอัตราโอกาสออก (Drop Rates) เรียบร้อยแล้ว');
+        return redirect()->route('admin.gacha.items', $gacha)->with('success', 'อัปเดตอัตราโอกาสออก (Drop Rates) เรียบร้อยแล้ว');
     }
 }

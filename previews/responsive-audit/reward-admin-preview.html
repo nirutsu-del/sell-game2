@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="th">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1020"><meta name="csrf-token" content=""><title>Mizuki Shop</title><link rel="preload" as="style" href="http://localhost/sell-game2/public/build/assets/app-Bg3mMHFr.css" /><link rel="modulepreload" as="script" href="http://localhost/sell-game2/public/build/assets/app-Dtx4R1TO.js" /><link rel="stylesheet" href="http://localhost/sell-game2/public/build/assets/app-Bg3mMHFr.css" /><script type="module" src="http://localhost/sell-game2/public/build/assets/app-Dtx4R1TO.js"></script></head>
+<body class="vault-app  vault-store  min-h-screen text-slate-100 antialiased">
+<a href="#main-content" class="skip-link">ข้ามไปยังเนื้อหา</a>
+<header class="site-header">
+    <div class="mx-auto max-w-6xl px-4">
+        <div class="site-header-row">
+                <a class="brand" href="http://localhost/sell-game2/public"><img class="brand-wordmark" src="http://localhost/sell-game2/public/storage/store-settings/mizuki-speed-logo-02.png" alt="Mizuki Shop" width="1200" height="220"></a>
+        <nav class="main-nav" aria-label="เมนูหลัก">
+            <a class="" href="http://localhost/sell-game2/public">หน้าแรก</a><a class="" href="http://localhost/sell-game2/public/categories">สินค้า</a><a class="" href="http://localhost/sell-game2/public/wallet">เติมเงิน</a><a class="" href="http://localhost/sell-game2/public/gacha">สุ่มไอดี</a><a class="" href="http://localhost/sell-game2/public/contact">ติดต่อ</a>
+        </nav>
+                <div class="header-actions">
+                    <a id="notification-bell" href="http://localhost/sell-game2/public/notifications" data-count-url="http://localhost/sell-game2/public/notifications/count" aria-label="แจ้งเตือน ยังไม่อ่าน 0 รายการ" class="icon-button relative">
+                <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+                <span id="notification-badge"  hidden  class="rounded-full bg-orange-600 px-1.5 py-0.5 text-[10px] font-bold text-white">0</span>
+            </a>
+            <a href="http://localhost/sell-game2/public/dashboard" class="account-link">บัญชีของฉัน</a>            <a href="http://localhost/sell-game2/public/wallet" class="wallet-chip"><span>฿</span>1,000.00</a>
+            <a href="http://localhost/sell-game2/public/logout" class="logout-link">ออกจากระบบ</a>
+                </div>
+    </div>
+        </div>
+</header>
+<div class="vault-workspace">
+    <main id="main-content" class="mx-auto max-w-6xl px-4 py-7">
+            <nav class="account-nav" aria-label="เมนูบัญชี">
+    <div class="account-nav-title"><span class="account-avatar">M</span><span class="hidden sm:inline">บัญชีของฉัน</span></div>
+    <div class="account-nav-links">
+        <a class="" href="http://localhost/sell-game2/public/dashboard">ภาพรวม</a>
+        <a class="" href="http://localhost/sell-game2/public/collection">คอลเลกชัน</a>
+        <a class="" href="http://localhost/sell-game2/public/wallet">Wallet</a>
+        <a class="" href="http://localhost/sell-game2/public/orders">ประวัติ</a>
+        <a class="" href="http://localhost/sell-game2/public/notifications">แจ้งเตือน</a>
+        <a class="" href="http://localhost/sell-game2/public/account/password">รหัสผ่าน</a>
+        <a href="http://localhost/sell-game2/public/logout">ออกจากระบบ</a>
+    </div>
+</nav>
+                    <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+    <div>
+        <div class="flex items-center gap-2">
+            <a href="http://localhost/sell-game2/public/admin/gacha" class="text-sm font-medium text-violet-400 hover:underline">← กล่องสุ่มทั้งหมด</a>
+            <span class="text-slate-600">/</span>
+            <span class="text-sm text-slate-400">ของรางวัล</span>
+        </div>
+        <h1 class="mt-1 text-3xl font-bold text-white">Free Fire</h1>
+        <p class="text-sm text-slate-400">ราคา: <span class="font-bold text-emerald-400">฿10.00</span> / ครั้ง</p>
+    </div>
+    <div class="flex items-center gap-3">
+        <a href="http://localhost/sell-game2/public/gacha/1" target="_blank" class="rounded-lg bg-slate-800 px-4 py-2 text-sm font-semibold hover:bg-slate-700">👁️ ดูหน้าสุ่มจริง</a>
+        <a href="http://localhost/sell-game2/public/admin/gacha/1/edit" class="rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold hover:bg-slate-800">แก้ไขกล่อง</a>
+    </div>
+</div>
+
+
+<div class="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-xl border p-4 border-emerald-500/40 bg-emerald-950/20 text-emerald-300">
+    <div class="flex items-center gap-3">
+        <span class="text-2xl">✅</span>
+        <div>
+            <p class="font-bold">ผลรวมโอกาสออกของรางวัลในกล่อง: <span class="text-lg underline">100.00%</span></p>
+            <p class="text-xs opacity-80">
+                                    อัตราโอกาสออกรวมครบ 100% พอดิบพอดี ระบบจะกระจายความน่าจะเป็นตามเรทนี้
+                            </p>
+        </div>
+    </div>
+</div>
+
+<div class="mt-8 grid gap-8 lg:grid-cols-3">
+    
+    <div class="lg:col-span-2 space-y-6">
+        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+                <h2 class="text-xl font-bold text-white">รายการของรางวัลในกล่อง (3)</h2>
+                <span class="text-xs text-slate-400">แก้ไขเรทแล้วกดบันทึกด้านล่าง</span>
+            </div>
+
+            <form action="http://localhost/sell-game2/public/admin/gacha/1/items/rates" method="POST" class="mt-4">
+                <input type="hidden" name="_token" value="" autocomplete="off">                <input type="hidden" name="_method" value="PUT">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="border-b border-slate-800 text-xs font-semibold uppercase text-slate-400">
+                            <tr>
+                                <th class="py-3 px-3">ประเภท</th>
+                                <th class="py-3 px-3">รายละเอียดของรางวัล</th>
+                                <th class="py-3 px-3">สถานะ</th>
+                                <th class="py-3 px-3 w-36">Drop Rate (%)</th>
+                                <th class="py-3 px-3 text-right">ลบ</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800/60 text-slate-300">
+                                                            <tr class="hover:bg-slate-800/30">
+                                    <td class="py-3 px-3">
+                                                                                    <span class="inline-flex items-center gap-1 rounded bg-emerald-950 px-2 py-1 text-xs font-semibold text-emerald-300 border border-emerald-800">
+                                                💰 เครดิต
+                                            </span>
+                                                                            </td>
+                                    <td class="py-3 px-3">
+                                                                                    <div>
+                                                <p class="font-bold text-emerald-400">คืนเงิน ฿5.00</p>
+                                                <p class="text-xs text-slate-400">เติมเข้ากระเป๋า Wallet ผู้สุ่มทันที</p>
+                                            </div>
+                                                                            </td>
+                                    <td class="py-3 px-3">
+                                                                                    <span class="rounded bg-sky-500/20 px-2 py-0.5 text-xs font-medium text-sky-300">ไม่จำกัด</span>
+                                                                            </td>
+                                    <td class="py-3 px-3">
+                                        <div class="flex items-center gap-1">
+                                            <input type="number" step="0.0001" min="0" max="100" name="rates[2]" value="60" class="w-24 rounded border border-slate-700 bg-slate-800 px-2.5 py-1 text-sm font-semibold text-white focus:border-violet-500 focus:outline-none">
+                                            <span class="text-xs text-slate-400">%</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-3 text-right">
+                                        <button type="submit" form="delete-item-2" class="text-rose-400 hover:text-rose-300 text-xs hover:underline" onclick="return confirm('ยืนยันลบรางวัลนี้ออกจากกล่อง?')">
+                                            ✕ นำออก
+                                        </button>
+                                    </td>
+                                </tr>
+                                                            <tr class="hover:bg-slate-800/30">
+                                    <td class="py-3 px-3">
+                                                                                    <span class="inline-flex items-center gap-1 rounded bg-emerald-950 px-2 py-1 text-xs font-semibold text-emerald-300 border border-emerald-800">
+                                                💰 เครดิต
+                                            </span>
+                                                                            </td>
+                                    <td class="py-3 px-3">
+                                                                                    <div>
+                                                <p class="font-bold text-emerald-400">คืนเงิน ฿10.00</p>
+                                                <p class="text-xs text-slate-400">เติมเข้ากระเป๋า Wallet ผู้สุ่มทันที</p>
+                                            </div>
+                                                                            </td>
+                                    <td class="py-3 px-3">
+                                                                                    <span class="rounded bg-sky-500/20 px-2 py-0.5 text-xs font-medium text-sky-300">ไม่จำกัด</span>
+                                                                            </td>
+                                    <td class="py-3 px-3">
+                                        <div class="flex items-center gap-1">
+                                            <input type="number" step="0.0001" min="0" max="100" name="rates[3]" value="30" class="w-24 rounded border border-slate-700 bg-slate-800 px-2.5 py-1 text-sm font-semibold text-white focus:border-violet-500 focus:outline-none">
+                                            <span class="text-xs text-slate-400">%</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-3 text-right">
+                                        <button type="submit" form="delete-item-3" class="text-rose-400 hover:text-rose-300 text-xs hover:underline" onclick="return confirm('ยืนยันลบรางวัลนี้ออกจากกล่อง?')">
+                                            ✕ นำออก
+                                        </button>
+                                    </td>
+                                </tr>
+                                                            <tr class="hover:bg-slate-800/30">
+                                    <td class="py-3 px-3">
+                                                                                    <span class="inline-flex items-center gap-1 rounded bg-violet-950 px-2 py-1 text-xs font-semibold text-violet-300 border border-violet-800">
+                                                🎮 ไอดีเกม
+                                            </span>
+                                                                            </td>
+                                    <td class="py-3 px-3">
+                                                                                    <div>
+                                                <p class="font-bold text-white">Phoenix Rush • ชุดเพลิงอมตะ</p>
+                                                <p class="text-xs text-slate-400">เกม: Free Fire · ราคาปกติ ฿890.00</p>
+                                            </div>
+                                                                            </td>
+                                    <td class="py-3 px-3">
+                                                                                                                                    <span class="rounded bg-rose-500/20 px-2 py-0.5 text-xs font-medium text-rose-300">ถูกสุ่มไปแล้ว</span>
+                                                                                                                        </td>
+                                    <td class="py-3 px-3">
+                                        <div class="flex items-center gap-1">
+                                            <input type="number" step="0.0001" min="0" max="100" name="rates[4]" value="10" class="w-24 rounded border border-slate-700 bg-slate-800 px-2.5 py-1 text-sm font-semibold text-white focus:border-violet-500 focus:outline-none">
+                                            <span class="text-xs text-slate-400">%</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3 px-3 text-right">
+                                        <button type="submit" form="delete-item-4" class="text-rose-400 hover:text-rose-300 text-xs hover:underline" onclick="return confirm('ยืนยันลบรางวัลนี้ออกจากกล่อง?')">
+                                            ✕ นำออก
+                                        </button>
+                                    </td>
+                                </tr>
+                                                    </tbody>
+                    </table>
+                </div>
+
+                                    <div class="mt-5 flex justify-end">
+                        <button type="submit" class="rounded-lg bg-emerald-600 px-5 py-2 font-bold text-white hover:bg-emerald-500 shadow-md shadow-emerald-600/20">
+                            💾 บันทึกการเปลี่ยนแปลง Drop Rates
+                        </button>
+                    </div>
+                            </form>
+
+                            <form id="delete-item-2" action="http://localhost/sell-game2/public/admin/gacha/1/items/2" method="POST" class="hidden">
+                    <input type="hidden" name="_token" value="" autocomplete="off">                    <input type="hidden" name="_method" value="DELETE">                </form>
+                            <form id="delete-item-3" action="http://localhost/sell-game2/public/admin/gacha/1/items/3" method="POST" class="hidden">
+                    <input type="hidden" name="_token" value="" autocomplete="off">                    <input type="hidden" name="_method" value="DELETE">                </form>
+                            <form id="delete-item-4" action="http://localhost/sell-game2/public/admin/gacha/1/items/4" method="POST" class="hidden">
+                    <input type="hidden" name="_token" value="" autocomplete="off">                    <input type="hidden" name="_method" value="DELETE">                </form>
+                    </div>
+    </div>
+
+    
+    <div class="space-y-6">
+        <div class="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                <span>➕</span> เพิ่มของรางวัลลงกล่อง
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">เลือกเพิ่มไอดีเกม หรือรางวัลปลอบใจเป็นเครดิต</p>
+
+            <form action="http://localhost/sell-game2/public/admin/gacha/1/items" method="POST" class="mt-5 space-y-4" id="addItemForm">
+                <input type="hidden" name="_token" value="" autocomplete="off">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">ประเภทรางวัล</label>
+                    <div class="mt-2 grid grid-cols-2 gap-2">
+                        <label class="flex cursor-pointer items-center justify-center rounded-lg border border-slate-700 bg-slate-800/80 p-3 text-sm font-semibold text-slate-300 has-[:checked]:border-violet-500 has-[:checked]:bg-violet-600/20 has-[:checked]:text-violet-300">
+                            <input type="radio" name="reward_type" value="game_account" checked class="hidden" onchange="toggleRewardType('game_account')">
+                            🎮 ไอดีเกม
+                        </label>
+                        <label class="flex cursor-pointer items-center justify-center rounded-lg border border-slate-700 bg-slate-800/80 p-3 text-sm font-semibold text-slate-300 has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-600/20 has-[:checked]:text-emerald-300">
+                            <input type="radio" name="reward_type" value="credit" class="hidden" onchange="toggleRewardType('credit')">
+                            💰 คืนเครดิต
+                        </label>
+                    </div>
+                </div>
+
+                
+                <div id="accountField">
+                    <label for="reward-game-filter" class="block text-xs font-semibold text-slate-400">หมวดหมู่เกม</label>
+                    <select id="reward-game-filter" class="mt-1.5 mb-4 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2.5 text-sm"><option value="">ทุกเกม</option><option value="1">Free Fire</option><option value="2">Roblox</option><option value="3">Rov</option><option value="4">Valorant</option></select>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">เลือกไอดีเกมที่พร้อมขาย</label>
+                    <select name="game_account_id" class="mt-1.5 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2.5 text-sm text-white focus:border-violet-500 focus:outline-none">
+                                                    <option value="19" data-category="1">
+                                [Free Fire] Frost Hunter • นักล่าเหมันต์ (฿1,290.00)
+                            </option>
+                                                    <option value="20" data-category="2">
+                                [Roblox] Galaxy Voyager • นักท่องจักรวาล (฿590.00)
+                            </option>
+                                                    <option value="21" data-category="2">
+                                [Roblox] Dragon Legacy • ตำนานมังกร (฿790.00)
+                            </option>
+                                                    <option value="22" data-category="3">
+                                [Rov] Lunar Empress • จักรพรรดินีจันทรา (฿1,590.00)
+                            </option>
+                                                    <option value="23" data-category="3">
+                                [Rov] Crimson Knight • อัศวินโลหิต (฿1,190.00)
+                            </option>
+                                                    <option value="24" data-category="4">
+                                [Valorant] Neon Pulse • สายฟ้าแห่งมหานคร (฿1,890.00)
+                            </option>
+                                                    <option value="25" data-category="4">
+                                [Valorant] Shadow Protocol • ปฏิบัติการเงา (฿2,490.00)
+                            </option>
+                                            </select>
+                    <p class="mt-2 text-xs text-cyan-300">เมื่อสุ่มไอดีออก ระบบจะเพิ่มไอดีพร้อมขายในหมวดเดียวกันมาแทน ด้วยอัตราสุ่มเดิม หากไม่มีไอดีเหลือจะหยุดรางวัลนั้น</p>
+                                    </div>
+
+                
+                <div id="creditField" class="hidden">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">จำนวนเงินเครดิตคืน (บาท)</label>
+                    <input type="number" step="0.01" min="0.01" name="credit_amount" placeholder="เช่น 5.00 หรือ 15.00" class="mt-1.5 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white focus:border-violet-500 focus:outline-none">
+                </div>
+
+                
+                <div>
+                    <div class="flex items-center justify-between">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">อัตราการออก (Drop Rate %)</label>
+                        <span class="text-xs text-slate-500">ทศนิยมได้ 4 ตำแหน่ง</span>
+                    </div>
+                    <div class="mt-1.5 flex items-center gap-2">
+                        <input type="number" step="0.0001" min="0.0001" max="100" name="drop_rate" required placeholder="เช่น 1.5 หรือ 50" class="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm font-semibold text-white focus:border-violet-500 focus:outline-none">
+                        <span class="text-sm font-bold text-slate-400">%</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full mt-2 rounded-lg bg-violet-600 py-2.5 font-bold text-white shadow-md shadow-violet-600/30 hover:bg-violet-500">
+                    + เพิ่มรางวัลลงในกล่อง
+                </button>
+            </form>
+        </div>
+
+        
+        <div class="rounded-2xl border border-slate-800/80 bg-slate-950/50 p-5 text-xs text-slate-400 space-y-2">
+            <p class="font-bold text-slate-300">💡 เคล็ดลับการตั้งค่ากล่องสุ่ม:</p>
+            <p>1. <strong>รางวัลใหญ่ (Jackpot):</strong> ใส่ไอดีเกมราคาสูง แล้วตั้งเรทน้อย เช่น 0.5% - 2%</p>
+            <p>2. <strong>รางวัลกลาง:</strong> ไอดีเกมทั่วไป ตั้งเรทประมาณ 5% - 15%</p>
+            <p>3. <strong>รางวัลปลอบใจ:</strong> รางวัลคืนเครดิต (เช่น กล่องละ 20 คืนเครดิต 5 บาท เรท 60%, คืน 10 บาท เรท 25%) ช่วยให้ผู้เล่นรู้สึกไม่เสียเปล่าและอยากสุ่มต่อ</p>
+        </div>
+    </div>
+</div>
+
+<script>
+const gameFilter = document.getElementById('reward-game-filter');
+const accountSelect = document.querySelector('select[name="game_account_id"]');
+const accountOptions = [...accountSelect.options].map(option => option.cloneNode(true));
+gameFilter.addEventListener('change', () => {
+    const options = accountOptions.filter(option => !gameFilter.value || option.dataset.category === gameFilter.value);
+    accountSelect.replaceChildren(...options.map(option => option.cloneNode(true)));
+    if (!options.length) accountSelect.add(new Option('ไม่มีไอดีพร้อมขายในเกมนี้', ''));
+});
+function toggleRewardType(type) {
+    const accField = document.getElementById('accountField');
+    const credField = document.getElementById('creditField');
+    if (type === 'game_account') {
+        accField.classList.remove('hidden');
+        credField.classList.add('hidden');
+    } else {
+        accField.classList.add('hidden');
+        credField.classList.remove('hidden');
+    }
+}
+</script>
+</main>
+</div>
+<nav class="vault-bottom-nav" aria-label="เมนูมือถือ">
+        <a href="http://localhost/sell-game2/public/categories" class="" ><span aria-hidden="true">⌂</span>ร้านไอดี</a>
+        <a href="http://localhost/sell-game2/public/gacha" class="" ><span aria-hidden="true">✦</span>กล่องสุ่ม</a>
+        <a href="http://localhost/sell-game2/public/wallet" class="" ><span aria-hidden="true">◈</span>Wallet</a>
+        <a href="http://localhost/sell-game2/public/dashboard" class="" ><span aria-hidden="true">◎</span>บัญชี</a>
+    </nav>
+<footer class="mt-12 border-t border-slate-800 px-4 py-8 text-sm text-slate-500"><div class="mx-auto flex max-w-6xl flex-wrap justify-between gap-4"><p>✦ Mizuki Shop · ร้านค้าเกมของคุณ</p><div class="flex gap-5"><a href="http://localhost/sell-game2/public/news">ข่าวสาร</a><a href="http://localhost/sell-game2/public/orders">ประวัติคำสั่งซื้อ</a><a href="http://localhost/sell-game2/public/contact">ติดต่อร้าน</a></div></div></footer>
+<p class="px-4 pb-5 text-center text-xs text-slate-500">วันและเวลาที่แสดงใช้เวลาไทย (Asia/Bangkok · UTC+7)</p>
+</body></html>

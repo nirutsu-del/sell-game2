@@ -34,6 +34,7 @@ Route::middleware(['auth','auth.session'])->group(function () {
 
 Route::middleware(['auth','auth.session'])->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
+    Route::get('/collection', [\App\Http\Controllers\CollectionController::class, 'index'])->name('user.collection');
     Route::get('/account/password', [\App\Http\Controllers\PasswordController::class,'edit'])->name('password.edit');
     Route::put('/account/password', [\App\Http\Controllers\PasswordController::class,'update'])->middleware('throttle:5,1')->name('password.update');
     Route::get('/notifications', [\App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');

@@ -38,7 +38,10 @@
             <span>01 / OPEN YOUR MYSTERY</span>
             <button id="gacha-sound" type="button" aria-pressed="false" class="rounded-full border border-violet-400/30 px-3 py-2">เสียง: ปิด</button>
         </div>
-        <div id="gacha-chest" class="gacha-chest">
+        <div class="gacha-modes" role="group" aria-label="รูปแบบการสุ่ม"><button type="button" data-gacha-mode="cards" aria-pressed="true">✦ เลือกการ์ด</button><button type="button" data-gacha-mode="wheel" aria-pressed="false">◉ วงล้อ</button><button type="button" data-gacha-mode="box" aria-pressed="false">◇ เปิดกล่อง</button></div>
+        <div id="gacha-cards-scene" class="gacha-cards-scene"><p>เลือกการ์ด 1 ใบ แล้วกดปุ่มสุ่มด้านล่าง</p><div class="gacha-card-choices">@for($i=0;$i<5;$i++)<button type="button" class="gacha-choice" data-card-index="{{ $i }}" aria-pressed="false" aria-label="เลือกการ์ดใบที่ {{ $i+1 }}"><span class="gacha-choice-back"><b>✦</b><small>MIZUKI</small><span>0{{ $i+1 }}</span></span><span class="gacha-choice-front"></span></button>@endfor</div></div>
+        <div id="gacha-wheel-scene" class="gacha-wheel-scene" hidden><div class="gacha-wheel-wrap"><span class="gacha-wheel-pointer" aria-hidden="true">▼</span><div id="gacha-wheel" class="gacha-wheel" aria-hidden="true"></div><span class="gacha-wheel-hub" aria-hidden="true">✦</span></div><p>วงล้อเป็นภาพแสดงผล ช่องมีขนาดเท่ากันและไม่ใช่สัดส่วนโอกาสได้รับ</p><ol id="gacha-wheel-legend" class="gacha-wheel-legend"></ol></div>
+        <div id="gacha-chest" class="gacha-chest" hidden>
             <div class="gacha-orbit"></div>
             @if($box->image)
                 <img src="{{ asset('storage/'.$box->image) }}" alt="{{ $box->name }}" class="relative h-40 w-40 rounded-2xl object-contain">
@@ -50,7 +53,7 @@
             <div class="gacha-pointer" aria-hidden="true">▼</div>
             <div id="gacha-track" class="gacha-track"></div>
         </div>
-        <p id="gacha-status" role="status" aria-live="polite" class="relative mt-5 text-center text-sm text-violet-200">เลือกเปิดกล่อง แล้วลุ้นรางวัลของคุณ</p>
+        <p id="gacha-status" role="status" aria-live="polite" class="relative mt-5 text-center text-sm text-violet-200">เลือกการ์ดที่ชอบ การเลือกใบไม่เปลี่ยนโอกาสได้รับรางวัล</p>
         <div class="relative mt-6 flex flex-col items-center gap-3">
             @auth
                 <button id="gacha-spin" class="gacha-primary" type="button">สุ่ม 1 ครั้ง · ฿{{ number_format($box->price_per_spin, 2) }}</button>
@@ -65,7 +68,7 @@
     <section>
         <h2 class="text-xl font-bold">รางวัลและโอกาสได้รับ</h2>
         <p class="mt-2 text-xs text-slate-400">คำนวณจากรางวัลที่ยังพร้อมสุ่มขณะเปิดหน้านี้ โอกาสอาจเปลี่ยนเมื่อมีผู้ได้รับไอดีไปแล้ว สีการ์ดบอกประเภทรางวัล</p>
-        <div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
+        <div id="gacha-rewards-list" class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
             @forelse($rewards as $reward)
                 <article class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
                     @if($reward['image'])

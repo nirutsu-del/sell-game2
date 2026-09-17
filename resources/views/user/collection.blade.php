@@ -1,0 +1,19 @@
+@extends('layouts.app')
+@section('content')
+<section class="collection-room" aria-labelledby="collection-title" data-collection-theme data-theme-user="{{ auth()->id() }}" data-theme="ice">
+    <fieldset class="collection-theme-picker"><legend>แต่งห้องสะสม</legend><div>@foreach(['fire'=>'ไฟ','ice'=>'น้ำแข็ง','galaxy'=>'กาแล็กซี'] as $theme=>$label)<button type="button" data-theme-choice="{{ $theme }}" aria-pressed="{{ $theme === 'ice' ? 'true' : 'false' }}"><span class="theme-swatch swatch-{{ $theme }}" aria-hidden="true"></span>{{ $label }}</button>@endforeach</div><p>จำธีมแยกตามบัญชีบนอุปกรณ์นี้</p></fieldset>
+    <header class="collection-hero"><div><p class="collection-eyebrow">MIZUKI / PERSONAL VAULT</p><h1 id="collection-title">ห้องโชว์คอลเลกชัน</h1><p class="collection-owner">พื้นที่สะสมของ {{ auth()->user()->name }}</p><p class="collection-intro">ทุกไอดีที่คุณเลือก มีที่ของตัวเองบนชั้นนี้</p></div><div class="collection-emblem" aria-hidden="true">✦</div><dl class="collection-stats"><div><dt>ไอดีสะสม</dt><dd>{{ $owned->count() }}</dd></div><div><dt>เกมในคอลเลกชัน</dt><dd>{{ $games->count() }}</dd></div><div><dt>จากกล่องสุ่ม</dt><dd>{{ $owned->where('source','gacha')->count() }}</dd></div></dl></header>
+    <div class="collection-toolbar"><nav aria-label="กรองคอลเลกชันตามเกม"><a href="{{ route('user.collection') }}" @if(!request()->filled('game')) aria-current="page" @endif>ทั้งหมด</a>@foreach($games as $game)<a href="{{ route('user.collection',['game'=>$game->id]) }}" @if(request('game') == $game->id) aria-current="page" @endif>{{ $game->name }}</a>@endforeach</nav><a class="collection-browse" href="{{ route('catalog.index') }}">ค้นหาไอดีเพิ่ม ↗</a></div>
+    @if($items->isNotEmpty())
+    <div class="collection-grid">
+        @foreach($items as $purchase)
+        @php($item = collect(config('demo_catalog',[]))->first(fn($demo) => $demo['title'] === $purchase->account->title))
+        <article class="collection-card {{ $item ? 'demo-tone-'.$item['tone'] : '' }}"><div class="collection-card-art">@if(!empty($purchase->account->images[0]))<img src="{{ asset('storage/'.$purchase->account->images[0]) }}" alt="{{ $purchase->account->title }}" loading="lazy" width="800" height="600">@else<span class="collection-art-empty" aria-hidden="true">✦</span>@endif<span class="collection-owned">IN YOUR COLLECTION</span></div><div class="collection-card-body"><p class="collection-game">{{ $purchase->account->category?->name ?? 'ไอดีเกม' }} <span>#{{ str_pad((string)$purchase->id,4,'0',STR_PAD_LEFT) }}</span></p><h2>{{ $purchase->account->title }}</h2>@if($item)<div class="demo-account-tags"><span>{{ $item['rank'] }}</span><span>{{ $item['collection'] }}</span></div>@endif<p class="collection-acquired">{{ $purchase->source === 'gacha' ? 'ได้รับจากกล่องสุ่ม' : 'ซื้อเข้าคอลเลกชัน' }} · {{ $purchase->created_at->copy()->timezone('Asia/Bangkok')->format('d/m/Y') }}</p><a href="{{ route('purchases.show',$purchase) }}">ดูข้อมูลไอดีของฉัน <span aria-hidden="true">↗</span></a></div></article>
+        @endforeach
+    </div>
+    @else
+    <div class="collection-empty"><div class="collection-empty-shelves" aria-hidden="true"><span>✧</span><span>✦</span><span>✧</span></div><h2>{{ $owned->isEmpty() ? 'ชั้นสะสมกำลังรอไอดีแรกของคุณ' : 'ยังไม่มีไอดีในเกมที่เลือก' }}</h2><p>{{ $owned->isEmpty() ? 'ซื้อไอดีหรือรับรางวัลไอดีจากกล่องสุ่มสำเร็จ แล้วการ์ดจะปรากฏที่นี่อัตโนมัติ' : 'เลือกทั้งหมดเพื่อกลับไปดูคอลเลกชันของคุณ' }}</p><a class="market-button" href="{{ $owned->isEmpty() ? route('catalog.index') : route('user.collection') }}">{{ $owned->isEmpty() ? 'เลือกไอดีแรกของฉัน ↗' : 'ดูคอลเลกชันทั้งหมด' }}</a></div>
+    @endif
+    <p class="collection-private">คอลเลกชันส่วนตัว · ดูข้อมูลล็อกอินได้จากหน้ารายการซื้อของคุณ@if(config('store.demo_mode')) · เว็บไซต์สาธิตสำหรับมินิโปรเจกต์@endif</p>
+</section>
+@endsection

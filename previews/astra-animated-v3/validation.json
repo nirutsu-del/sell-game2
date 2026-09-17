@@ -1,0 +1,58 @@
+[
+  {
+    "file": "C:\\xampp\\htdocs\\sell-game2\\previews\\astra-animated-v3\\free-fire-animated.webp",
+    "frames": 60,
+    "unique_frames": 60,
+    "duration_ms": 3000,
+    "loop": 0,
+    "dimensions": [
+      640,
+      640
+    ],
+    "size_bytes": 2518480,
+    "quality": 75,
+    "periodic_render_verified": true
+  },
+  {
+    "file": "C:\\xampp\\htdocs\\sell-game2\\previews\\astra-animated-v3\\roblox-animated.webp",
+    "frames": 60,
+    "unique_frames": 60,
+    "duration_ms": 3000,
+    "loop": 0,
+    "dimensions": [
+      640,
+      640
+    ],
+    "size_bytes": 1549102,
+    "quality": 75,
+    "periodic_render_verified": true
+  },
+  {
+    "file": "C:\\xampp\\htdocs\\sell-game2\\previews\\astra-animated-v3\\rov-animated.webp",
+    "frames": 60,
+    "unique_frames": 60,
+    "duration_ms": 3000,
+    "loop": 0,
+    "dimensions": [
+      640,
+      640
+    ],
+    "size_bytes": 2582086,
+    "quality": 75,
+    "periodic_render_verified": true
+  },
+  {
+    "file": "C:\\xampp\\htdocs\\sell-game2\\previews\\astra-animated-v3\\valorant-animated.webp",
+    "frames": 60,
+    "unique_frames": 60,
+    "duration_ms": 3000,
+    "loop": 0,
+    "dimensions": [
+      640,
+      640
+    ],
+    "size_bytes": 1862568,
+    "quality": 75,
+    "periodic_render_verified": true
+  }
+]

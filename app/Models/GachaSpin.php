@@ -32,12 +32,12 @@ class GachaSpin extends Model
 
     public function box(): BelongsTo
     {
-        return $this->belongsTo(GachaBox::class, 'gacha_box_id');
+        return $this->belongsTo(GachaBox::class, 'gacha_box_id')->withTrashed();
     }
 
     public function item(): BelongsTo
     {
-        return $this->belongsTo(GachaItem::class, 'gacha_item_id');
+        return $this->belongsTo(GachaItem::class, 'gacha_item_id')->withTrashed();
     }
 
     public function purchase(): BelongsTo

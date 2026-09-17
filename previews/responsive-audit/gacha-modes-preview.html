@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="th">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b1020"><meta name="csrf-token" content=""><title>Mizuki Shop</title><link rel="preload" as="style" href="http://localhost/sell-game2/public/build/assets/app-Bg3mMHFr.css" /><link rel="modulepreload" as="script" href="http://localhost/sell-game2/public/build/assets/app-Dtx4R1TO.js" /><link rel="stylesheet" href="http://localhost/sell-game2/public/build/assets/app-Bg3mMHFr.css" /><script type="module" src="http://localhost/sell-game2/public/build/assets/app-Dtx4R1TO.js"></script></head>
+<body class="vault-app  vault-store  min-h-screen text-slate-100 antialiased">
+<a href="#main-content" class="skip-link">ข้ามไปยังเนื้อหา</a>
+<header class="site-header">
+    <div class="mx-auto max-w-6xl px-4">
+        <div class="site-header-row">
+                <a class="brand" href="http://localhost/sell-game2/public"><img class="brand-wordmark" src="http://localhost/sell-game2/public/storage/store-settings/mizuki-speed-logo-02.png" alt="Mizuki Shop" width="1200" height="220"></a>
+        <nav class="main-nav" aria-label="เมนูหลัก">
+            <a class="" href="http://localhost/sell-game2/public">หน้าแรก</a><a class="" href="http://localhost/sell-game2/public/categories">สินค้า</a><a class="" href="http://localhost/sell-game2/public/wallet">เติมเงิน</a><a class="" href="http://localhost/sell-game2/public/gacha">สุ่มไอดี</a><a class="" href="http://localhost/sell-game2/public/contact">ติดต่อ</a>
+        </nav>
+                <div class="header-actions">
+                    <a id="notification-bell" href="http://localhost/sell-game2/public/notifications" data-count-url="http://localhost/sell-game2/public/notifications/count" aria-label="แจ้งเตือน ยังไม่อ่าน 0 รายการ" class="icon-button relative">
+                <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+                <span id="notification-badge"  hidden  class="rounded-full bg-orange-600 px-1.5 py-0.5 text-[10px] font-bold text-white">0</span>
+            </a>
+            <a href="http://localhost/sell-game2/public/dashboard" class="account-link">บัญชีของฉัน</a>            <a href="http://localhost/sell-game2/public/wallet" class="wallet-chip"><span>฿</span>1,000.00</a>
+            <a href="http://localhost/sell-game2/public/logout" class="logout-link">ออกจากระบบ</a>
+                </div>
+    </div>
+        </div>
+</header>
+<div class="vault-workspace">
+    <main id="main-content" class="mx-auto max-w-6xl px-4 py-7">
+            <nav class="account-nav" aria-label="เมนูบัญชี">
+    <div class="account-nav-title"><span class="account-avatar">M</span><span class="hidden sm:inline">บัญชีของฉัน</span></div>
+    <div class="account-nav-links">
+        <a class="" href="http://localhost/sell-game2/public/dashboard">ภาพรวม</a>
+        <a class="" href="http://localhost/sell-game2/public/collection">คอลเลกชัน</a>
+        <a class="" href="http://localhost/sell-game2/public/wallet">Wallet</a>
+        <a class="" href="http://localhost/sell-game2/public/orders">ประวัติ</a>
+        <a class="" href="http://localhost/sell-game2/public/notifications">แจ้งเตือน</a>
+        <a class="" href="http://localhost/sell-game2/public/account/password">รหัสผ่าน</a>
+        <a href="http://localhost/sell-game2/public/logout">ออกจากระบบ</a>
+    </div>
+</nav>
+                    <div id="gacha-room" class="mx-auto max-w-5xl space-y-7">
+    <script type="application/json" id="gacha-settings">{"url":"http:\/\/localhost\/sell-game2\/public\/gacha\/1\/spin","csrf":null,"balance":1000,"price":10,"active":true,"rewards":[{"id":2,"title":"\u0e40\u0e04\u0e23\u0e14\u0e34\u0e15 \u0e3f5.00","image":null,"type":"credit","chance":66.6667},{"id":3,"title":"\u0e40\u0e04\u0e23\u0e14\u0e34\u0e15 \u0e3f10.00","image":null,"type":"credit","chance":33.3333}],"storageKey":"gacha:999999:1","walletUrl":"http:\/\/localhost\/sell-game2\/public\/wallet"}</script>
+    <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+            <a href="http://localhost/sell-game2/public/gacha" class="text-sm text-violet-300">← กลับไปเลือกกล่อง</a>
+            <p class="mt-5 text-xs tracking-[.3em] text-violet-400">Mizuki Shop / MYSTERY ROOM</p>
+            <h1 class="mt-2 text-3xl font-black sm:text-4xl">Free Fire</h1>
+            <p class="mt-2 text-sm text-slate-400"></p>
+        </div>
+                <a href="http://localhost/sell-game2/public/wallet" class="rounded-xl border border-slate-700 bg-slate-900 px-5 py-3 text-sm">
+            Wallet <strong id="gacha-balance" class="ml-3 text-emerald-400">฿1,000.00</strong> · เติมเงิน
+        </a>
+            </div>
+    <section id="gacha-stage" class="gacha-stage" aria-label="ห้องเปิดกล่องสุ่ม">
+        <div class="relative z-10 flex items-center justify-between text-xs text-violet-300">
+            <span>01 / OPEN YOUR MYSTERY</span>
+            <button id="gacha-sound" type="button" aria-pressed="false" class="rounded-full border border-violet-400/30 px-3 py-2">เสียง: ปิด</button>
+        </div>
+        <div class="gacha-modes" role="group" aria-label="รูปแบบการสุ่ม"><button type="button" data-gacha-mode="cards" aria-pressed="true">✦ เลือกการ์ด</button><button type="button" data-gacha-mode="wheel" aria-pressed="false">◉ วงล้อ</button><button type="button" data-gacha-mode="box" aria-pressed="false">◇ เปิดกล่อง</button></div>
+        <div id="gacha-cards-scene" class="gacha-cards-scene"><p>เลือกการ์ด 1 ใบ แล้วกดปุ่มสุ่มด้านล่าง</p><div class="gacha-card-choices"><button type="button" class="gacha-choice" data-card-index="0" aria-pressed="false" aria-label="เลือกการ์ดใบที่ 1"><span class="gacha-choice-back"><b>✦</b><small>MIZUKI</small><span>01</span></span><span class="gacha-choice-front"></span></button><button type="button" class="gacha-choice" data-card-index="1" aria-pressed="false" aria-label="เลือกการ์ดใบที่ 2"><span class="gacha-choice-back"><b>✦</b><small>MIZUKI</small><span>02</span></span><span class="gacha-choice-front"></span></button><button type="button" class="gacha-choice" data-card-index="2" aria-pressed="false" aria-label="เลือกการ์ดใบที่ 3"><span class="gacha-choice-back"><b>✦</b><small>MIZUKI</small><span>03</span></span><span class="gacha-choice-front"></span></button><button type="button" class="gacha-choice" data-card-index="3" aria-pressed="false" aria-label="เลือกการ์ดใบที่ 4"><span class="gacha-choice-back"><b>✦</b><small>MIZUKI</small><span>04</span></span><span class="gacha-choice-front"></span></button><button type="button" class="gacha-choice" data-card-index="4" aria-pressed="false" aria-label="เลือกการ์ดใบที่ 5"><span class="gacha-choice-back"><b>✦</b><small>MIZUKI</small><span>05</span></span><span class="gacha-choice-front"></span></button></div></div>
+        <div id="gacha-wheel-scene" class="gacha-wheel-scene" hidden><div class="gacha-wheel-wrap"><span class="gacha-wheel-pointer" aria-hidden="true">▼</span><div id="gacha-wheel" class="gacha-wheel" aria-hidden="true"></div><span class="gacha-wheel-hub" aria-hidden="true">✦</span></div><p>วงล้อเป็นภาพแสดงผล ช่องมีขนาดเท่ากันและไม่ใช่สัดส่วนโอกาสได้รับ</p><ol id="gacha-wheel-legend" class="gacha-wheel-legend"></ol></div>
+        <div id="gacha-chest" class="gacha-chest" hidden>
+            <div class="gacha-orbit"></div>
+                            <img src="http://localhost/sell-game2/public/storage/gacha-boxes/Q6XDZviIS701Jp4d4rppsUCchTleJHTk0LV7o2Ln.png" alt="Free Fire" class="relative h-40 w-40 rounded-2xl object-contain">
+                    </div>
+        <div id="gacha-reel" class="gacha-reel" hidden>
+            <div class="gacha-pointer" aria-hidden="true">▼</div>
+            <div id="gacha-track" class="gacha-track"></div>
+        </div>
+        <p id="gacha-status" role="status" aria-live="polite" class="relative mt-5 text-center text-sm text-violet-200">เลือกการ์ดที่ชอบ การเลือกใบไม่เปลี่ยนโอกาสได้รับรางวัล</p>
+        <div class="relative mt-6 flex flex-col items-center gap-3">
+                            <button id="gacha-spin" class="gacha-primary" type="button">สุ่ม 1 ครั้ง · ฿10.00</button>
+                <button id="gacha-skip" class="text-sm text-slate-300 underline" type="button" hidden>ข้ามฉากสุ่ม</button>
+                        <p class="text-xs text-slate-400">฿10.00 ต่อครั้ง · ผลถูกบันทึกในประวัติ</p>
+        </div>
+        <p id="gacha-error" role="alert" class="relative mt-4 text-center text-sm text-rose-300" hidden></p>
+    </section>
+    <section>
+        <h2 class="text-xl font-bold">รางวัลและโอกาสได้รับ</h2>
+        <p class="mt-2 text-xs text-slate-400">คำนวณจากรางวัลที่ยังพร้อมสุ่มขณะเปิดหน้านี้ โอกาสอาจเปลี่ยนเมื่อมีผู้ได้รับไอดีไปแล้ว สีการ์ดบอกประเภทรางวัล</p>
+        <div id="gacha-rewards-list" class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                            <article class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+                                        <div class="mb-3 flex h-28 items-center justify-center rounded-lg bg-slate-950 text-4xl">💎</div>
+                                        <p class="text-xs text-violet-300">66.6667%</p>
+                    <h3 class="mt-2 break-words text-sm font-bold">เครดิต ฿5.00</h3>
+                </article>
+                            <article class="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+                                        <div class="mb-3 flex h-28 items-center justify-center rounded-lg bg-slate-950 text-4xl">💎</div>
+                                        <p class="text-xs text-violet-300">33.3333%</p>
+                    <h3 class="mt-2 break-words text-sm font-bold">เครดิต ฿10.00</h3>
+                </article>
+                    </div>
+    </section>
+    <section class="rounded-2xl border border-slate-800 bg-slate-900 p-5">
+        <h2 class="text-lg font-bold">ประวัติการสุ่มของคุณ</h2>
+        <p class="mt-1 text-xs text-slate-400">รีเฟรชหรือออกจากฉากสุ่ม รางวัลยังอยู่ที่นี่</p>
+        <div id="gacha-history" class="mt-4 divide-y divide-slate-800">
+                </div>
+            </section>
+</div>
+<dialog id="gacha-result" class="gacha-result" aria-labelledby="gacha-result-title">
+    <div class="gacha-sparkles" aria-hidden="true">✦ · ✧ · ✦</div>
+    <p class="text-xs tracking-[.3em] text-violet-300">YOUR REWARD</p>
+    <div id="gacha-result-art" class="my-6 text-7xl"></div>
+    <h2 id="gacha-result-title" class="text-2xl font-black">ได้รับรางวัลแล้ว!</h2>
+    <p id="gacha-result-text" class="mt-3 text-sm text-slate-300"></p>
+    <a id="gacha-purchase" class="mt-5 inline-block text-violet-300 underline" hidden>ดูข้อมูลไอดีของคุณ</a>
+    <div class="mt-6 grid gap-3">
+        <button id="gacha-again" class="gacha-primary">สุ่มอีกครั้ง · ฿10.00</button>
+        <button id="gacha-close" class="rounded-xl border border-slate-700 px-4 py-3">ปิดและดูประวัติ</button>
+        <a href="http://localhost/sell-game2/public/gacha" class="text-sm text-slate-400">กลับไปเลือกกล่อง</a>
+    </div>
+</dialog>
+</main>
+</div>
+<nav class="vault-bottom-nav" aria-label="เมนูมือถือ">
+        <a href="http://localhost/sell-game2/public/categories" class="" ><span aria-hidden="true">⌂</span>ร้านไอดี</a>
+        <a href="http://localhost/sell-game2/public/gacha" class="" ><span aria-hidden="true">✦</span>กล่องสุ่ม</a>
+        <a href="http://localhost/sell-game2/public/wallet" class="" ><span aria-hidden="true">◈</span>Wallet</a>
+        <a href="http://localhost/sell-game2/public/dashboard" class="" ><span aria-hidden="true">◎</span>บัญชี</a>
+    </nav>
+<footer class="mt-12 border-t border-slate-800 px-4 py-8 text-sm text-slate-500"><div class="mx-auto flex max-w-6xl flex-wrap justify-between gap-4"><p>✦ Mizuki Shop · ร้านค้าเกมของคุณ</p><div class="flex gap-5"><a href="http://localhost/sell-game2/public/news">ข่าวสาร</a><a href="http://localhost/sell-game2/public/orders">ประวัติคำสั่งซื้อ</a><a href="http://localhost/sell-game2/public/contact">ติดต่อร้าน</a></div></div></footer>
+<p class="px-4 pb-5 text-center text-xs text-slate-500">วันและเวลาที่แสดงใช้เวลาไทย (Asia/Bangkok · UTC+7)</p>
+</body></html>

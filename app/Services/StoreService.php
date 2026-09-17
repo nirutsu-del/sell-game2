@@ -172,6 +172,20 @@ class StoreService
                 'box_name' => $box->name,
             ];
             $spinRecord->update(['result_data' => $response]);
+            if ($purchase) {
+                // Keep the original item for historical spins; a new item occupies its place.
+                $replacement = GameAccount::where('category_id', $account->category_id)
+                    ->where('status', 'available')
+                    ->whereNotIn('id', GachaItem::where('gacha_box_id', $box->id)->whereNotNull('game_account_id')->select('game_account_id'))
+                    ->orderBy('id')->lockForUpdate()->first();
+                if ($replacement) {
+                    GachaItem::create([
+                        'gacha_box_id'=>$box->id, 'game_account_id'=>$replacement->id,
+                        'reward_type'=>'game_account', 'drop_rate'=>$selectedItem->drop_rate,
+                    ]);
+                    $selectedItem->update(['drop_rate'=>0]);
+                }
+            }
             return $response;
         }, 3);
     }

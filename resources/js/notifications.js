@@ -8,7 +8,7 @@ if (bell) {
         const timeout = setTimeout(() => controller.abort(), 10000);
         try {
             const response = await fetch(bell.dataset.countUrl, {
-                headers: {Accept:'application/json'}, cache:'no-store', signal:controller.signal,
+                headers: {Accept:'application/json', 'X-Requested-With':'XMLHttpRequest'}, cache:'no-store', signal:controller.signal,
             });
             if (response.status === 401 || response.status === 419) { expired = true; return; }
             if (!response.ok) return;

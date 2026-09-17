@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Mizuki Shop web matched logo concept</title>
+  <desc id="desc">A rounded orange game vault tile with a cyan M accent and Mizuki Shop wordmark, shown beside a dark website header.</desc>
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffc080"/><stop offset=".58" stop-color="#ff9142"/><stop offset="1" stop-color="#e9561b"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b1faff"/><stop offset="1" stop-color="#45d3e4"/></linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="700" rx="34" fill="#0b1020"/>
+  <text x="64" y="72" fill="#63dceb" font-family="Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="4">MIZUKI SHOP / WEB MATCH LOGO</text>
+  <g transform="translate(86 142)">
+    <circle cx="235" cy="190" r="150" fill="none" stroke="#ff8a3d" stroke-width="2" opacity=".28"/>
+    <circle cx="235" cy="190" r="167" fill="none" stroke="#63dceb" stroke-width="2" stroke-dasharray="3 18" opacity=".5"/>
+    <g transform="rotate(-9 235 190)">
+      <rect x="92" y="47" width="286" height="286" rx="62" fill="#57240f" opacity=".7" transform="translate(12 18)"/>
+      <rect x="92" y="47" width="286" height="286" rx="62" fill="url(#tile)" stroke="#ffd2a5" stroke-width="4"/>
+      <path d="M139 264V167l96 83 96-83v97h-39v-50l-57 49-57-49v50Z" fill="url(#cyan)"/>
+      <path d="M233 101l12 25 25 12-25 12-12 25-12-25-25-12 25-12Z" fill="#291108"/>
+      <path d="M144 292h180" stroke="#63dceb" stroke-width="8" stroke-linecap="round" opacity=".9"/>
+    </g>
+  </g>
+  <g transform="translate(620 156)">
+    <text x="0" y="110" fill="#f4f7fc" font-family="Arial, sans-serif" font-size="54" font-weight="900" letter-spacing="2">MIZUKI</text>
+    <text x="0" y="174" fill="#ff9a4d" font-family="Arial, sans-serif" font-size="54" font-weight="900" letter-spacing="2">SHOP</text>
+    <text x="3" y="220" fill="#a8b5c9" font-family="Arial, sans-serif" font-size="16" letter-spacing="3">GAME ACCOUNTS / GAME VAULT</text>
+    <rect x="0" y="270" width="390" height="116" rx="18" fill="#141c2e" stroke="#2b3850"/>
+    <rect x="24" y="294" width="68" height="68" rx="18" fill="url(#tile)"/>
+    <path d="M38 348v-29l20 17 20-17v29h-9v-15l-11 10-11-10v15Z" fill="url(#cyan)"/>
+    <path d="M58 302l4 8 8 4-8 4-4 8-4-8-8-4 8-4Z" fill="#291108"/>
+    <text x="115" y="333" fill="#f4f7fc" font-family="Arial, sans-serif" font-size="24" font-weight="800" letter-spacing="2">MIZUKI SHOP</text>
+  </g>
+  <text x="600" y="625" text-anchor="middle" fill="#63dceb" font-family="Arial, sans-serif" font-size="16" letter-spacing="3">ORANGE HERO TILE  ·  CYAN M ACCENT  ·  CLEAR AT 32PX</text>
+</svg>

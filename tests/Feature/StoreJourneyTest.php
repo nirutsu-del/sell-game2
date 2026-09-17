@@ -80,6 +80,7 @@ class StoreJourneyTest extends TestCase
         $this->assertAuthenticatedAs($buyer);
         $response = $this->post(route('accounts.buy', $account));
         $purchase = PurchaseHistory::where('user_id', $buyer->id)->firstOrFail();
+        $response->assertSessionHas('reveal_purchase_id', $purchase->id);
         $response->assertRedirect(route('purchases.show', $purchase));
         $this->get(route('purchases.show', $purchase))->assertOk()
             ->assertSee('test-player-only')->assertSee('test-delivery-secret');

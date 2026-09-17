@@ -1,3 +1,3 @@
 <?php
 
-return ['service_catalog_enabled' => false];
+return ['service_catalog_enabled' => false, 'demo_mode' => true];

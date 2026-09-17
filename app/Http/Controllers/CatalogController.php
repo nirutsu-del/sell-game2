@@ -10,6 +10,7 @@ class CatalogController extends Controller {
             'categories'=>Category::whereNull('parent_id')->withCount('products','gameAccounts')->orderByDesc('is_featured')->orderBy('sort_order')->take(6)->get(),
             'products'=>config('store.service_catalog_enabled') ? Product::where('is_active',true)->with(['category','variants'=>fn($q)=>$q->where('is_active',true)])->orderByDesc('is_featured')->latest()->take(8)->get() : collect(),
             'accounts'=>GameAccount::with('category')->where('status','available')->latest()->take(8)->get(),
+            'featuredBox'=>\App\Models\GachaBox::where('is_active',true)->with('items.account')->orderBy('id')->first(),
             'stats'=>[User::count(),(config('store.service_catalog_enabled') ? Product::where('is_active',true)->count() : 0)+GameAccount::where('status','available')->count(),PurchaseHistory::count()+ServiceOrder::where('status','completed')->count()],
         ]);
     }

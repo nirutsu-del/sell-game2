@@ -166,16 +166,19 @@
 
                 {{-- Game Account Selection --}}
                 <div id="accountField">
+                    <label for="reward-game-filter" class="block text-xs font-semibold text-slate-400">หมวดหมู่เกม</label>
+                    <select id="reward-game-filter" class="mt-1.5 mb-4 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2.5 text-sm"><option value="">ทุกเกม</option>@foreach($availableAccounts->pluck('category')->filter()->unique('id') as $category)<option value="{{ $category->id }}">{{ $category->name }}</option>@endforeach</select>
                     <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400">เลือกไอดีเกมที่พร้อมขาย</label>
                     <select name="game_account_id" class="mt-1.5 w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2.5 text-sm text-white focus:border-violet-500 focus:outline-none">
                         @forelse($availableAccounts as $acc)
-                            <option value="{{ $acc->id }}">
+                            <option value="{{ $acc->id }}" data-category="{{ $acc->category_id }}">
                                 [{{ $acc->category->name ?? 'เกม' }}] {{ $acc->title }} (฿{{ number_format($acc->price, 2) }})
                             </option>
                         @empty
                             <option value="" disabled selected>-- ไม่มีไอดีว่างในสต็อก --</option>
                         @endforelse
                     </select>
+                    <p class="mt-2 text-xs text-cyan-300">เมื่อสุ่มไอดีออก ระบบจะเพิ่มไอดีพร้อมขายในหมวดเดียวกันมาแทน ด้วยอัตราสุ่มเดิม หากไม่มีไอดีเหลือจะหยุดรางวัลนั้น</p>
                     @if($availableAccounts->isEmpty())
                         <p class="mt-1 text-xs text-amber-400">ไม่มีไอดีว่าง <a href="{{ route('admin.accounts.create') }}" class="underline font-bold">กดเพิ่มไอดีใหม่ก่อน</a></p>
                     @endif
@@ -216,6 +219,14 @@
 </div>
 
 <script>
+const gameFilter = document.getElementById('reward-game-filter');
+const accountSelect = document.querySelector('select[name="game_account_id"]');
+const accountOptions = [...accountSelect.options].map(option => option.cloneNode(true));
+gameFilter.addEventListener('change', () => {
+    const options = accountOptions.filter(option => !gameFilter.value || option.dataset.category === gameFilter.value);
+    accountSelect.replaceChildren(...options.map(option => option.cloneNode(true)));
+    if (!options.length) accountSelect.add(new Option('ไม่มีไอดีพร้อมขายในเกมนี้', ''));
+});
 function toggleRewardType(type) {
     const accField = document.getElementById('accountField');
     const credField = document.getElementById('creditField');

@@ -9,7 +9,9 @@
     <a href="{{ route('wallet.index') }}" class="rounded-lg bg-violet-600 px-4 py-3 font-semibold hover:bg-violet-500">Wallet ฿{{ number_format(auth()->user()->balance, 2) }}</a>
 </div>
 
+<div class="mt-6 rounded-2xl border border-cyan-400/30 bg-slate-900 p-6"><p class="text-sm text-cyan-300">Wallet ของคุณ</p><strong class="mt-2 block text-4xl">฿{{ number_format(auth()->user()->balance, 2) }}</strong><div class="mt-4 flex flex-wrap gap-3"><a class="market-button" href="{{ route('wallet.index') }}">เติมเงินเข้า Wallet</a><a class="market-small-button" href="{{ route('notifications.index') }}">ดูการแจ้งเตือน →</a></div></div>
 <div class="mt-8 grid gap-6 lg:grid-cols-2">
+    <a href="{{ route('user.collection') }}" class="collection-entry lg:col-span-2"><span><small>MY GAME COLLECTION</small><strong>ห้องโชว์คอลเลกชันของคุณ</strong><span>รวมไอดีที่ซื้อและรางวัลไอดีจากกล่องสุ่มไว้ในที่เดียว</span></span><b aria-hidden="true">↗</b></a>
     <a href="{{ route('password.edit') }}" class="market-shortcut lg:col-span-2">เปลี่ยนรหัสผ่าน →</a>
     <a href="{{ route('orders.index') }}" class="market-shortcut lg:col-span-2">▤ ประวัติทั้งหมด · ซื้อไอดี / สุ่มรางวัล →</a>
     <section class="rounded-xl border border-slate-800 bg-slate-900 p-5">

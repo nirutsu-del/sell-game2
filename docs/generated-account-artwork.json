@@ -1,0 +1,408 @@
+{
+  "tool": "built-in image_gen",
+  "completed": [
+    {
+      "key": "ff",
+      "theme": "Aurora",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-ec5270be-1b90-4d02-b766-61e4cb4a7db3.png"
+    },
+    {
+      "key": "ff",
+      "theme": "Eclipse",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-f702d679-822d-4d75-b04b-7de78a202336.png"
+    },
+    {
+      "key": "ff",
+      "theme": "Nova",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-b18dace6-9872-4f48-b986-187e2f293070.png"
+    },
+    {
+      "key": "ff",
+      "theme": "Storm",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-65090d26-94c5-4342-ae83-603c64e72a98.png"
+    },
+    {
+      "key": "ff",
+      "theme": "Blaze",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-4cb06503-a78d-4e49-8e1f-d9e9bc7b2d6e.png"
+    },
+    {
+      "key": "ff",
+      "theme": "Crystal",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-d360f562-94f3-4276-920f-6316145d1ea3.png"
+    },
+    {
+      "key": "ff",
+      "theme": "Infinity",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-f517801d-42b8-466d-b4ce-3d2a33125ee4.png"
+    },
+    {
+      "key": "ff",
+      "theme": "Phantom",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-ee71f200-cf87-42ea-8c03-4675784140d0.png"
+    },
+    {
+      "key": "ff",
+      "theme": "Solar",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-4e2f6043-c627-47e4-b273-698fa9682b36.png"
+    },
+    {
+      "key": "roblox",
+      "theme": "Aurora",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-4f5915fc-a292-492e-9f66-10de920d5f95.png"
+    },
+    {
+      "key": "ff",
+      "theme": "Lunar",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-06c6b7ec-f1aa-4ba2-94f1-4a6d2b3ae031.png"
+    },
+    {
+      "key": "roblox",
+      "theme": "Nova",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-c0251ac9-58a1-4963-b4b8-6f6d243cd660.png"
+    },
+    {
+      "key": "roblox",
+      "theme": "Storm",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-270bb408-3682-48e1-9a8b-76d65a569bf4.png"
+    },
+    {
+      "key": "roblox",
+      "theme": "Eclipse",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-5f4283bd-c6d6-42fe-ae7d-9e41b43d33c6.png"
+    },
+    {
+      "key": "roblox",
+      "theme": "Blaze",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-31a760cd-3cd8-484c-b12d-e8b9af30ccd6.png"
+    },
+    {
+      "key": "roblox",
+      "theme": "Solar",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-84c87ec0-c235-4ec6-83d9-fbe076f001e7.png"
+    },
+    {
+      "key": "roblox",
+      "theme": "Crystal",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-751d8235-9440-4003-bcd0-f53fd2c49afa.png"
+    },
+    {
+      "key": "roblox",
+      "theme": "Lunar",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-1850d1f9-9f18-435b-a3e8-ed26031c1a9b.png"
+    },
+    {
+      "key": "roblox",
+      "theme": "Phantom",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-5bdafcf7-bc84-478e-b1a9-c2ad60b8e11f.png"
+    },
+    {
+      "key": "roblox",
+      "theme": "Infinity",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-e8a4a2b9-cf95-40ba-a2e0-6401aa7cc35e.png"
+    },
+    {
+      "key": "rov",
+      "theme": "Aurora",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-42b2ddaa-79f6-41df-995b-b6e29db83a84.png"
+    },
+    {
+      "key": "rov",
+      "theme": "Eclipse",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-19b330eb-8dd9-492f-a8d7-72bc27a78139.png"
+    },
+    {
+      "key": "rov",
+      "theme": "Nova",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-ff18ad6c-774a-4af4-91b0-c60a1b5e6a7c.png"
+    },
+    {
+      "key": "rov",
+      "theme": "Storm",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-57380ac9-7cd4-495c-9bf9-d92ecbe7cae7.png"
+    },
+    {
+      "key": "rov",
+      "theme": "Blaze",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-71d3c0a4-7f00-47eb-9a5a-a2cfefe290ba.png"
+    },
+    {
+      "key": "rov",
+      "theme": "Crystal",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-826ec4e4-d79c-4f5e-9b45-632c4b3a4206.png"
+    },
+    {
+      "key": "rov",
+      "theme": "Phantom",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-541e07fb-55e3-43bc-9799-e79ad4e91aa5.png"
+    },
+    {
+      "key": "rov",
+      "theme": "Solar",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-5c61c57b-3be8-489b-b734-41ab4dd23da7.png"
+    },
+    {
+      "key": "rov",
+      "theme": "Lunar",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-eea7b3ad-63a9-47cb-8f65-c57041c2ae78.png"
+    },
+    {
+      "key": "rov",
+      "theme": "Infinity",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-6e357c13-bfa4-456b-a00d-61a04ab5626d.png"
+    },
+    {
+      "key": "valorant",
+      "theme": "Eclipse",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-96ca366a-1ec0-483c-9d4d-4b5105fe45eb.png"
+    },
+    {
+      "key": "valorant",
+      "theme": "Aurora",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-c79ad9c0-76ee-4e4e-a8e4-46d78ed58273.png"
+    },
+    {
+      "key": "valorant",
+      "theme": "Nova",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-95cdb036-c267-465c-82ee-03cba487f178.png"
+    },
+    {
+      "key": "valorant",
+      "theme": "Storm",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-0debeff0-dff2-449a-8bca-82193b7b6fae.png"
+    },
+    {
+      "key": "valorant",
+      "theme": "Blaze",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-b7ea1df2-f8f1-490e-8ef3-f8972f2def25.png"
+    },
+    {
+      "key": "valorant",
+      "theme": "Crystal",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-6f87b425-c8d0-4a7c-8793-bb33d2094d15.png"
+    },
+    {
+      "key": "valorant",
+      "theme": "Phantom",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-7c34df31-4f93-4356-95b9-ccaf0f252d84.png"
+    },
+    {
+      "key": "valorant",
+      "theme": "Solar",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-890472d4-0b8a-46b1-91f9-0cc126a66f22.png"
+    },
+    {
+      "key": "valorant",
+      "theme": "Lunar",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-228d143c-a24d-482a-a8c2-10ff3026c4e7.png"
+    },
+    {
+      "key": "valorant",
+      "theme": "Infinity",
+      "path": "C:\\Users\\ACER\\.codex\\generated_images\\01a09459-232d-71a0-9b50-bd9cf9bd1ce7\\exec-b6f951f3-b05d-46cd-9a86-42da49889765.png"
+    }
+  ],
+  "prompts": [
+    {
+      "key": "ff",
+      "theme": "Aurora",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Free Fire, collection Aurora. Cinematic battle royale survivor in fashionable tactical streetwear, tropical battlefield. Aurora theme: flowing green and violet polar lights, iridescent armor, poised heroic character. Strong central subject, richly detailed lighting, clean readable silhouette at thumbnail size, polished professional digital game key art. Full bleed illustration, no text, no logos, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "ff",
+      "theme": "Eclipse",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Free Fire, Eclipse Collection. cinematic battle royale survivor in fashionable tactical streetwear, tropical battlefield. Specific concept: black gold solar eclipse, mysterious masked character. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "ff",
+      "theme": "Nova",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Free Fire, Nova Collection. cinematic battle royale survivor in fashionable tactical streetwear, tropical battlefield. Specific concept: pink cosmic nova, energetic young heroine. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "ff",
+      "theme": "Storm",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Free Fire, Storm Collection. cinematic battle royale survivor in fashionable tactical streetwear, tropical battlefield. Specific concept: electric blue lightning storm, agile white-haired character. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "ff",
+      "theme": "Blaze",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Free Fire, Blaze Collection. cinematic battle royale survivor in fashionable tactical streetwear, tropical battlefield. Specific concept: orange scarlet flame, bold armored champion. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "ff",
+      "theme": "Crystal",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Free Fire, Crystal Collection. cinematic battle royale survivor in fashionable tactical streetwear, tropical battlefield. Specific concept: icy cyan crystal cavern, elegant guardian. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "ff",
+      "theme": "Infinity",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Free Fire, Infinity Collection. cinematic battle royale survivor in fashionable tactical streetwear, tropical battlefield. Specific concept: teal cosmic portal, futuristic explorer. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "ff",
+      "theme": "Phantom",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Free Fire, Phantom Collection. cinematic battle royale survivor in fashionable tactical streetwear, tropical battlefield. Specific concept: violet spectral mist, stealthy hooded wanderer. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "ff",
+      "theme": "Solar",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Free Fire, Solar Collection. cinematic battle royale survivor in fashionable tactical streetwear, tropical battlefield. Specific concept: golden sunlit ruins, radiant desert champion. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "roblox",
+      "theme": "Aurora",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Roblox, Aurora Collection. charming blocky 3D Roblox-style adventurer, imaginative toy-like world. Specific concept: green violet polar lights, iridescent details. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "ff",
+      "theme": "Lunar",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Free Fire, Lunar Collection. cinematic battle royale survivor in fashionable tactical streetwear, tropical battlefield. Specific concept: silver moonlight, midnight blue celestial sentinel. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "roblox",
+      "theme": "Nova",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Roblox, Nova Collection. charming blocky 3D Roblox-style adventurer, imaginative toy-like world. Specific concept: pink cosmic nova, energetic young heroine. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "roblox",
+      "theme": "Storm",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Roblox, Storm Collection. charming blocky 3D Roblox-style adventurer, imaginative toy-like world. Specific concept: electric blue lightning storm, agile white-haired character. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "roblox",
+      "theme": "Eclipse",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Roblox, Eclipse Collection. charming blocky 3D Roblox-style adventurer, imaginative toy-like world. Specific concept: black gold solar eclipse, mysterious masked character. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "roblox",
+      "theme": "Blaze",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Roblox, Blaze Collection. charming blocky 3D Roblox-style adventurer, imaginative toy-like world. Specific concept: orange scarlet flame, bold armored champion. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "roblox",
+      "theme": "Solar",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Roblox, Solar Collection. charming blocky 3D Roblox-style adventurer, imaginative toy-like world. Specific concept: golden sunlit ruins, radiant desert champion. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "roblox",
+      "theme": "Crystal",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Roblox, Crystal Collection. charming blocky 3D Roblox-style adventurer, imaginative toy-like world. Specific concept: icy cyan crystal cavern, elegant guardian. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "roblox",
+      "theme": "Lunar",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Roblox, Lunar Collection. charming blocky 3D Roblox-style adventurer, imaginative toy-like world. Specific concept: silver moonlight, midnight blue celestial sentinel. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "roblox",
+      "theme": "Phantom",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Roblox, Phantom Collection. charming blocky 3D Roblox-style adventurer, imaginative toy-like world. Specific concept: violet spectral mist, stealthy hooded wanderer. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "roblox",
+      "theme": "Infinity",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Roblox, Infinity Collection. charming blocky 3D Roblox-style adventurer, imaginative toy-like world. Specific concept: teal cosmic portal, futuristic explorer. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "rov",
+      "theme": "Aurora",
+      "prompt": "Create one new landscape 3:2 premium game account catalog illustration for Rov, Aurora Collection. epic high fantasy MOBA hero, ornate armor, magical arena. Specific concept: green violet polar lights, iridescent details. Distinct original character and environment, professional polished game key art, cinematic lighting, strong central silhouette readable in a thumbnail. Full bleed, no text, no logo, no UI, no collage. Fictional illustrative account artwork."
+    },
+    {
+      "key": "rov",
+      "theme": "Eclipse",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for RoV: epic high fantasy MOBA hero, ornate armor and magical arena. Collection Eclipse: black and gold solar eclipse, masked knight. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "rov",
+      "theme": "Nova",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for RoV: epic high fantasy MOBA hero, ornate armor and magical arena. Collection Nova: pink cosmic nova, energetic heroine. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "rov",
+      "theme": "Storm",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for RoV: epic high fantasy MOBA hero, ornate armor and magical arena. Collection Storm: electric blue lightning, agile storm warrior. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "rov",
+      "theme": "Blaze",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for RoV: epic high fantasy MOBA hero, ornate armor and magical arena. Collection Blaze: scarlet flame, armored champion. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "rov",
+      "theme": "Crystal",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for RoV: epic high fantasy MOBA hero, ornate armor and magical arena. Collection Crystal: icy crystal cavern, elegant guardian. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "rov",
+      "theme": "Phantom",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for RoV: epic high fantasy MOBA hero, ornate armor and magical arena. Collection Phantom: spectral violet mist, hooded wanderer. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "rov",
+      "theme": "Solar",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for RoV: epic high fantasy MOBA hero, ornate armor and magical arena. Collection Solar: sunlit golden ruins, radiant desert champion. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "rov",
+      "theme": "Lunar",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for RoV: epic high fantasy MOBA hero, ornate armor and magical arena. Collection Lunar: silver moonlight, midnight blue sentinel. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "rov",
+      "theme": "Infinity",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for RoV: epic high fantasy MOBA hero, ornate armor and magical arena. Collection Infinity: teal cosmic portal, dimensional explorer. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "valorant",
+      "theme": "Eclipse",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for Valorant: stylized tactical sci-fi agent, angular polished game key art and futuristic urban arena. Collection Eclipse: black and gold solar eclipse, masked knight. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "valorant",
+      "theme": "Aurora",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for Valorant: stylized tactical sci-fi agent, angular polished game key art and futuristic urban arena. Collection Aurora: green violet aurora, iridescent armor. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "valorant",
+      "theme": "Nova",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for Valorant: stylized tactical sci-fi agent, angular polished game key art and futuristic urban arena. Collection Nova: pink cosmic nova, energetic heroine. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "valorant",
+      "theme": "Storm",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for Valorant: stylized tactical sci-fi agent, angular polished game key art and futuristic urban arena. Collection Storm: electric blue lightning, agile storm warrior. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "valorant",
+      "theme": "Blaze",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for Valorant: stylized tactical sci-fi agent, angular polished game key art and futuristic urban arena. Collection Blaze: scarlet flame, armored champion. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "valorant",
+      "theme": "Crystal",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for Valorant: stylized tactical sci-fi agent, angular polished game key art and futuristic urban arena. Collection Crystal: icy crystal cavern, elegant guardian. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "valorant",
+      "theme": "Phantom",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for Valorant: stylized tactical sci-fi agent, angular polished game key art and futuristic urban arena. Collection Phantom: spectral violet mist, hooded wanderer. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "valorant",
+      "theme": "Solar",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for Valorant: stylized tactical sci-fi agent, angular polished game key art and futuristic urban arena. Collection Solar: sunlit golden ruins, radiant desert champion. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "valorant",
+      "theme": "Lunar",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for Valorant: stylized tactical sci-fi agent, angular polished game key art and futuristic urban arena. Collection Lunar: silver moonlight, midnight blue sentinel. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    },
+    {
+      "key": "valorant",
+      "theme": "Infinity",
+      "prompt": "Create a new landscape 3:2 premium game-account catalog illustration for Valorant: stylized tactical sci-fi agent, angular polished game key art and futuristic urban arena. Collection Infinity: teal cosmic portal, dimensional explorer. Original distinct character, beautiful detailed environment, cinematic lighting, strong central silhouette readable at thumbnail size. Full-bleed professional game illustration. No text, no logos, no UI, no collage. Fictional account demonstration artwork."
+    }
+  ],
+  "pending": []
+}
