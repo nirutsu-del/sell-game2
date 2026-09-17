@@ -36,9 +36,10 @@ class NotificationsTest extends TestCase
 
     public function test_topup_approval_and_rejection_notify_once_and_link_to_exact_record(): void
     {
+        \Illuminate\Support\Facades\Storage::fake('local');
         $admin = User::factory()->create(['role'=>'admin']);
         $user = User::factory()->create(['balance'=>0]);
-        $this->actingAs($user)->post(route('wallet.topups.store'),['request_id'=>(string) \Illuminate\Support\Str::uuid(),'amount'=>100,'payment_method'=>'promptpay_slip'])->assertSessionHasNoErrors();
+        $this->actingAs($user)->post(route('wallet.topups.store'),['request_id'=>(string) \Illuminate\Support\Str::uuid(),'amount'=>100,'payment_method'=>'promptpay_slip','slip'=>$this->paymentSlip()])->assertSessionHasNoErrors();
         $this->assertSame(1,$admin->notifications()->count());
         $topup = TopupTransaction::firstOrFail();
         $this->actingAs($admin)->post(route('admin.topups.approve',$topup), ['funds_received'=>1,'received_amount'=>$topup->amount,'transfer_reference'=>'TEST-100'])->assertSessionHasNoErrors();
@@ -49,7 +50,7 @@ class NotificationsTest extends TestCase
         $this->actingAs($user)->post(route('notifications.open',$notification->id))
             ->assertRedirect(route('wallet.index',['topup'=>$topup->id]).'#topup-'.$topup->id);
         $this->get(route('wallet.index',['topup'=>$topup->id]))->assertOk()->assertSee($topup->reference_no);
-        $this->post(route('wallet.topups.store'),['request_id'=>(string) \Illuminate\Support\Str::uuid(),'amount'=>25,'payment_method'=>'truemoney_gift'])->assertSessionHasNoErrors();
+        $this->post(route('wallet.topups.store'),['request_id'=>(string) \Illuminate\Support\Str::uuid(),'amount'=>25,'payment_method'=>'truemoney_gift','slip'=>$this->paymentSlip()])->assertSessionHasNoErrors();
         $second = TopupTransaction::latest('id')->first();
         $this->actingAs($admin)->post(route('admin.topups.reject',$second), ['reason'=>'ไม่พบยอดเข้าทดสอบ'])->assertSessionHasNoErrors();
         $this->assertSame(2,$user->notifications()->count());

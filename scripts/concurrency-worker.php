@@ -39,7 +39,7 @@ try {
     if ($task['kind'] === 'buy') {
         $result = app(App\Services\StoreService::class)->buy($user,$task['target']);
         $id = $result->id;
-    } elseif ($task['kind'] === 'approve') {
+    } elseif (in_array($task['kind'], ['approve','same_reference'], true)) {
         app(App\Http\Controllers\Admin\TopupController::class)->approve($request,App\Models\TopupTransaction::findOrFail($task['target']));
         $id = $task['target'];
     } else {

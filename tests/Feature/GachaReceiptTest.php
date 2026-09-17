@@ -11,6 +11,25 @@ class GachaReceiptTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_saved_receipt_survives_box_deletion_but_new_spins_are_blocked(): void
+    {
+        $user = User::factory()->create(['balance'=>100]);
+        $box = GachaBox::create(['name'=>'Deleted', 'price_per_spin'=>30, 'is_active'=>true]);
+        GachaItem::create(['gacha_box_id'=>$box->id,'reward_type'=>'credit','credit_amount'=>5,'drop_rate'=>1]);
+        $url = route('gacha.spin', $box);
+        $body = ['request_id'=>(string) Str::uuid()];
+        $first = $this->actingAs($user)->postJson($url, $body)->assertOk();
+        $this->actingAs(User::factory()->create(['role'=>'admin']))->delete(route('admin.gacha.destroy',$box))->assertRedirect();
+        $retry = $this->actingAs($user)->postJson($url,$body)->assertOk()->assertJsonPath('next_rewards',[]);
+        $this->assertSame($first->json('spin_id'),$retry->json('spin_id'));
+        $this->post($url,$body)->assertRedirect(route('user.collection'));
+        $this->postJson($url,['request_id'=>(string)Str::uuid()])->assertNotFound();
+        $this->assertSame('75.00',$user->fresh()->balance);
+        $this->assertDatabaseCount('gacha_spins',1);
+        $this->assertDatabaseCount('wallet_transactions',2);
+        $this->actingAs(User::factory()->create())->postJson($url,$body)->assertNotFound();
+    }
+
     public function test_retry_returns_saved_reward_without_charging_again(): void
     {
         $user = User::factory()->create(['balance' => 100]);

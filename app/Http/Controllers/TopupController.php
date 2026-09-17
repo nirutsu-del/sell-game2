@@ -26,7 +26,7 @@ class TopupController extends Controller
     }
     public function store(Request $request)
     {
-        $data = $request->validate(['request_id'=>'required|uuid','amount'=>'required|numeric|decimal:0,2|min:1|max:100000','payment_method'=>'required|in:promptpay_slip,truemoney_gift','slip'=>'nullable|image|max:5120']);
+        $data = $request->validate(['request_id'=>'required|uuid','amount'=>'required|numeric|decimal:0,2|min:1|max:100000','payment_method'=>'required|in:promptpay_slip,truemoney_gift','slip'=>'required|image|mimes:jpg,jpeg,png,webp|max:5120']);
         $slipHash = $request->hasFile('slip') ? hash_file('sha256', $request->file('slip')->getRealPath()) : null;
         $fingerprint = hash('sha256', json_encode([
             number_format((float) $data['amount'], 2, '.', ''), $data['payment_method'],

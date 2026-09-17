@@ -9,6 +9,18 @@ use Tests\TestCase;
 
 class SlipReviewTest extends TestCase {
     use RefreshDatabase;
+    public function test_both_channels_require_slip_without_creating_pending_records(): void {
+        Storage::fake('local');
+        $this->actingAs(User::factory()->create());
+        foreach (['promptpay_slip','truemoney_gift'] as $method) {
+            $this->post(route('wallet.topups.store'), ['request_id'=>(string)Str::uuid(),'amount'=>100,'payment_method'=>$method])
+                ->assertSessionHasErrors('slip');
+        }
+        $this->assertDatabaseCount('topup_transactions',0);
+        $this->assertDatabaseCount('notifications',0);
+        $this->assertDatabaseCount('topup_slip_hashes',0);
+        $this->assertCount(0,Storage::disk('local')->allFiles('slips'));
+    }
     private function body(): array {
         return ['request_id'=>(string)Str::uuid(),'amount'=>100,'payment_method'=>'promptpay_slip',
             'slip'=>UploadedFile::fake()->createWithContent('test.png',base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII='))];

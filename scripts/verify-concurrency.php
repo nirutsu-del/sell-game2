@@ -46,16 +46,16 @@ try {
     $category = Category::create(['name'=>'Race category','slug'=>'race-category']);
     $passed = true;
     for ($round=1;$round<=2;$round++) {
-        foreach (['buy','approve','retry','same_slip'] as $kind) {
+        foreach (['buy','approve','same_reference','retry','same_slip'] as $kind) {
             $tasks = []; $users = [];
             foreach (range(0,3) as $n) $users[] = User::create(['name'=>'Race user','email'=>"$round-$kind-$n@example.test",'password'=>bin2hex(random_bytes(16)),'balance'=>$kind==='buy'?300:0]);
             $target = null;
             if ($kind==='buy') $target = GameAccount::create(['category_id'=>$category->id,'title'=>'Race account','price'=>199,'status'=>'available','credentials_data'=>['username'=>'test-only']])->id;
-            if ($kind==='approve') $target = TopupTransaction::create(['user_id'=>$users[0]->id,'amount'=>150,'payment_method'=>'promptpay_slip','reference_no'=>"RACE-$round"])->id;
+            if ($kind==='approve') $target = TopupTransaction::create(['user_id'=>$users[0]->id,'amount'=>150,'payment_method'=>'promptpay_slip','reference_no'=>"RACE-$round-$kind"])->id;
             $requestId = (string) Illuminate\Support\Str::uuid();
             foreach (range(0,3) as $n) {
-                $body = $kind==='approve' ? ['funds_received'=>1,'received_amount'=>150,'transfer_reference'=>'RACE-ONLY'] : ['request_id'=>$kind==='retry'?$requestId:(string)Illuminate\Support\Str::uuid(),'amount'=>100,'payment_method'=>'promptpay_slip'];
-                $tasks[] = ['kind'=>$kind,'user'=>$kind==='approve'?$admin->id:($kind==='retry'?$users[0]->id:$users[$n]->id),'target'=>$target,'body'=>$body];
+                $body = in_array($kind,['approve','same_reference'],true) ? ['funds_received'=>1,'received_amount'=>150,'transfer_reference'=>"RACE-$round-$kind"] : ['request_id'=>$kind==='retry'?$requestId:(string)Illuminate\Support\Str::uuid(),'amount'=>100,'payment_method'=>'promptpay_slip'];
+                $tasks[] = ['kind'=>$kind,'user'=>in_array($kind,['approve','same_reference'],true)?$admin->id:($kind==='retry'?$users[0]->id:$users[$n]->id),'target'=>$kind==='same_reference' ? TopupTransaction::create(['user_id'=>$users[$n]->id,'amount'=>150,'payment_method'=>'promptpay_slip','reference_no'=>"REF-$round-$n"])->id : $target,'body'=>$body];
             }
             foreach (range(0,3) as $n) if (is_file($dir.'/ready-'.$n)) unlink($dir.'/ready-'.$n);
             if (is_file($dir.'/release')) unlink($dir.'/release');
@@ -90,6 +90,7 @@ try {
             $casePass = match($kind) {
                 'buy' => $ok===1 && $validation===3 && $debits===1 && $credits===0 && (float)array_sum($balances)===1001.0 && PurchaseHistory::where('game_account_id',$target)->count()===1 && GameAccount::find($target)->status==='sold',
                 'approve' => $ok===1 && $validation===3 && $credits===1 && $debits===0 && $balances[0]==='150.00' && TopupReview::where('topup_id',$target)->count()===1,
+                'same_reference' => $ok===1 && $validation===3 && $credits===1 && $debits===0 && (float)array_sum($balances)===150.0 && TopupTransaction::whereIn('user_id',$ids)->where('status','success')->count()===1,
                 'retry' => $ok===4 && $topups===1 && count(array_unique(array_column($outputs,'id')))===1 && $credits===0 && (float)array_sum($balances)===0.0,
                 'same_slip' => $ok===1 && $validation===3 && $topups===1 && $credits===0 && (float)array_sum($balances)===0.0,
             };

@@ -54,6 +54,14 @@ class TopupController extends Controller
                 throw ValidationException::withMessages(['received_amount'=>'ยอดเข้าจริงไม่ตรงกับยอดที่แจ้ง ห้ามอนุมัติ กรุณาตรวจสอบหรือติดต่อผู้ใช้']);
             }
 
+            $verified['transfer_reference'] = trim($verified['transfer_reference']);
+            if (!DB::table('topup_transfer_references')->insertOrIgnore([
+                'identity_hash'=>\App\Services\TopupTransferIdentity::key($topup->payment_method, $verified['transfer_reference']),
+                'topup_id'=>$topup->id,
+            ])) {
+                throw ValidationException::withMessages(['transfer_reference'=>'เลขอ้างอิงการโอนนี้ถูกอนุมัติแล้วในช่องทางนี้ กรุณาตรวจสอบรายการเดิม']);
+            }
+
             $topup->user->increment('balance', $topup->amount);
             $topup->update(['status' => 'success', 'verification_payload'=>[
                 'method'=>'manual', 'reviewer_id'=>$request->user()->id,

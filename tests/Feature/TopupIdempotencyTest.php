@@ -39,14 +39,16 @@ class TopupIdempotencyTest extends TestCase
 
     public function test_conflicting_payload_is_rejected_and_other_users_cannot_read_receipt(): void
     {
+        Storage::fake('local');
         $user = User::factory()->create();
-        $body = ['request_id'=>(string) Str::uuid(), 'amount'=>100, 'payment_method'=>'promptpay_slip'];
+        $body = ['request_id'=>(string) Str::uuid(), 'amount'=>100, 'payment_method'=>'promptpay_slip', 'slip'=>$this->paymentSlip()];
         $this->actingAs($user)->post(route('wallet.topups.store'), $body)->assertStatus(303);
         $body['amount'] = 200;
         $this->post(route('wallet.topups.store'), $body)->assertSessionHasErrors('request_id');
         $this->assertDatabaseCount('topup_transactions', 1);
         $other = User::factory()->create();
         $this->actingAs($other)->get(route('wallet.index',['topup'=>TopupTransaction::first()->id]))->assertNotFound();
+        $body['slip'] = $this->paymentSlip();
         $this->post(route('wallet.topups.store'), $body)->assertStatus(303);
         $this->assertDatabaseCount('topup_transactions', 2);
     }

@@ -20,7 +20,8 @@ class CheckoutController extends Controller
         $result = $store->spin($r->user(), $box, $data['request_id'] ?? null);
 
         if ($r->expectsJson() || $r->ajax()) {
-            $eligible = \App\Models\GachaBox::findOrFail($box)->eligibleItems();
+            $currentBox = \App\Models\GachaBox::find($box);
+            $eligible = $currentBox?->is_active ? $currentBox->eligibleItems() : collect();
             $weight = $eligible->sum('drop_rate');
             $nextRewards = $eligible->map(fn ($item) => [
                 'id'=>$item->id, 'type'=>$item->reward_type,
@@ -35,6 +36,9 @@ class CheckoutController extends Controller
             ]);
         }
 
+        if (!\App\Models\GachaBox::whereKey($box)->exists()) {
+            return redirect()->route('user.collection')->with('success', $result['result']);
+        }
         return redirect()->route('gacha.show', $box)->with('success', $result['result']);
     }
 
