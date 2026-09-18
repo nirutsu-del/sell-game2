@@ -455,3 +455,46 @@
 @media(prefers-reduced-motion:reduce) { .gacha-choice,.gacha-wheel { animation:none; transition:none; } }
 #gacha-rewards-list .gacha-card { width:100%; height:auto; min-height:210px; }
 #gacha-rewards-list .gacha-card p { display:block; overflow:visible; overflow-wrap:anywhere; }
+
+/* Animated mystery chest artwork, with a static reduced-motion source. */
+.mystery-banner-picture { display:block; width:100%; height:100%; }
+.mystery-banner-picture img { display:block; width:100%; height:100%; object-fit:cover; }
+.home-gacha:has(.has-mystery-banner) { display:block; }
+.home-gacha:has(.has-mystery-banner) .home-gacha-copy { position:relative; max-width:62%; }
+.home-gacha-art.has-mystery-banner { position:absolute; inset:0; min-height:0; overflow:hidden; perspective:none; pointer-events:none; }
+.home-gacha-art.has-mystery-banner .mystery-banner-picture { position:absolute; inset:0; }
+.home-gacha-art.has-mystery-banner img { object-position:70% center; }
+.home-gacha-art.has-mystery-banner::after { content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg,#091320f5 0%,#091320db 32%,#09132066 56%,#09132010 80%); }
+.mystery-catalog-hero { min-height:430px; display:flex; align-items:center; background:#091320; }
+.mystery-catalog-hero > .mystery-banner-picture { position:absolute; inset:0; }
+.mystery-catalog-hero .mystery-banner-picture img { object-position:70% center; }
+.mystery-catalog-shade { position:absolute; inset:0; background:linear-gradient(90deg,#091320fa 0%,#091320ed 30%,#09132060 57%,transparent 80%); }
+.mystery-catalog-hero .mystery-catalog-copy { max-width:510px; }
+.mystery-catalog-copy h1 { font-size:clamp(30px,3.5vw,46px); line-height:1.35; }
+@media(max-width:700px) {
+  .home-gacha:has(.has-mystery-banner) .home-gacha-copy { max-width:100%; padding-top:200px; }
+  .home-gacha-art.has-mystery-banner { aspect-ratio:auto; }
+  .home-gacha-art.has-mystery-banner::after { background:linear-gradient(0deg,#091320f5 0%,#091320e0 45%,#09132040 78%,#09132010); }
+  .home-gacha-art.has-mystery-banner img { object-fit:cover; object-position:68% top; }
+  .mystery-catalog-hero { min-height:580px; align-items:flex-end; padding:230px 24px 28px; }
+  .mystery-catalog-hero > .mystery-banner-picture { height:330px; }
+  .mystery-catalog-hero .mystery-banner-picture img { object-position:68% center; }
+  .mystery-catalog-shade { background:linear-gradient(0deg,#091320 0%,#091320 30%,#091320e0 49%,transparent 80%); }
+}
+
+/* Full-resolution golden chest, with separate vector light effects. */
+.golden-dawn-banner { overflow:hidden; }
+.home-gacha-art.has-mystery-banner .golden-dawn-banner img,.mystery-catalog-hero .golden-dawn-banner img { object-position:right center; }
+.golden-dawn-effects { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.golden-dawn-particle { opacity:0; }
+@media(prefers-reduced-motion:no-preference) {
+ .golden-dawn-rays { animation:golden-light-breathe 4s ease-in-out infinite alternate; }
+ .golden-dawn-glow { animation:golden-light-breathe 3s ease-in-out infinite alternate-reverse; }
+ .golden-dawn-particle { animation:golden-spark-rise 4.8s linear infinite; animation-delay:var(--spark-delay); }
+}
+@keyframes golden-light-breathe { from { opacity:.3; } to { opacity:1; } }
+@keyframes golden-spark-rise { 0% { opacity:0; transform:translate(0,25px); } 18% { opacity:.9; } 78% { opacity:.65; } 100% { opacity:0; transform:translate(var(--spark-drift),-280px); } }
+.golden-dawn-glow { filter:blur(24px); }
+.golden-dawn-rays { filter:blur(7px); }
+@media(prefers-reduced-motion:no-preference) { .golden-dawn-glow { animation-name:golden-core-breathe; } }
+@keyframes golden-core-breathe { from { opacity:.03; } to { opacity:.13; } }

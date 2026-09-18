@@ -14,12 +14,8 @@
             <a class="home-gacha-all" href="{{ route('gacha.index') }}">ดูกล่องทั้งหมด →</a>
         </div>
     </div>
-    <div class="home-gacha-art" aria-hidden="true">
-        <div class="home-gacha-orbit"></div>
-        <div class="home-gacha-rays"></div>
-        <div class="home-gacha-chest"><div class="home-gacha-lid"></div><div class="home-gacha-chest-body"><span>✦</span><small>MIZUKI</small></div></div>
-        <span class="home-gacha-spark spark-one">✦</span><span class="home-gacha-spark spark-two">+</span><span class="home-gacha-spark spark-three">✧</span>
-        <span class="home-gacha-art-label">MYSTERY AWAITS</span>
+    <div class="home-gacha-art has-mystery-banner">
+        @include('partials.mystery-banner-art')
     </div>
 </section>
 @endif

@@ -3,11 +3,13 @@
 @section('content')
 <div class="space-y-10">
     {{-- Hero Section --}}
-    <div class="relative overflow-hidden rounded-3xl border border-violet-800/30 bg-gradient-to-br from-violet-950/60 via-slate-900 to-slate-950 p-8 sm:p-12">
+    <div class="mystery-catalog-hero relative overflow-hidden rounded-3xl border border-violet-800/30 bg-gradient-to-br from-violet-950/60 via-slate-900 to-slate-950 p-8 sm:p-12">
+        @include('partials.mystery-banner-art', ['lazy'=>false])
+        <div class="mystery-catalog-shade" aria-hidden="true"></div>
         <div class="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-violet-600/20 blur-3xl pointer-events-none"></div>
         <div class="absolute -left-16 -bottom-16 h-64 w-64 rounded-full bg-fuchsia-600/15 blur-3xl pointer-events-none"></div>
 
-        <div class="relative z-10 max-w-2xl">
+        <div class="mystery-catalog-copy relative z-10 max-w-2xl">
             <div class="inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 text-xs font-semibold text-violet-300">
                 <span class="animate-pulse">✨</span> LUCKY GACHA REWARDS
             </div>
