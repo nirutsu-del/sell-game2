@@ -2,7 +2,7 @@
 @section('content')
 <a href="{{ auth()->check() ? route('contact.index') : route('contact') }}" class="text-sm text-orange-300">← กลับหน้าติดต่อ</a>
 <article class="mx-auto mt-6 max-w-3xl rounded-2xl border border-slate-700 bg-slate-900 p-6">
-    <p class="text-sm text-orange-300">C-{{ $message->id }} · {{ $message->resolved_at ? 'จัดการแล้ว' : 'เปิดอยู่' }}</p>
+    <p class="text-sm text-orange-300">C-{{ $message->id }} · {{ $message->statusLabel() }}</p>
     <h1 class="mt-3 break-words text-2xl font-bold">{{ $message->subject }}</h1>
     <p class="mt-3 text-sm text-slate-400">ร้านจะตอบกลับในหน้านี้ กลับมาเปิดเพื่อตรวจสอบคำตอบได้</p>
     @if($trackingUrl)

@@ -17,10 +17,12 @@ Route::get('/news/{news:slug}', [StoreController::class, 'newsShow'])->name('new
 Route::get('/contact', [ContactController::class, 'create'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:10,1')->name('contact.store');
 Route::get('/contact/guest/{message}', [ContactController::class, 'show'])->middleware('signed')->name('contact.guest.show');
+Route::get('/contact/guest/{message}/attachments/{attachment}', [ContactController::class, 'attachment'])->middleware('signed')->name('contact.guest.attachment');
 Route::post('/contact/guest/{message}/reply', [ContactController::class, 'reply'])->middleware(['signed','throttle:10,1'])->name('contact.guest.reply');
 Route::middleware(['auth','auth.session'])->group(function () {
     Route::get('/contact/threads', [ContactController::class, 'index'])->name('contact.index');
     Route::get('/contact/threads/{message}', [ContactController::class, 'show'])->name('contact.show');
+    Route::get('/contact/threads/{message}/attachments/{attachment}', [ContactController::class, 'attachment'])->name('contact.attachment');
     Route::post('/contact/threads/{message}/reply', [ContactController::class, 'reply'])->middleware('throttle:10,1')->name('contact.reply');
 });
 
@@ -60,6 +62,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'auth.session', 'adm
     Route::get('reports/sales/export', [\App\Http\Controllers\Admin\SalesReportController::class,'export'])->name('reports.sales.export');
     Route::get('contacts', [\App\Http\Controllers\Admin\ContactInboxController::class,'index'])->name('contacts.index');
     Route::get('contacts/{message}', [\App\Http\Controllers\Admin\ContactInboxController::class,'show'])->name('contacts.show');
+    Route::get('contacts/{message}/attachments/{attachment}', [ContactController::class,'attachment'])->name('contacts.attachment');
     Route::patch('contacts/{message}', [\App\Http\Controllers\Admin\ContactInboxController::class,'update'])->name('contacts.update');
     Route::post('contacts/{message}/reply', [\App\Http\Controllers\Admin\ContactInboxController::class,'reply'])->middleware('throttle:30,1')->name('contacts.reply');
     Route::get('settings', [\App\Http\Controllers\Admin\StoreSettingController::class,'edit'])->name('settings.edit');

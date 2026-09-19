@@ -18,13 +18,22 @@
         @if($settings->opening_hours)<h3 class="mt-6 font-semibold">เวลาทำการ / เวลาตอบข้อความ</h3><p class="mt-2 whitespace-pre-line break-words text-sm text-slate-300">{{ $settings->opening_hours }}</p>@endif
         <p class="mt-6 text-xs leading-6 text-slate-400">หากสอบถามคำสั่งซื้อ กรุณาระบุเลขอ้างอิง เช่น S-12 หรือ A-8 เพื่อให้ร้านตรวจสอบได้สะดวก</p>
     </section>
-    <form method="POST" action="{{ route('contact.store') }}" class="market-form space-y-4 rounded-2xl border border-slate-700 bg-slate-900 p-6">
+    <form method="POST" action="{{ route('contact.store') }}" enctype="multipart/form-data" class="market-form space-y-4 rounded-2xl border border-slate-700 bg-slate-900 p-6">
         @csrf<h2 class="text-xl font-bold">ฝากข้อความถึงร้าน</h2>
         <p class="text-sm text-slate-400">หลังส่ง คุณจะเข้าสู่หน้าติดตามเรื่อง ร้านจะตอบกลับในหน้านั้น @guest กรุณาเก็บลิงก์ส่วนตัวที่ได้รับ หรือเข้าสู่ระบบก่อนส่งเพื่อดูประวัติและรับแจ้งเตือนในเว็บไซต์ @endguest</p>
         <label>ชื่อ<input name="name" value="{{ old('name',auth()->user()?->name) }}" required maxlength="100"></label>
         <label>อีเมล<input name="email" type="email" value="{{ old('email',auth()->user()?->email) }}" required></label>
         <label>หัวข้อ<input name="subject" value="{{ old('subject') }}" required maxlength="150"></label>
+        <label>ประเภทปัญหา<select name="category" required>@foreach(App\Models\ContactMessage::CATEGORIES as $value=>$label)<option value="{{ $value }}" @selected(old('category','general') === $value)>{{ $label }}</option>@endforeach</select></label>
+        @auth
+        <label>คำสั่งซื้อที่เกี่ยวข้อง (ไม่บังคับ)<input name="order_reference" list="contact-orders" value="{{ old('order_reference') }}" maxlength="40" placeholder="เลือกหรือพิมพ์ เช่น S-12, A-8, G-3"></label>
+        <datalist id="contact-orders">@foreach($orderOptions as $order)<option value="{{ $order['reference'] }}">{{ $order['date']?->copy()->timezone('Asia/Bangkok')->format('d/m/Y H:i') }}</option>@endforeach</datalist>
+        <p class="text-xs text-slate-400">แสดง 100 รายการล่าสุดของคุณ หากเก่ากว่านั้น พิมพ์เลขจากประวัติคำสั่งซื้อได้</p>
+        @else
+        <p class="text-sm text-slate-400"><a class="underline" href="{{ route('login') }}">เข้าสู่ระบบ</a> เพื่อเลือกคำสั่งซื้อของคุณ</p>
+        @endauth
         <label>ข้อความ<textarea name="message" rows="5" required maxlength="3000">{{ old('message') }}</textarea></label>
+        @include('partials.contact-upload')
         <button class="market-button">ส่งข้อความ</button>
     </form>
 </div>

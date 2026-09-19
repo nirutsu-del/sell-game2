@@ -4,7 +4,8 @@
 <div class="space-y-3">
     @forelse($messages as $message)
         <a href="{{ route('contact.show',$message) }}" class="block rounded-2xl border border-slate-700 bg-slate-900 p-5">
-            <p class="text-sm text-orange-300">C-{{ $message->id }} · {{ $message->resolved_at ? 'จัดการแล้ว' : 'เปิดอยู่' }}</p>
+            <p class="text-sm text-orange-300">C-{{ $message->id }} · {{ $message->statusLabel() }}</p>
+            <p class="mt-2 text-sm text-slate-400">{{ $message->categoryLabel() }} · {{ $message->order_reference }}</p>
             <h2 class="mt-2 break-words font-bold">{{ $message->subject }}</h2>
             <p class="mt-2 text-xs text-slate-400">อัปเดต {{ $message->updated_at->copy()->timezone('Asia/Bangkok')->format('d/m/Y H:i') }}</p>
         </a>

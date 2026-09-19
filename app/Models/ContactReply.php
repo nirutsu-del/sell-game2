@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ContactReply extends Model
 {
     protected $fillable = ['user_id', 'from_staff', 'body'];
+    public function attachments() { return $this->hasMany(ContactAttachment::class); }
 
     protected function casts(): array
     {
