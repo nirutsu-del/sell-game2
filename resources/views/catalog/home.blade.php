@@ -5,10 +5,13 @@
         @if($banners->isNotEmpty())
         <div id="store-banner-track" class="market-hero-banner-track" aria-label="แบนเนอร์ร้านค้า" tabindex="0">
             @foreach($banners as $banner)
-            <div class="market-hero-banner-slide" data-store-banner>
+            <div class="market-hero-banner-slide {{ $banner->image === 'store-banners/mizuki-worlds-collision.webp' ? 'worlds-collision-slide' : '' }}" data-store-banner>
                 @if($banner->link)<a href="{{ $banner->link }}" aria-label="{{ $banner->title }}">@endif
                 <img src="{{ asset('storage/'.$banner->image) }}" alt="{{ $banner->title }}" @if(!$loop->first) loading="lazy" @endif>
                 @if($banner->link)</a>@endif
+                @if($banner->image === 'store-banners/mizuki-worlds-collision.webp')
+                <div class="worlds-collision-effects" aria-hidden="true"><span class="worlds-collision-glow"></span>@for($i=0;$i<22;$i++)<i style="--x:{{ 43+($i*17)%54 }}%;--y:{{ 22+($i*13)%68 }}%;--delay:-{{ $i*.31 }}s"></i>@endfor</div>
+                @endif
             </div>
             @endforeach
         </div>

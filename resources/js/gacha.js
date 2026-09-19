@@ -13,17 +13,28 @@ if (root) {
         wheelRewards = config.rewards.slice(0, 10);
         if (winner && !wheelRewards.some(r => r.id === winner.id)) wheelRewards = [...wheelRewards.slice(0, 9), winner];
         const count = wheelRewards.length || 1;
-        const colors = ['#183e58','#774626','#423564','#235457','#693647'];
-        el('wheel').style.background = `conic-gradient(${Array.from({length:count}, (_,i) => `${colors[i%colors.length]} ${i*360/count}deg ${(i+1)*360/count}deg`).join(',')})`;
+        const colors = ['#152c43','#1c354a','#18243c','#20384a'];
+        el('wheel').classList.toggle('is-dense', count > 6);
+        el('wheel').style.background = `conic-gradient(${Array.from({length:count}, (_,i) => {
+            const color = wheelRewards[i]?.type === 'game_account' ? '#54402d' : colors[i%colors.length];
+            return `#bd9457 ${i*360/count}deg ${i*360/count+.5}deg, ${color} ${i*360/count+.5}deg ${(i+1)*360/count}deg`;
+        }).join(',')})`;
         el('wheel').style.transform = 'rotate(0deg)';
-        el('wheel').replaceChildren(); el('wheel-legend').replaceChildren();
+        el('wheel').replaceChildren();
         wheelRewards.forEach((reward,i) => {
             const marker = document.createElement('span');
-            marker.className = 'gacha-wheel-number'; marker.textContent = String(i+1);
+            marker.className = 'gacha-wheel-number';
+            const icon = document.createElement('span'), caption = document.createElement('strong');
+            icon.className = 'wheel-reward-icon';
+            if (reward.type === 'game_account' && reward.image) {
+                const image = document.createElement('img'); image.src = reward.image; image.alt = '';
+                image.addEventListener('error', () => { icon.textContent = '✦'; }, {once:true}); icon.append(image);
+            } else icon.textContent = reward.type === 'credit' ? '฿' : '✦';
+            caption.textContent = count > 6 ? String(i+1) : reward.type === 'credit' ? reward.title.replace(/^เครดิต\s*/, '') : 'ไอดีเกม';
+            marker.append(icon, caption);
             const angle = (i+.5)*2*Math.PI/count;
-            marker.style.left = `${50 + Math.sin(angle)*35}%`; marker.style.top = `${50 - Math.cos(angle)*35}%`;
+            marker.style.left = `${50 + Math.sin(angle)*32}%`; marker.style.top = `${50 - Math.cos(angle)*32}%`;
             el('wheel').append(marker);
-            const label = document.createElement('li'); label.textContent = `${i+1}. ${reward.title}`; el('wheel-legend').append(label);
         });
     }
     function resetScene() {
@@ -93,6 +104,20 @@ if (root) {
         visual.className = 'gacha-card-art'; title.textContent = reward.title;
         art(visual, reward); node.append(visual, title); return node;
     }
+    function rewardRow(reward) {
+        const node = document.createElement('article'), visual = document.createElement('div');
+        const title = document.createElement('h3'), chance = document.createElement('span');
+        node.className = 'room-reward' + (reward.type === 'game_account' ? ' is-account' : '');
+        visual.className = 'room-reward-art';
+        if (reward.type === 'credit') {
+            const coin = document.createElement('span'); coin.className = 'room-coin';
+            coin.textContent = '฿'; coin.setAttribute('aria-hidden', 'true'); visual.append(coin);
+        } else art(visual, reward);
+        title.textContent = reward.title; chance.className = 'room-chance';
+        chance.textContent = Number(Number(reward.chance).toFixed(4)) + '%';
+        chance.setAttribute('aria-label', 'โอกาส ' + Number(reward.chance).toFixed(4) + '%');
+        node.append(visual, title, chance); return node;
+    }
     async function scene(data) {
         const winner = {id:data.item_id, title: data.account_title || 'เครดิต ' + money(data.credit_amount), type: data.reward_type, image: data.reward_image};
         if (mode === 'cards') {
@@ -119,7 +144,6 @@ if (root) {
                 await animation.finished.catch(()=>{}); animation.cancel(); animation = null;
             }
             el('wheel').style.transform = `rotate(${rotation}deg)`;
-            el('wheel-legend').children[index]?.classList.add('is-winner');
         } else {
         if (!reduced.matches) {
             el('stage').classList.add('is-opening');
@@ -192,13 +216,14 @@ if (root) {
                 config.rewards = data.next_rewards;
                 const list = el('rewards-list'); list.replaceChildren();
                 config.rewards.forEach(reward => {
-                    const node = card(reward);
-                    const chance = document.createElement('p'); chance.textContent = Number(reward.chance).toFixed(4) + '%';
-                    chance.className = 'text-xs text-violet-300'; node.append(chance); list.append(node);
+                    list.append(rewardRow(reward));
                 });
                 if (!config.rewards.length) {
                     const empty = document.createElement('p'); empty.className = 'col-span-full p-8 text-center'; empty.textContent = 'รางวัลหมดชั่วคราว'; list.append(empty);
                 }
+                const stock = el('stock');
+                const accounts = config.rewards.filter(reward => reward.type === 'game_account').length;
+                if (stock) stock.textContent = accounts ? `รางวัลไอดี ${accounts} รายการ` : config.rewards.length ? 'รางวัลเครดิต' : 'รางวัลหมด';
             } else if (data.reward_type === 'game_account') config.rewards = config.rewards.filter(r => r.id !== data.item_id);
             const row = document.createElement('div'), label = document.createElement('p');
             row.className = 'py-3 text-sm'; label.textContent = '#' + data.spin_id + ' · ' + data.result;

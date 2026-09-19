@@ -498,3 +498,18 @@
 .golden-dawn-rays { filter:blur(7px); }
 @media(prefers-reduced-motion:no-preference) { .golden-dawn-glow { animation-name:golden-core-breathe; } }
 @keyframes golden-core-breathe { from { opacity:.03; } to { opacity:.13; } }
+
+/* Selected homepage artwork: Worlds Collide. */
+.worlds-collision-slide { position:relative; overflow:hidden; }
+.worlds-collision-effects { position:absolute; inset:0; pointer-events:none; }
+.worlds-collision-glow { position:absolute; inset:0; background:radial-gradient(ellipse at 78% 45%,#75ddff20,transparent 40%); }
+.worlds-collision-effects i { position:absolute; left:var(--x); top:var(--y); width:3px; height:3px; border-radius:50%; background:#ffd6a1; box-shadow:0 0 10px #ffab64; opacity:0; }
+.worlds-collision-effects i:nth-child(even) { background:#95efff; box-shadow:0 0 9px #5bdaee; }
+@media(prefers-reduced-motion:no-preference) {
+ .worlds-collision-slide img { animation:worlds-image-drift 14s ease-in-out infinite alternate; }
+ .worlds-collision-glow { animation:worlds-glow-breathe 5s ease-in-out infinite alternate; }
+ .worlds-collision-effects i { animation:worlds-spark-rise 6s linear infinite; animation-delay:var(--delay); }
+}
+@keyframes worlds-image-drift { to { transform:scale(1.015); } }
+@keyframes worlds-glow-breathe { from { opacity:.25; } to { opacity:1; } }
+@keyframes worlds-spark-rise { 0% { opacity:0; transform:translateY(12px); } 20% { opacity:.7; } 100% { opacity:0; transform:translate(12px,-85px); } }
