@@ -19,7 +19,7 @@ class SecurityHeaders
         $response->headers->set('Content-Security-Policy', $this->contentSecurityPolicy());
 
         // Account pages and reset tokens must not be stored by shared caches.
-        if ($request->user() || $request->is('login', 'logout', 'register', 'forgot-password', 'reset-password/*', 'reset-password', 'admin', 'admin/*')) {
+        if ($request->user() || $request->is('login', 'logout', 'register', 'admin', 'admin/*')) {
             $response->headers->set('Cache-Control', 'no-store, private');
         }
 

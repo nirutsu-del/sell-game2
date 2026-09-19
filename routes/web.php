@@ -16,12 +16,15 @@ Route::get('/news', [StoreController::class, 'news'])->name('news.index');
 Route::get('/news/{news:slug}', [StoreController::class, 'newsShow'])->name('news.show');
 Route::get('/contact', [ContactController::class, 'create'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:10,1')->name('contact.store');
+Route::get('/contact/guest/{message}', [ContactController::class, 'show'])->middleware('signed')->name('contact.guest.show');
+Route::post('/contact/guest/{message}/reply', [ContactController::class, 'reply'])->middleware(['signed','throttle:10,1'])->name('contact.guest.reply');
+Route::middleware(['auth','auth.session'])->group(function () {
+    Route::get('/contact/threads', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/contact/threads/{message}', [ContactController::class, 'show'])->name('contact.show');
+    Route::post('/contact/threads/{message}/reply', [ContactController::class, 'reply'])->middleware('throttle:10,1')->name('contact.reply');
+});
 
 Route::middleware('guest')->group(function () {
-    Route::get('/forgot-password', [\App\Http\Controllers\PasswordController::class,'request'])->name('password.request');
-    Route::post('/forgot-password', [\App\Http\Controllers\PasswordController::class,'email'])->middleware('throttle:5,1')->name('password.email');
-    Route::get('/reset-password/{token}', [\App\Http\Controllers\PasswordController::class,'resetForm'])->name('password.reset');
-    Route::post('/reset-password', [\App\Http\Controllers\PasswordController::class,'reset'])->middleware('throttle:10,1')->name('password.store');
     Route::get('/login', [AuthController::class, 'form'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:login')->name('login.store');
     Route::post('/register', [AuthController::class, 'register'])->middleware('throttle:5,1')->name('register');
@@ -58,6 +61,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'auth.session', 'adm
     Route::get('contacts', [\App\Http\Controllers\Admin\ContactInboxController::class,'index'])->name('contacts.index');
     Route::get('contacts/{message}', [\App\Http\Controllers\Admin\ContactInboxController::class,'show'])->name('contacts.show');
     Route::patch('contacts/{message}', [\App\Http\Controllers\Admin\ContactInboxController::class,'update'])->name('contacts.update');
+    Route::post('contacts/{message}/reply', [\App\Http\Controllers\Admin\ContactInboxController::class,'reply'])->middleware('throttle:30,1')->name('contacts.reply');
     Route::get('settings', [\App\Http\Controllers\Admin\StoreSettingController::class,'edit'])->name('settings.edit');
     Route::put('settings', [\App\Http\Controllers\Admin\StoreSettingController::class,'update'])->name('settings.update');
     Route::put('settings/contact', [\App\Http\Controllers\Admin\StoreSettingController::class,'updateContact'])->name('settings.contact.update');

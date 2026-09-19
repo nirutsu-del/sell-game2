@@ -3,7 +3,7 @@
 รัน `php artisan store:security-check` อ่านค่าโดยไม่แก้ไขหรือพิมพ์ secrets คืน exit code 1 เมื่อยังมีค่าที่ไม่พร้อม ผล PASS ไม่ได้รับรองความปลอดภัยของเซิร์ฟเวอร์
 
 - Production: APP_ENV=production, APP_DEBUG=false, APP_URL เป็น HTTPS ของโดเมนจริง, SESSION_SECURE_COOKIE=true อย่าใช้ secure cookie กับ HTTP localhost
-- ใช้ DB user ของร้านที่จำกัดสิทธิ์และมีรหัสผ่าน ไม่ใช้ root ตั้ง SMTP จริงและทดสอบลืมรหัสผ่าน
+- ใช้ DB user ของร้านที่จำกัดสิทธิ์และมีรหัสผ่าน ไม่ใช้ root (ระบบลืมรหัสผ่านทางอีเมลถูกนำออกแล้ว)
 - ตั้ง DocumentRoot ไป public/ เท่านั้น ห้ามเปิดทั้งโปรเจกต์ออกอินเทอร์เน็ต .htaccess ที่ root เป็นเพียงชั้นเสริมสำหรับ Apache ที่เปิด AllowOverride; Nginx ไม่อ่านไฟล์นี้
 - ตรวจจาก HTTP จริงว่า .env, .git/config, storage/app/backups และ storage/app/private/slips ได้ 403/404 ไม่ใช่ไฟล์ดาวน์โหลด ทดสอบว่ารูปใน public/storage ยังเปิดได้ PHP feature tests ไม่ได้ทดสอบ Apache
 - จำกัดสิทธิ์ไฟล์: ผู้ใช้เว็บเขียนได้เฉพาะ storage และ bootstrap/cache; ปิดการ execute script ใน uploads ที่เว็บเซิร์ฟเวอร์ จำกัด ACL ชุดสำรอง/APP_KEY บน Windows เก็บสำเนาเข้ารหัสนอกเครื่อง

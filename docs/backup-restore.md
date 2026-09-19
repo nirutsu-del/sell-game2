@@ -1,5 +1,20 @@
 # สำรองและกู้คืนข้อมูล Mizuki Shop
 
+## สำรองอัตโนมัติบน XAMPP เครื่องนี้ (19 กันยายน 2026)
+
+ติดตั้ง Windows Task Scheduler ชื่อ `MizukiShop-DailyBackup` แล้ว โดย `scripts/install-local-backup-task.ps1` เรียก `scripts/run-local-backup.ps1` แบบซ่อนหน้าต่างภายใต้ผู้ใช้ปัจจุบัน ไม่เก็บรหัสผ่าน Windows ในสคริปต์
+
+- ตรวจทุกชั่วโมง แต่สร้าง backup สำเร็จไม่เกินวันละครั้งตามวันที่ไทย หาก MySQL ยังปิดจะลองใหม่รอบถัดไป
+- ทำงานขณะผู้ใช้ลงชื่อเข้า Windows อยู่ เครื่องเปิดและ MySQL พร้อมใช้งานเท่านั้น ไม่ได้เปิด MySQL หรือปลุกเครื่องให้เอง
+- ที่เก็บ: `%LOCALAPPDATA%/MizukiShop/backups` ซึ่งอยู่นอกโฟลเดอร์เว็บไซต์
+- `status.json` บอกเวลาลองล่าสุด เวลาสำเร็จ ชุดล่าสุดและ exit code; `last-run.log` บอกผลรอบที่พยายามสำรอง
+- ทดสอบเรียกผ่าน Windows Task จริงได้ exit code 0 และสร้าง manifest พร้อม SQL/ไฟล์แล้ว
+- ใช้ file lock กันรันซ้อนและข้ามวันเดิมเมื่อมี manifest; ไม่ลบ backup เก่าอัตโนมัติ
+- ถ้าต้องการสำรองซ้ำวันนี้ด้วยมือ: `powershell.exe -NoProfile -File scripts/run-local-backup.ps1 -Force`
+- ถ้าย้ายโปรเจกต์ ให้รัน installer อีกครั้งเพื่ออัปเดตตำแหน่งสคริปต์
+
+สำเนานี้ยังอยู่บนเครื่องเดียวกัน ไม่ใช่ off-site backup ยังรอผู้ใช้ระบุโฟลเดอร์/ปลายทางนอกเครื่องก่อนคัดลอกออกไป และต้องเก็บ APP_KEY เดิมแยกอย่างปลอดภัยด้วย
+
 ดูขั้นตอนกู้คืนและข้อควรระวังฉบับปัจจุบันในหัวข้อการสำรองและกู้คืนของ [production-security.md](production-security.md)
 
 รัน `php artisan store:backup` เพื่อสร้างชุดชื่อไม่ซ้ำใน `storage/app/backups` โดยมี `database.sql`, `storage_public`, `private_slips` (ถ้ามี) และ `manifest.json` ไม่รวม `.env` ต้องเก็บ APP_KEY เดิมแยกอย่างปลอดภัยเพื่อถอดรหัสข้อมูลหลังการกู้คืน

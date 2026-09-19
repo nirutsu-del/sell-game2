@@ -6,6 +6,7 @@
         <a class="{{ request()->routeIs('wallet.*') ? 'is-active' : '' }}" href="{{ route('wallet.index') }}">Wallet</a>
         <a class="{{ request()->routeIs('orders.*','purchases.*') ? 'is-active' : '' }}" href="{{ route('orders.index') }}">ประวัติ</a>
         <a class="{{ request()->routeIs('notifications.*') ? 'is-active' : '' }}" href="{{ route('notifications.index') }}">แจ้งเตือน</a>
+        <a class="{{ request()->routeIs('contact.*') ? 'is-active' : '' }}" href="{{ route('contact.index') }}">เรื่องที่ฉันติดต่อ</a>
         <a class="{{ request()->routeIs('password.*') ? 'is-active' : '' }}" href="{{ route('password.edit') }}">รหัสผ่าน</a>
         <a href="{{ route('logout.form') }}">ออกจากระบบ</a>
     </div>

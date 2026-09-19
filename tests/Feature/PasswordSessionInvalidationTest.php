@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\{Auth, Hash, Password};
+use Illuminate\Support\Facades\{Auth, Hash};
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
@@ -27,7 +27,7 @@ class PasswordSessionInvalidationTest extends TestCase
 
     public static function flows(): array
     {
-        return [['file', 'change'], ['file', 'reset'], ['database', 'change'], ['database', 'reset']];
+        return [['file'], ['database']];
     }
 
     // Separate encrypted cookie jars and fresh guards/stores model independent devices.
@@ -49,7 +49,7 @@ class PasswordSessionInvalidationTest extends TestCase
     }
 
     #[DataProvider('flows')]
-    public function test_old_device_and_remember_cookie_are_rejected_after_password_change_or_reset(string $driver, string $flow): void
+    public function test_old_device_and_remember_cookie_are_rejected_after_password_change(string $driver): void
     {
         $this->sessionDirectory = sys_get_temp_dir().'/mizuki-session-test-'.bin2hex(random_bytes(8));
         mkdir($this->sessionDirectory);
@@ -70,18 +70,12 @@ class PasswordSessionInvalidationTest extends TestCase
 
         $currentDevice = [];
         $body = ['password' => 'new-password', 'password_confirmation' => 'new-password'];
-        if ($flow === 'change') {
-            $this->visit($currentDevice, 'POST', route('login.store'), [
-                'email' => $user->email, 'password' => 'old-password',
-            ])->assertRedirect();
-            $this->visit($currentDevice, 'PUT', route('password.update'), $body + [
-                'current_password' => 'old-password',
-            ])->assertRedirect(route('login'))->assertSessionHasNoErrors();
-        } else {
-            $this->visit($currentDevice, 'POST', route('password.store'), $body + [
-                'email' => $user->email, 'token' => Password::createToken($user),
-            ])->assertRedirect(route('login'))->assertSessionHasNoErrors();
-        }
+        $this->visit($currentDevice, 'POST', route('login.store'), [
+            'email' => $user->email, 'password' => 'old-password',
+        ])->assertRedirect();
+        $this->visit($currentDevice, 'PUT', route('password.update'), $body + [
+            'current_password' => 'old-password',
+        ])->assertRedirect(route('login'))->assertSessionHasNoErrors();
 
         $this->assertTrue(Hash::check('new-password', $user->fresh()->password));
         $this->assertNotSame($oldToken, $user->fresh()->remember_token);

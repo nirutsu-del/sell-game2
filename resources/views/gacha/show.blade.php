@@ -18,7 +18,7 @@
         'walletUrl' => route('wallet.index'),
     ];
 @endphp
-<div id="gacha-room" class="room-layout" style="--room-background: url('{{ asset('images/gacha/card-room-background.png') }}'); --room-card-back: url('{{ asset('images/gacha/mizuki-card-back.png') }}')">
+<div id="gacha-room" class="room-layout" style="--room-background: url('{{ asset('images/gacha/card-room-background.webp') }}'); --room-card-back: url('{{ asset('images/gacha/mizuki-card-back.webp') }}')">
     <script type="application/json" id="gacha-settings">@json($settings)</script>
     @include('gacha.room-layout')
     <section class="room-history rounded-2xl border border-slate-800 bg-slate-900 p-5">

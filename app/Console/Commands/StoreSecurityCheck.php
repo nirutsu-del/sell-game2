@@ -21,13 +21,12 @@ class StoreSecurityCheck extends Command
             'Session cookies are HTTP-only' => (bool) config('session.http_only'),
             'Session SameSite is lax or strict' => in_array(config('session.same_site'), ['lax', 'strict'], true),
             'Database user is not root and has a password' => !in_array($db['username'] ?? '', ['', 'root'], true) && filled($db['password'] ?? null),
-            'Mail transport is not log or array' => !in_array(config('mail.default'), ['log', 'array', null], true),
         ];
 
         foreach ($checks as $label => $passed) {
             $this->line(($passed ? '[PASS] ' : '[FAIL] ').$label);
         }
-        $this->warn('Manual checks still required: public/ document root, HTTPS, file permissions, SMTP delivery, scheduler, off-site backups and isolated restore test.');
+        $this->warn('Manual checks still required: public/ document root, HTTPS, file permissions, scheduler, off-site backups and isolated restore test.');
 
         return in_array(false, $checks, true) ? self::FAILURE : self::SUCCESS;
     }

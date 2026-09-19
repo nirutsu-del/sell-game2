@@ -8,7 +8,6 @@
             <label>อีเมล<input name="email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
             <label>รหัสผ่าน<input name="password" type="password" autocomplete="current-password" required placeholder="กรอกรหัสผ่าน"></label>
             <button class="market-button w-full">เข้าสู่ระบบ</button>
-            <a class="block text-center text-sm text-orange-300" href="{{ route('password.request') }}">ลืมรหัสผ่าน?</a>
         </form>
         <form method="POST" action="{{ route('register') }}" class="market-form space-y-4 rounded-2xl border border-slate-700 bg-slate-900 p-6 shadow-xl">
             @csrf

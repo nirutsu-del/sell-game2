@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use App\Models\ContactMessage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Services\ContactConversation;
+use App\Notifications\StoreNotification;
 
 class ContactInboxController extends Controller
 {
@@ -22,7 +24,7 @@ class ContactInboxController extends Controller
             else $query->where(fn($q)=>$q->where('name','like',"%$search%")->orWhere('email','like',"%$search%")->orWhere('subject','like',"%$search%")->orWhere('message','like',"%$search%"));
         }
         return response()->view('admin.contacts.index',[
-            'messages'=>$query->latest()->orderByDesc('id')->paginate(20)->withQueryString(),
+            'messages'=>$query->orderByDesc('updated_at')->orderByDesc('id')->paginate(20)->withQueryString(),
             'counts'=>[
                 'all'=>ContactMessage::count(),
                 'new'=>ContactMessage::whereNull('read_at')->whereNull('resolved_at')->count(),
@@ -33,7 +35,16 @@ class ContactInboxController extends Controller
     }
     public function show(ContactMessage $message)
     {
-        return response()->view('admin.contacts.show',compact('message'))->header('Cache-Control','private, no-store');
+        return response()->view('admin.contacts.show',['message'=>$message,'replies'=>$message->replies()->orderBy('id')->paginate(30)])->header('Cache-Control','private, no-store');
+    }
+    public function reply(Request $request, ContactMessage $message)
+    {
+        $data = $request->validate(['body'=>'required|string|max:3000']);
+        ContactConversation::reply($message,$data['body'],$request->user(),true);
+        $params = ['message'=>$message->id];
+        $lastPage = (int) ceil($message->replies()->count()/30);
+        if ($lastPage > 1) $params['page'] = $lastPage;
+        return redirect()->route('admin.contacts.show',$params)->with('success','ส่งคำตอบให้ลูกค้าแล้ว');
     }
     public function update(Request $request, ContactMessage $message)
     {
@@ -47,6 +58,8 @@ class ContactInboxController extends Controller
                 $message->resolved_by = $request->user()->id;
                 $message->resolved_by_name = $request->user()->name;
                 $message->resolution_note = $data['resolution_note'] ?? null;
+                $message->user?->notify(new StoreNotification('เรื่อง C-'.$message->id.' จัดการแล้ว',
+                    'หากยังมีปัญหา สามารถตอบกลับเพื่อเปิดเรื่องอีกครั้งได้','contact',$message->id));
             }
             $message->save();
         },3);

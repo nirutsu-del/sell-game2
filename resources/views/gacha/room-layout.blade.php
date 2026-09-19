@@ -10,7 +10,7 @@
         <div class="room-stage-art">
             <div id="gacha-cards-scene" class="gacha-cards-scene"><div class="gacha-card-choices">@for($i=0;$i<5;$i++)<button type="button" class="gacha-choice" data-card-index="{{ $i }}" aria-pressed="false" aria-label="เลือกการ์ดใบที่ {{ $i+1 }}"><span class="gacha-choice-back"><span class="room-card-number">0{{ $i+1 }}</span></span><span class="gacha-choice-front"></span></button>@endfor</div></div>
             <div id="gacha-wheel-scene" class="gacha-wheel-scene" hidden><div class="gacha-wheel-wrap"><span class="gacha-wheel-pointer" aria-hidden="true">▼</span><div id="gacha-wheel" class="gacha-wheel" aria-hidden="true"></div><span class="gacha-wheel-hub" aria-hidden="true">✦</span></div></div>
-            <div id="gacha-chest" class="gacha-chest room-royal-chest" hidden><div class="gacha-orbit" aria-hidden="true"></div><img src="{{ asset('images/gacha/royal-chest-cutout.png') }}" alt="หีบสมบัติกรมท่าขอบทอง พร้อมตราดาว" decoding="async"></div>
+            <div id="gacha-chest" class="gacha-chest room-royal-chest" hidden><div class="gacha-orbit" aria-hidden="true"></div><img src="{{ asset('images/gacha/royal-chest-cutout.webp') }}" alt="หีบสมบัติกรมท่าขอบทอง พร้อมตราดาว" decoding="async" width="960" height="800"></div>
             <p id="gacha-box-note" hidden>ภาพเปิดกล่องเป็นแอนิเมชันแสดงผลรางวัลจากเซิร์ฟเวอร์เท่านั้น</p>
             <div id="gacha-reel" class="gacha-reel" hidden><div class="gacha-pointer" aria-hidden="true">▼</div><div id="gacha-track" class="gacha-track"></div></div>
         </div>

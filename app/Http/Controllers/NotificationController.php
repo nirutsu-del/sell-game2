@@ -36,6 +36,7 @@ class NotificationController extends Controller
             'admin_topup' => route('admin.topups.index',['topup'=>$id]),
             'admin_purchase' => route('admin.dashboard',['purchase'=>$id]),
             'admin_contact' => route('admin.contacts.show',$id),
+            'contact' => route('contact.show',$id),
             default => route('notifications.index'),
         };
         $item->markAsRead();

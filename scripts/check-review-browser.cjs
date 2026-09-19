@@ -44,6 +44,12 @@ const server = http.createServer((req, res) => {
         for (const width of [390, 1440]) {
             const page = await browser.newPage({viewport: {width, height: 950}, reducedMotion: 'reduce'});
             const errors = [];
+            page.on('response', response => {
+                if (response.url().includes('/images/gacha/') && !response.ok()) errors.push('Gacha image HTTP ' + response.status());
+            });
+            page.on('requestfailed', request => {
+                if (request.url().includes('/images/gacha/')) errors.push('Gacha image request failed');
+            });
             page.on('pageerror', error => errors.push(error.message));
             page.on('console', message => {
                 if (message.type() === 'error' && /content.security.policy|violat|refused/i.test(message.text())) errors.push(message.text());
@@ -67,7 +73,11 @@ const server = http.createServer((req, res) => {
                 assert.equal(await page.locator('#gacha-wheel-scene').isVisible(), mode === 'wheel');
                 if (mode === 'cards') {
                     await page.locator('[data-card-index="2"]').click();
-                    assert(await page.getByText('การเลือกใบไม่เปลี่ยนโอกาสได้รับรางวัล ผลรางวัลกำหนดโดยเซิร์ฟเวอร์', {exact: true}).isVisible());
+                    assert.equal(await page.locator('[data-card-index="2"]').getAttribute('aria-pressed'), 'true');
+                    assert(await page.locator('.room-submit').getByText('การเลือกการ์ดไม่เปลี่ยนโอกาสได้รับรางวัล', {exact: true}).isVisible());
+                }
+                if (mode === 'box') {
+                    assert(await page.locator('#gacha-chest img').evaluate(img => img.complete && img.naturalWidth > 0));
                 }
                 await page.locator('#gacha-stage').screenshot({path: path.join(output, `${process.env.REVIEW_MODE || 'built'}-${mode}-${width}.png`)});
                 const before = spins;

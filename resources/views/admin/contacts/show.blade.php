@@ -5,7 +5,7 @@
     <p class="text-xs text-orange-300">C-{{ $message->id }} · {{ $message->statusLabel() }}</p>
     <h1 class="mt-3 break-words text-2xl font-bold">{{ $message->subject }}</h1>
     <dl class="mt-5 grid grid-cols-[auto_1fr] gap-x-5 gap-y-2 text-sm"><dt class="text-slate-400">ผู้ส่ง</dt><dd class="break-words">{{ $message->name }}</dd><dt class="text-slate-400">อีเมล</dt><dd class="break-all">{{ $message->email }}</dd><dt class="text-slate-400">เวลาส่ง</dt><dd>{{ $message->created_at->copy()->timezone('Asia/Bangkok')->format('d/m/Y H:i:s') }}</dd></dl>
-    <p class="mt-6 whitespace-pre-wrap break-words rounded-xl bg-slate-950 p-5 text-sm leading-7">{{ $message->message }}</p>
+    @include('partials.contact-conversation',['replyUrl'=>route('admin.contacts.reply',$message)])
     @if($message->read_at)<p class="mt-4 text-xs text-slate-400">ทำเครื่องหมายอ่านแล้วเมื่อ {{ $message->read_at->copy()->timezone('Asia/Bangkok')->format('d/m/Y H:i:s') }}</p>@endif
     @unless($message->resolved_at)
         @unless($message->read_at)
@@ -13,7 +13,7 @@
         @endunless
         <form method="POST" action="{{ route('admin.contacts.update',$message) }}" class="market-form mt-6 space-y-3">
             @csrf @method('PATCH')<input type="hidden" name="action" value="resolve">
-            <label>บันทึกการจัดการภายในร้าน (ไม่ส่งให้ลูกค้า)<textarea name="resolution_note" maxlength="3000" rows="3">{{ old('resolution_note') }}</textarea></label>
+            <label>บันทึกการจัดการภายในร้าน (ไม่ส่งให้ลูกค้า)<textarea name="resolution_note" maxlength="3000" rows="3">{{ old('resolution_note',$message->resolution_note) }}</textarea></label>
             <button class="market-button">ทำเครื่องหมายว่าจัดการแล้ว</button>
         </form>
     @else

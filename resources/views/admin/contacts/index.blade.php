@@ -11,7 +11,7 @@
     <input aria-label="ค้นหาข้อความ" name="q" value="{{ request('q') }}" maxlength="100" placeholder="C-12, ชื่อ, อีเมล, หัวข้อ หรือข้อความ" class="min-w-0 flex-1 rounded-xl bg-slate-800 p-3">
     <button class="market-button">ค้นหา</button><a href="{{ route('admin.contacts.index') }}" class="py-3 text-sm text-slate-400">ล้างตัวกรอง</a>
 </form>
-<p class="mb-4 text-xs text-slate-400">พบ {{ $messages->total() }} รายการ · ใหม่ล่าสุดก่อน</p>
+<p class="mb-4 text-xs text-slate-400">พบ {{ $messages->total() }} รายการ · อัปเดตล่าสุดก่อน</p>
 <div class="space-y-3">
 @forelse($messages as $message)
     <a href="{{ route('admin.contacts.show',$message) }}" class="block rounded-2xl border border-slate-700 bg-slate-900 p-5 hover:border-orange-500/50">
