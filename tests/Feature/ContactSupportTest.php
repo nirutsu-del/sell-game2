@@ -20,6 +20,18 @@ class ContactSupportTest extends TestCase
         return ['name'=>'Customer','email'=>'customer@example.com','subject'=>'Support request','message'=>'Please help','category'=>'account'];
     }
 
+    public function test_simplified_form_submits_without_subject_or_order_reference(): void
+    {
+        $this->get(route('contact'))->assertOk()->assertDontSee('name="subject"',false)->assertDontSee('name="order_reference"',false);
+        $data = $this->data();
+        unset($data['subject']);
+        $this->post(route('contact.store'),$data)->assertSessionHasNoErrors()->assertRedirect();
+        $message = ContactMessage::firstOrFail();
+        $this->assertSame(ContactMessage::CATEGORIES['account'],$message->subject);
+        $this->assertNull($message->order_reference);
+        $this->get(session('contact_tracking_url'))->assertOk()->assertSee($message->subject);
+    }
+
     public function test_waiting_side_changes_on_reply_but_not_on_read_and_filters_match(): void
     {
         $user = User::factory()->create();
@@ -53,12 +65,12 @@ class ContactSupportTest extends TestCase
         $item = GachaItem::create(['gacha_box_id'=>$box->id,'reward_type'=>'credit','credit_amount'=>1,'drop_rate'=>1]);
         $spin = GachaSpin::create(['user_id'=>$user->id,'gacha_box_id'=>$box->id,'gacha_item_id'=>$item->id,'price_paid'=>10]);
         $refs = ['S-'.$service->id,'A-'.$purchase->id,'G-'.$spin->id];
-        $this->actingAs($user)->get(route('contact'))->assertOk()->assertSee($refs)->assertDontSee('PRIVATE PASSWORD')->assertDontSee('PRIVATE RECIPIENT');
+        $this->actingAs($user)->get(route('contact'))->assertOk()->assertDontSee('name="order_reference"',false)->assertDontSee('PRIVATE PASSWORD')->assertDontSee('PRIVATE RECIPIENT');
         foreach ($refs as $ref) {
             $this->post(route('contact.store'),$this->data()+['order_reference'=>strtolower($ref)])->assertSessionHasNoErrors();
             $this->assertSame($ref,ContactMessage::latest('id')->first()->order_reference);
         }
-        $this->actingAs($other)->get(route('contact'))->assertViewHas('orderOptions',[]);
+        $this->actingAs($other)->get(route('contact'))->assertOk()->assertDontSee('name="order_reference"',false);
         foreach ($refs as $ref) $this->post(route('contact.store'),$this->data()+['order_reference'=>$ref])->assertSessionHasErrors('order_reference');
         $this->post(route('contact.store'),array_replace($this->data(),['category'=>'invalid']))->assertSessionHasErrors('category');
         $this->assertDatabaseCount('contact_messages',3);

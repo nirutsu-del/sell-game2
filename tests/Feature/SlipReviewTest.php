@@ -43,17 +43,21 @@ class SlipReviewTest extends TestCase {
         $this->assertDatabaseCount('topup_slip_hashes',1);
         $this->post(route('wallet.topups.store'),$this->body())->assertSessionHasErrors('slip');
     }
-    public function test_manual_approval_requires_confirmation_matching_amount_and_reference(): void {
+    public function test_manual_approval_requires_confirmation_and_matching_amount_without_reference(): void {
         $buyer = User::factory()->create(['balance'=>0]);
         $admin = User::factory()->create(['role'=>'admin']);
         $topup = TopupTransaction::create(['user_id'=>$buyer->id,'amount'=>100,'payment_method'=>'promptpay_slip','reference_no'=>'REVIEW']);
-        $this->actingAs($admin)->post(route('admin.topups.approve',$topup))->assertSessionHasErrors(['funds_received','received_amount','transfer_reference']);
+        $this->actingAs($admin)->post(route('admin.topups.approve',$topup))->assertSessionHasErrors(['funds_received','received_amount']);
         $this->post(route('admin.topups.approve',$topup),['funds_received'=>1,'received_amount'=>99,'transfer_reference'=>'TEST'])->assertSessionHasErrors('received_amount');
         $this->assertSame('0.00',$buyer->fresh()->balance);
         $this->assertDatabaseCount('wallet_transactions',0);
-        $this->post(route('admin.topups.approve',$topup),['funds_received'=>1,'received_amount'=>100,'transfer_reference'=>'TEST'])->assertStatus(303);
+        $this->post(route('admin.topups.approve',$topup),['funds_received'=>1,'received_amount'=>100])->assertStatus(303);
         $this->assertSame('100.00',$buyer->fresh()->balance);
         $this->assertSame($admin->id,$topup->fresh()->verification_payload['reviewer_id']);
-        $this->get(route('admin.topups.index'))->assertOk()->assertSee('TEST');
+        $this->assertNull($topup->fresh()->verification_payload['transfer_reference']);
+        $this->assertDatabaseCount('topup_transfer_references',0);
+        $this->get(route('admin.topups.index'))->assertOk()->assertDontSee('name="transfer_reference"',false);
+        $this->post(route('admin.topups.approve',$topup),['funds_received'=>1,'received_amount'=>100])->assertSessionHasErrors('topup');
+        $this->assertSame('100.00',$buyer->fresh()->balance);
     }
 }

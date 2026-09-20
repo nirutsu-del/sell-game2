@@ -48,11 +48,12 @@ class ContactController extends Controller {
         return Storage::disk('local')->response($attachment->path,'image-'.$attachment->id.'.'.match($attachment->mime) {'image/jpeg'=>'jpg','image/png'=>'png',default=>'webp'},
             ['Content-Type'=>$attachment->mime,'Cache-Control'=>'private, no-store','X-Content-Type-Options'=>'nosniff','Referrer-Policy'=>'no-referrer']);
     }
-    public function create(Request $request) { return view('contact',['settings'=>StoreSetting::current(),'orderOptions'=>ContactOrders::options($request->user())]); }
+    public function create() { return view('contact',['settings'=>StoreSetting::current()]); }
     public function store(Request $request) {
-        $data = $request->validate(['name'=>'required|string|max:100','email'=>'required|email|max:254','subject'=>'required|string|max:150','message'=>'required|string|max:3000',
+        $data = $request->validate(['name'=>'required|string|max:100','email'=>'required|email|max:254','subject'=>'nullable|string|max:150','message'=>'required|string|max:3000',
             'category'=>['sometimes','required',Rule::in(array_keys(ContactMessage::CATEGORIES))],'order_reference'=>'nullable|string|max:40']+ContactAttachments::rules());
         $data['order_reference'] = ContactOrders::validateReference($request->user(),$data['order_reference'] ?? null);
+        $data['subject'] = $data['subject'] ?? ContactMessage::CATEGORIES[$data['category'] ?? 'general'];
         unset($data['attachments']);
         $message = ContactAttachments::withUploads($request->file('attachments',[]), fn($uploads) => DB::transaction(function () use ($request,$data,$uploads) {
             $message = ContactMessage::create($data+['user_id'=>$request->user()?->id]);

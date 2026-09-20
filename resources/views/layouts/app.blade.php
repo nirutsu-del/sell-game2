@@ -43,10 +43,10 @@
 <main id="main-content" class="mx-auto max-w-6xl px-4 py-7">
     @if(request()->routeIs('admin.*'))
         <div class="vault-admin-heading"><span>พื้นที่จัดการร้าน</span><a href="{{ route('shop.index') }}">เปิดหน้าร้าน ↗</a></div>
-    @elseif(auth()->check() && !request()->routeIs('shop.index','catalog.*','products.*','accounts.*','gacha.*','contact','news.*'))
+    @elseif(auth()->check() && !request()->routeIs('shop.index','catalog.*','products.*','accounts.*','gacha.*','contact','news.*','wallet.index'))
         @include('partials.account-nav')
     @endif
-    @if(request()->routeIs('products.show','accounts.show','gacha.*','news.*','contact'))
+    @if(request()->routeIs('products.show','accounts.show','news.*'))
     <form action="{{ route('catalog.index') }}" class="global-search mb-8">
         <span aria-hidden="true">⌕</span><input name="q" value="{{ request('q') }}" aria-label="ค้นหาทั้งร้าน" placeholder="ค้นหาไอดีเกม สินค้า หรือบริการ…" maxlength="100"><button aria-label="ค้นหา">ค้นหา</button>
     </form>

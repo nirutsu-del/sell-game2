@@ -14,8 +14,8 @@
 <p class="mb-4 text-xs text-slate-400">พบ {{ $messages->total() }} รายการ · อัปเดตล่าสุดก่อน</p>
 <div class="space-y-3">
 @forelse($messages as $message)
-    <a href="{{ route('admin.contacts.show',$message) }}" class="block rounded-2xl border border-slate-700 bg-slate-900 p-5 hover:border-orange-500/50">
-        <div class="flex flex-wrap justify-between gap-2"><p class="text-xs text-orange-300">C-{{ $message->id }} · {{ $message->statusLabel() }}</p><time class="text-xs text-slate-500">{{ $message->created_at->copy()->timezone('Asia/Bangkok')->format('d/m/Y H:i') }}</time></div>
+    <a href="{{ route('admin.contacts.show',$message) }}" class="block rounded-2xl border bg-slate-900 p-5 {{ $message->resolved_at ? 'border-emerald-500 hover:border-emerald-400' : 'border-slate-700 hover:border-orange-500/50' }}">
+        <div class="flex flex-wrap justify-between gap-2"><p class="text-xs {{ $message->resolved_at ? 'text-emerald-300' : 'text-orange-300' }}">C-{{ $message->id }} · {{ $message->statusLabel() }}</p><time class="text-xs text-slate-500">{{ $message->created_at->copy()->timezone('Asia/Bangkok')->format('d/m/Y H:i') }}</time></div>
         <h2 class="mt-3 break-words font-bold">{{ $message->subject }}</h2>
         <p class="mt-2 text-sm text-slate-400">{{ $message->categoryLabel() }} · {{ $message->order_reference }}</p>
         <p class="mt-2 break-words text-sm text-slate-400">{{ $message->name }} · {{ $message->email }}</p>
