@@ -2,6 +2,7 @@
     <div class="admin-nav-title"><span class="admin-dot"></span><span>จัดการร้าน</span></div>
     <div class="admin-nav-links">
         <a class="{{ request()->routeIs('admin.dashboard') ? 'is-active' : '' }}" href="{{ route('admin.dashboard') }}">ภาพรวม</a>
+        <a class="{{ request()->routeIs('admin.members.*') ? 'is-active' : '' }}" href="{{ route('admin.members.index') }}">สมาชิก</a>
         <a class="{{ request()->routeIs('admin.accounts.*') ? 'is-active' : '' }}" href="{{ route('admin.accounts.index') }}">ไอดีเกม</a>
         <a class="{{ request()->routeIs('admin.categories.*') ? 'is-active' : '' }}" href="{{ route('admin.categories.index') }}">หมวดหมู่</a>
         @if(config('store.service_catalog_enabled'))

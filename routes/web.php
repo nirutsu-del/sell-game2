@@ -58,6 +58,7 @@ Route::middleware(['auth','auth.session'])->group(function () {
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'auth.session', 'admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('members', \App\Http\Controllers\Admin\MemberController::class)->only(['index', 'create', 'store', 'edit', 'update']);
     Route::get('reports/sales', [\App\Http\Controllers\Admin\SalesReportController::class,'index'])->name('reports.sales');
     Route::get('reports/sales/export', [\App\Http\Controllers\Admin\SalesReportController::class,'export'])->name('reports.sales.export');
     Route::get('contacts', [\App\Http\Controllers\Admin\ContactInboxController::class,'index'])->name('contacts.index');
