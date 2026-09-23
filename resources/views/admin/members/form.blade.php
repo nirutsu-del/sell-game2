@@ -13,9 +13,22 @@
         @if($member->is(auth()->user()))
             <input type="hidden" name="role" value="admin">
             <p class="rounded bg-slate-800 p-3">สิทธิ์: ผู้ดูแลระบบ <span class="mt-1 block text-sm text-slate-400">บัญชีที่กำลังใช้งานไม่สามารถลดสิทธิ์ตัวเองได้</span></p>
+            <input type="hidden" name="status" value="active">
+            <div class="rounded bg-slate-800 p-3">
+                <span class="text-sm text-slate-400">สถานะบัญชี:</span> <span class="font-medium text-emerald-400">🟢 เปิดใช้งาน</span>
+                <span class="mt-1 block text-sm text-slate-400">บัญชีที่กำลังใช้งานไม่สามารถระงับการใช้งานตัวเองได้</span>
+            </div>
         @else
             <label class="block">สิทธิ์<select name="role" class="mt-2 w-full rounded bg-slate-800 p-3" required><option value="user" @selected(old('role', $member->role) === 'user')>สมาชิก</option><option value="admin" @selected(old('role', $member->role) === 'admin')>ผู้ดูแลระบบ</option></select>@error('role')<span class="mt-1 block text-sm text-red-300">{{ $message }}</span>@enderror</label>
             <p class="text-sm text-slate-400">ผู้ดูแลระบบสามารถเข้าถึงและจัดการข้อมูลหลังบ้านทั้งหมด</p>
+            <label class="block">สถานะบัญชี
+                <select name="status" class="mt-2 w-full rounded bg-slate-800 p-3" required>
+                    <option value="active" @selected(old('status', $member->status ?? 'active') === 'active')>🟢 เปิดใช้งาน</option>
+                    <option value="suspended" @selected(old('status', $member->status ?? 'active') === 'suspended')>🔴 ระงับการใช้งาน</option>
+                </select>
+                @error('status')<span class="mt-1 block text-sm text-red-300">{{ $message }}</span>@enderror
+            </label>
+            <p class="text-sm text-slate-400">บัญชีที่ถูกระงับจะไม่สามารถเข้าสู่ระบบหรือทำรายการใดๆ ในร้านได้</p>
         @endif
         @unless($member->exists)
             <label class="block">รหัสผ่าน<input type="password" name="password" minlength="8" maxlength="128" autocomplete="new-password" class="mt-2 w-full rounded bg-slate-800 p-3" required><span class="mt-1 block text-sm text-slate-400">อย่างน้อย 8 ตัวอักษร</span>@error('password')<span class="mt-1 block text-sm text-red-300">{{ $message }}</span>@enderror</label>

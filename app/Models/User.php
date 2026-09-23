@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'balance',
         'role',
+        'status',
     ];
 
     /**
@@ -51,6 +52,8 @@ class User extends Authenticatable
     }
 
     public function isAdmin(): bool { return $this->role === 'admin'; }
+    public function isActive(): bool { return ($this->status ?? 'active') === 'active'; }
+    public function isSuspended(): bool { return ($this->status ?? 'active') === 'suspended'; }
     public function purchases() { return $this->hasMany(PurchaseHistory::class); }
     public function topups() { return $this->hasMany(TopupTransaction::class); }
 }

@@ -98,4 +98,96 @@ class MemberManagementTest extends TestCase
                 && $members->count() === 20 && str_contains($members->nextPageUrl(), 'q=Paged')
                 && str_contains($members->nextPageUrl(), 'role=user'));
     }
+
+    public function test_admin_can_toggle_member_status_and_filter_by_status(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $member = User::factory()->create(['name' => 'Active Member', 'email' => 'active@example.com']);
+        $suspendedMember = User::factory()->create(['name' => 'Suspended Member', 'email' => 'suspended@example.com', 'status' => 'suspended']);
+
+        $this->actingAs($admin);
+
+        // Edit page shows status options
+        $this->get(route('admin.members.edit', $member))
+            ->assertOk()
+            ->assertSee('สถานะบัญชี')
+            ->assertSee('🟢 เปิดใช้งาน')
+            ->assertSee('🔴 ระงับการใช้งาน');
+
+        // Suspend member
+        $this->put(route('admin.members.update', $member), [
+            'name' => $member->name,
+            'email' => $member->email,
+            'role' => 'user',
+            'status' => 'suspended',
+        ])->assertRedirect(route('admin.members.index'));
+
+        $this->assertTrue($member->fresh()->isSuspended());
+
+        // Reactivate member
+        $this->put(route('admin.members.update', $member), [
+            'name' => $member->name,
+            'email' => $member->email,
+            'role' => 'user',
+            'status' => 'active',
+        ])->assertRedirect(route('admin.members.index'));
+
+        $this->assertTrue($member->fresh()->isActive());
+
+        // Filter by active
+        $this->get(route('admin.members.index', ['status' => 'active']))
+            ->assertOk()
+            ->assertSee($member->email)
+            ->assertDontSee($suspendedMember->email);
+
+        // Filter by suspended
+        $this->get(route('admin.members.index', ['status' => 'suspended']))
+            ->assertOk()
+            ->assertSee($suspendedMember->email)
+            ->assertDontSee($member->email);
+    }
+
+    public function test_admin_cannot_suspend_themselves(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $this->actingAs($admin);
+
+        $this->get(route('admin.members.edit', $admin))
+            ->assertOk()
+            ->assertSee('บัญชีที่กำลังใช้งานไม่สามารถระงับการใช้งานตัวเองได้');
+
+        $this->put(route('admin.members.update', $admin), [
+            'name' => $admin->name,
+            'email' => $admin->email,
+            'role' => 'admin',
+            'status' => 'suspended',
+        ])->assertSessionHasErrors('status');
+
+        $this->assertTrue($admin->fresh()->isActive());
+    }
+
+    public function test_suspended_user_cannot_login_and_is_kicked_out(): void
+    {
+        $user = User::factory()->create([
+            'email' => 'blocked@example.com',
+            'password' => bcrypt('password123'),
+            'status' => 'suspended',
+        ]);
+
+        // Attempt login
+        $response = $this->post(route('login.store'), [
+            'email' => 'blocked@example.com',
+            'password' => 'password123',
+        ]);
+
+        $response->assertSessionHasErrors('email');
+        $this->assertGuest();
+
+        // If authenticated user becomes suspended, middleware logs them out
+        $this->actingAs($user);
+        $this->get(route('user.dashboard'))
+            ->assertRedirect(route('login'))
+            ->assertSessionHasErrors('email');
+        $this->assertGuest();
+    }
 }
