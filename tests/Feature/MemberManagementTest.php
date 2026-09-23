@@ -190,4 +190,46 @@ class MemberManagementTest extends TestCase
             ->assertSessionHasErrors('email');
         $this->assertGuest();
     }
+
+    public function test_admin_can_toggle_status_via_action(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $member = User::factory()->create(['status' => 'active']);
+
+        $this->actingAs($admin);
+
+        // Suspend
+        $this->post(route('admin.members.toggle-status', $member))
+            ->assertRedirect();
+        $this->assertTrue($member->fresh()->isSuspended());
+
+        // Reactivate
+        $this->post(route('admin.members.toggle-status', $member))
+            ->assertRedirect();
+        $this->assertTrue($member->fresh()->isActive());
+
+        // Cannot toggle self
+        $this->post(route('admin.members.toggle-status', $admin))
+            ->assertSessionHasErrors('error');
+        $this->assertTrue($admin->fresh()->isActive());
+    }
+
+    public function test_admin_can_delete_member_with_protections(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+        $member = User::factory()->create();
+
+        $this->actingAs($admin);
+
+        // Cannot delete self
+        $this->delete(route('admin.members.destroy', $admin))
+            ->assertSessionHasErrors('error');
+        $this->assertDatabaseHas('users', ['id' => $admin->id]);
+
+        // Can delete another member
+        $this->delete(route('admin.members.destroy', $member))
+            ->assertRedirect(route('admin.members.index'))
+            ->assertSessionHas('success');
+        $this->assertDatabaseMissing('users', ['id' => $member->id]);
+    }
 }

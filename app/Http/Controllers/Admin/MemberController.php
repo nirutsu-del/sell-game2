@@ -74,6 +74,43 @@ class MemberController extends Controller
         return redirect()->route('admin.members.index')->with('success', 'บันทึกข้อมูลสมาชิกเรียบร้อยแล้ว');
     }
 
+    public function toggleStatus(Request $request, User $member)
+    {
+        if ($member->is($request->user())) {
+            return back()->withErrors(['error' => 'ไม่สามารถระงับการใช้งานบัญชีที่กำลังเข้าสู่ระบบอยู่ได้']);
+        }
+
+        $newStatus = $member->isSuspended() ? 'active' : 'suspended';
+        $member->status = $newStatus;
+        $member->save();
+
+        $message = $newStatus === 'active'
+            ? 'เปิดใช้งานบัญชี '.$member->name.' เรียบร้อยแล้ว'
+            : 'ระงับการใช้งานบัญชี '.$member->name.' เรียบร้อยแล้ว';
+
+        return back()->with('success', $message);
+    }
+
+    public function destroy(Request $request, User $member)
+    {
+        if ($member->is($request->user())) {
+            return back()->withErrors(['error' => 'ไม่สามารถลบบัญชีที่กำลังเข้าสู่ระบบอยู่ได้']);
+        }
+
+        if ($member->isAdmin() && User::where('role', 'admin')->count() <= 1) {
+            return back()->withErrors(['error' => 'ไม่สามารถลบผู้ดูแลระบบคนสุดท้ายของระบบได้']);
+        }
+
+        if (\App\Models\ServiceOrder::where('user_id', $member->id)->exists()) {
+            return back()->withErrors(['error' => 'ไม่สามารถลบบัญชีที่มีประวัติคำสั่งซื้องานบริการได้ แนะนำให้ใช้การระงับบัญชีแทน']);
+        }
+
+        $name = $member->name;
+        $member->delete();
+
+        return redirect()->route('admin.members.index')->with('success', 'ลบบัญชีสมาชิก '.$name.' เรียบร้อยแล้ว');
+    }
+
     private function rules(User $member): array
     {
         return [
