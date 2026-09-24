@@ -12,6 +12,7 @@ class GachaBox extends Model
 
     protected $fillable = [
         'name',
+        'category_id',
         'description',
         'price_per_spin',
         'image',
@@ -26,6 +27,11 @@ class GachaBox extends Model
         ];
     }
 
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     public function items(): HasMany
     {
         return $this->hasMany(GachaItem::class);
@@ -34,6 +40,50 @@ class GachaBox extends Model
     public function spins(): HasMany
     {
         return $this->hasMany(GachaSpin::class);
+    }
+
+    public function gameCategory(): ?Category
+    {
+        if ($this->relationLoaded('category') && $this->category) {
+            return $this->category;
+        }
+
+        if (!empty($this->category_id)) {
+            $cat = Category::find($this->category_id);
+            if ($cat) {
+                return $cat;
+            }
+        }
+
+        $catId = $this->items()
+            ->whereNotNull('game_account_id')
+            ->join('game_accounts', 'gacha_items.game_account_id', '=', 'game_accounts.id')
+            ->value('game_accounts.category_id');
+
+        if ($catId) {
+            return Category::find($catId);
+        }
+
+        return Category::all()->first(function ($cat) {
+            return str_contains(mb_strtolower($this->name), mb_strtolower($cat->name));
+        });
+    }
+
+    public function gameAccountsInStockCount(): int
+    {
+        $hasGameAccountReward = $this->items()
+            ->where('reward_type', 'game_account')
+            ->where('drop_rate', '>', 0)
+            ->exists();
+
+        if ($hasGameAccountReward || $this->category_id) {
+            $cat = $this->gameCategory();
+            if ($cat) {
+                return (int) $cat->gameAccounts()->where('status', 'available')->count();
+            }
+        }
+
+        return $this->availableAccountsCount();
     }
 
     public function availableAccountsCount(): int

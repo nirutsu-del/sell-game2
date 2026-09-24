@@ -23,6 +23,20 @@
         </div>
 
         <div>
+            <label class="block text-sm font-medium text-slate-300">หมวดหมู่เกม / เกมที่เกี่ยวข้อง</label>
+            <select name="category_id" class="mt-2 w-full rounded-lg border border-slate-700 bg-slate-800/80 px-4 py-3 text-white focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500">
+                <option value="">-- ไม่ระบุ (รวมหลายเกม / ทั่วไป) --</option>
+                @foreach($categories ?? [] as $cat)
+                    <option value="{{ $cat->id }}" {{ old('category_id', $box->category_id) == $cat->id ? 'selected' : '' }}>
+                        {{ $cat->name }}
+                    </option>
+                @endforeach
+            </select>
+            <p class="mt-1 text-xs text-slate-400">เลือกเกมที่กล่องนี้ใช้สุ่ม เพื่อแสดงจำนวนไอดีพร้อมสุ่มตามเกมนั้นๆ ที่มีอยู่ในระบบ</p>
+            @error('category_id') <p class="mt-1 text-xs text-rose-400">{{ $message }}</p> @enderror
+        </div>
+
+        <div>
             <label class="block text-sm font-medium text-slate-300">ราคาต่อการสุ่ม 1 ครั้ง (บาท) <span class="text-rose-400">*</span></label>
             <input type="number" step="0.01" min="0" name="price_per_spin" value="{{ old('price_per_spin', $box->price_per_spin) }}" required placeholder="เช่น 20.00" class="mt-2 w-full rounded-lg border border-slate-700 bg-slate-800/80 px-4 py-3 text-white placeholder-slate-500 focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500">
             @error('price_per_spin') <p class="mt-1 text-xs text-rose-400">{{ $message }}</p> @enderror

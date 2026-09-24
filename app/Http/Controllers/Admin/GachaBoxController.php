@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\GachaBox;
 use App\Models\GachaItem;
 use App\Models\GameAccount;
@@ -14,7 +15,8 @@ class GachaBoxController extends Controller
 {
     public function index()
     {
-        $boxes = GachaBox::withCount(['items', 'spins'])
+        $boxes = GachaBox::with(['category', 'items.account.category'])
+            ->withCount(['items', 'spins'])
             ->withSum('spins', 'price_paid')
             ->latest()
             ->paginate(15);
@@ -24,11 +26,14 @@ class GachaBoxController extends Controller
 
     public function create()
     {
+        $categories = Category::orderBy('name')->get();
+
         return view('admin.gacha.form', [
             'box' => new GachaBox([
                 'price_per_spin' => 20,
                 'is_active' => true,
             ]),
+            'categories' => $categories,
         ]);
     }
 
@@ -36,6 +41,7 @@ class GachaBoxController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'category_id' => ['nullable', 'exists:categories,id'],
             'description' => ['nullable', 'string'],
             'price_per_spin' => ['required', 'numeric', 'min:0'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
@@ -49,6 +55,7 @@ class GachaBoxController extends Controller
 
         $box = GachaBox::create([
             'name' => $data['name'],
+            'category_id' => $data['category_id'] ?? null,
             'description' => $data['description'] ?? null,
             'price_per_spin' => $data['price_per_spin'],
             'image' => $imagePath,
@@ -60,13 +67,19 @@ class GachaBoxController extends Controller
 
     public function edit(GachaBox $gacha)
     {
-        return view('admin.gacha.form', ['box' => $gacha]);
+        $categories = Category::orderBy('name')->get();
+
+        return view('admin.gacha.form', [
+            'box' => $gacha,
+            'categories' => $categories,
+        ]);
     }
 
     public function update(Request $request, GachaBox $gacha)
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'category_id' => ['nullable', 'exists:categories,id'],
             'description' => ['nullable', 'string'],
             'price_per_spin' => ['required', 'numeric', 'min:0'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
@@ -75,6 +88,7 @@ class GachaBoxController extends Controller
 
         $attributes = [
             'name' => $data['name'],
+            'category_id' => $data['category_id'] ?? null,
             'description' => $data['description'] ?? null,
             'price_per_spin' => $data['price_per_spin'],
             'is_active' => $request->boolean('is_active'),

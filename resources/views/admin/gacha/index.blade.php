@@ -53,10 +53,18 @@
                             <span class="rounded bg-slate-800 px-2.5 py-1 text-xs font-medium">{{ $box->items_count }} รายการ</span>
                         </td>
                         <td class="px-5 py-4">
-                            @php $avail = $box->availableAccountsCount(); @endphp
-                            <span class="rounded px-2.5 py-1 text-xs font-semibold {{ $avail > 0 ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-rose-950 text-rose-300 border border-rose-800' }}">
-                                {{ $avail }} ไอดี
-                            </span>
+                            @php 
+                                $avail = $box->gameAccountsInStockCount(); 
+                                $gameCategory = $box->gameCategory();
+                            @endphp
+                            <div class="flex flex-col items-start gap-1">
+                                <span class="rounded px-2.5 py-1 text-xs font-semibold {{ $avail > 0 ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-rose-950 text-rose-300 border border-rose-800' }}">
+                                    {{ $avail }} ไอดี
+                                </span>
+                                @if($gameCategory)
+                                    <span class="text-[11px] text-slate-400">เกม: {{ $gameCategory->name }}</span>
+                                @endif
+                            </div>
                         </td>
                         <td class="px-5 py-4 font-medium text-slate-200">
                             {{ number_format($box->spins_count) }} ครั้ง
