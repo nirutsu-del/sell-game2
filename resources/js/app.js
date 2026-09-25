@@ -5,6 +5,19 @@ import './notifications';
 import './store-settings';
 import './collection';
 
+document.querySelectorAll('[data-password-toggle]').forEach(button => {
+    const originalLabel = button.getAttribute('aria-label');
+    button.addEventListener('click', () => {
+        const input = document.getElementById(button.dataset.passwordToggle);
+        if (!input) return;
+        const visible = input.type === 'password';
+        input.type = visible ? 'text' : 'password';
+        button.textContent = visible ? 'ซ่อน' : 'แสดง';
+        button.setAttribute('aria-pressed', String(visible));
+        button.setAttribute('aria-label', visible ? originalLabel.replace('แสดง', 'ซ่อน') : originalLabel);
+    });
+});
+
 document.querySelectorAll('[data-open-dialog]').forEach(button => {
     button.addEventListener('click', () => document.getElementById(button.dataset.openDialog)?.showModal());
 });
@@ -45,5 +58,15 @@ document.querySelectorAll('[data-copy-credential]').forEach(button => {
         } catch {
             if (status) status.textContent = 'คัดลอกอัตโนมัติไม่ได้ กรุณาเลือกข้อความแล้วคัดลอก';
         }
+    });
+});
+
+// The banner motion can be paused independently of the authentication form.
+document.querySelectorAll('[data-banner-motion]').forEach(button => {
+    button.addEventListener('click', () => {
+        const paused = button.closest('[data-auth-banner]').classList.toggle('is-paused');
+        button.setAttribute('aria-pressed', String(paused));
+        button.setAttribute('aria-label', paused ? 'เล่นภาพเคลื่อนไหว' : 'หยุดภาพเคลื่อนไหว');
+        button.textContent = paused ? 'เล่นภาพ' : 'หยุดภาพ';
     });
 });

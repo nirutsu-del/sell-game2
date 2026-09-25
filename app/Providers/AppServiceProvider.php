@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
                 \Illuminate\Cache\RateLimiting\Limit::perMinute(5)->by('login-account:'.hash('sha256', $email.'|'.$request->ip())),
             ];
         });
-        \Illuminate\Support\Facades\View::composer('layouts.app', function ($view) {
+        \Illuminate\Support\Facades\View::composer(['layouts.app', 'auth.form'], function ($view) {
             $view->with('storeSettings', \App\Models\StoreSetting::current());
             $view->with('notificationUnread', auth()->check() ? auth()->user()->unreadNotifications()->count() : 0);
         });

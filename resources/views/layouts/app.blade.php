@@ -30,7 +30,8 @@
             <a href="{{ route('wallet.index') }}" class="wallet-chip"><span>฿</span>{{ number_format(auth()->user()->balance,2) }}</a>
             <a href="{{ route('logout.form') }}" class="logout-link">ออกจากระบบ</a>
         @else
-            <a href="{{ route('login') }}" class="market-button compact">เข้าสู่ระบบ / สมัครสมาชิก</a>
+            <a href="{{ route('login') }}" class="account-link">เข้าสู่ระบบ</a>
+            <a href="{{ route('register.form') }}" class="market-button compact">สมัครสมาชิก</a>
         @endauth
         </div>
     </div>
@@ -58,7 +59,7 @@
 </div>
 @unless(request()->routeIs('admin.*'))
 <nav class="vault-bottom-nav" aria-label="เมนูมือถือ">
-    @foreach([[route('catalog.index'),request()->routeIs('shop.index','catalog.*','accounts.*','products.*'),'⌂','ร้านไอดี'],[route('gacha.index'),request()->routeIs('gacha.*'),'✦','กล่องสุ่ม'],[route('wallet.index'),request()->routeIs('wallet.*'),'◈','Wallet'],[auth()->check() ? route('user.dashboard') : route('login'),request()->routeIs('user.*','orders.*','purchases.*','notifications.*','password.*','login'),'◎','บัญชี']] as $item)
+    @foreach([[route('catalog.index'),request()->routeIs('shop.index','catalog.*','accounts.*','products.*'),'⌂','ร้านไอดี'],[route('gacha.index'),request()->routeIs('gacha.*'),'✦','กล่องสุ่ม'],[route('wallet.index'),request()->routeIs('wallet.*'),'◈','Wallet'],[auth()->check() ? route('user.dashboard') : route('login'),request()->routeIs('user.*','orders.*','purchases.*','notifications.*','password.*','login','register.form'),'◎','บัญชี']] as $item)
     <a href="{{ $item[0] }}" class="{{ $item[1] ? 'is-active' : '' }}" @if($item[1]) aria-current="page" @endif><span aria-hidden="true">{{ $item[2] }}</span>{{ $item[3] }}</a>
     @endforeach
 </nav>
