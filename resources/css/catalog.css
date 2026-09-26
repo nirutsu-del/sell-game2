@@ -29,5 +29,32 @@
 .market-form label { display:block; font-size:14px; }
 .market-form input:not([type=checkbox]):not([type=hidden]),.market-form textarea,.market-form select { display:block; width:100%; background:#1e293b; padding:12px; border-radius:8px; margin-top:7px; }
 .market-form input[type=checkbox] { accent-color:#f97316; }
+.catalog-filters { margin:28px 0; padding:20px 24px 24px; border:1px solid #2a3549; border-radius:18px; background:linear-gradient(115deg,#171f2f,#111827); box-shadow:0 8px 28px #00000014; }
+.catalog-filters-heading { display:flex; align-items:center; justify-content:flex-end; margin-bottom:12px; }
+.catalog-filters-reset { display:inline-flex; align-items:center; gap:7px; min-height:32px; color:#aab7ca; font-size:12px; white-space:nowrap; }
+.catalog-filters-reset:hover { color:#ffac70; }
+.catalog-filters-reset span { font-size:20px; }
+.catalog-filters-fields { display:grid; grid-template-columns:minmax(180px,1fr) minmax(180px,220px) auto auto; align-items:end; gap:16px; }
+.catalog-filters-fields > * { min-width:0; }
+.catalog-filter-label { display:block; margin-bottom:8px; color:#aab7ca; font-size:12px; }
+.catalog-filter-input { position:relative; display:block; }
+.catalog-filter-input svg { position:absolute; left:15px; top:15px; width:20px; height:20px; color:#8292aa; pointer-events:none; }
+.catalog-filters .catalog-filter-input input,.catalog-filters .catalog-filter-sort select { width:100%; height:50px; border:1px solid #35435a; border-radius:10px; background:#0e1625; color:#edf2fa; font-size:14px; transition:border-color .16s,box-shadow .16s; }
+.catalog-filters .catalog-filter-input input { padding:0 14px 0 44px; }
+.catalog-filters .catalog-filter-sort select { padding:0 12px; cursor:pointer; }
+.catalog-filter-input input::placeholder { color:#8292aa; }
+.catalog-filters .catalog-filter-input input:hover,.catalog-filters .catalog-filter-sort select:hover { border-color:#63718a; }
+.catalog-filter-input:focus-within svg { color:#ffac70; }
+.catalog-filter-availability { position:relative; display:flex; align-items:center; gap:9px; min-height:50px; cursor:pointer; color:#cad4e3; font-size:13px; white-space:nowrap; }
+.catalog-filter-availability input { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.catalog-filter-switch { display:block; flex:none; width:36px; height:21px; padding:3px; border:1px solid #526078; border-radius:20px; background:#263247; transition:background .16s,border-color .16s; }
+.catalog-filter-switch::after { content:''; display:block; width:13px; height:13px; border-radius:50%; background:#cad4e3; transition:transform .16s; }
+.catalog-filter-availability input:checked + .catalog-filter-switch { border-color:#ff9b56; background:#ff9b56; }
+.catalog-filter-availability input:checked + .catalog-filter-switch::after { background:#24160d; transform:translateX(15px); }
+.catalog-filter-availability input:focus-visible + .catalog-filter-switch { outline:3px solid #49d6e8; outline-offset:4px; }
+.catalog-filters .catalog-filter-submit { gap:12px; min-height:50px; padding:0 20px; border-radius:10px; font-size:14px; white-space:nowrap; }
+.catalog-filter-submit svg { width:18px; height:18px; }
+@media(max-width:1100px) { .catalog-filters-fields { grid-template-columns:minmax(0,1fr) minmax(180px,240px); gap:12px 18px; }.catalog-filter-submit { justify-self:stretch; } }
+@media(max-width:540px) { .catalog-filters { padding:16px; border-radius:14px; }.catalog-filters-fields { grid-template-columns:minmax(0,1fr); gap:14px; }.catalog-filter-availability { min-height:44px; } }
 @media(max-width:640px) { .market-hero { grid-template-columns:1fr; }.market-hero-copy { padding:28px; }.market-hero-art { height:180px; }.market-controller { width:130px;height:130px;border-radius:24px;font-size:30px; }.market-controller span { font-size:18px; }.market-ring { width:210px;height:210px; }.market-shortcut { padding:14px; gap:10px; }.market-category-art strong { font-size:24px; } }
 @media(prefers-reduced-motion:reduce) { .market-card,.market-category,.market-product-art img { transition:none; } }
