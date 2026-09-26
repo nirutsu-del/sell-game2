@@ -2,6 +2,7 @@
     <div class="account-nav-title"><span class="account-avatar">{{ mb_substr(auth()->user()->name,0,1) }}</span><span class="hidden sm:inline">บัญชีของฉัน</span></div>
     <div class="account-nav-links">
         <a class="{{ request()->routeIs('user.dashboard') ? 'is-active' : '' }}" href="{{ route('user.dashboard') }}">ภาพรวม</a>
+        <a class="{{ request()->routeIs('user.profile.*') ? 'is-active' : '' }}" href="{{ route('user.profile.edit') }}">ข้อมูลส่วนตัว</a>
         <a class="{{ request()->routeIs('user.collection') ? 'is-active' : '' }}" href="{{ route('user.collection') }}">คอลเลกชัน</a>
         <a class="{{ request()->routeIs('wallet.*') ? 'is-active' : '' }}" href="{{ route('wallet.index') }}">Wallet</a>
         <a class="{{ request()->routeIs('orders.*','purchases.*') ? 'is-active' : '' }}" href="{{ route('orders.index') }}">ประวัติ</a>

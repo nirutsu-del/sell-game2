@@ -513,3 +513,8 @@
 @keyframes worlds-image-drift { to { transform:scale(1.015); } }
 @keyframes worlds-glow-breathe { from { opacity:.25; } to { opacity:1; } }
 @keyframes worlds-spark-rise { 0% { opacity:0; transform:translateY(12px); } 20% { opacity:.7; } 100% { opacity:0; transform:translate(12px,-85px); } }
+
+.vault-app #floating-store-contact { bottom:max(1.25rem,env(safe-area-inset-bottom)); }
+@media (max-width: 640px) {
+  .vault-app #floating-store-contact { bottom:calc(86px + env(safe-area-inset-bottom)); }
+}

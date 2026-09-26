@@ -15,6 +15,7 @@ Route::get('/gacha/{box}', [StoreController::class, 'gachaShow'])->name('gacha.s
 Route::get('/news', [StoreController::class, 'news'])->name('news.index');
 Route::get('/news/{news:slug}', [StoreController::class, 'newsShow'])->name('news.show');
 Route::get('/contact', [ContactController::class, 'create'])->name('contact');
+Route::get('/policies/{slug}', [\App\Http\Controllers\PolicyController::class, 'show'])->name('policies.show');
 Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:10,1')->name('contact.store');
 Route::get('/contact/guest/{message}', [ContactController::class, 'show'])->middleware('signed')->name('contact.guest.show');
 Route::get('/contact/guest/{message}/attachments/{attachment}', [ContactController::class, 'attachment'])->middleware('signed')->name('contact.guest.attachment');
@@ -40,6 +41,8 @@ Route::middleware(['auth','auth.session'])->group(function () {
 
 Route::middleware(['auth','auth.session'])->group(function () {
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
+    Route::get('/account/profile', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('user.profile.edit');
+    Route::put('/account/profile', [\App\Http\Controllers\ProfileController::class, 'update'])->middleware('throttle:10,1')->name('user.profile.update');
     Route::get('/collection', [\App\Http\Controllers\CollectionController::class, 'index'])->name('user.collection');
     Route::get('/account/password', [\App\Http\Controllers\PasswordController::class,'edit'])->name('password.edit');
     Route::put('/account/password', [\App\Http\Controllers\PasswordController::class,'update'])->middleware('throttle:5,1')->name('password.update');
@@ -58,6 +61,9 @@ Route::middleware(['auth','auth.session'])->group(function () {
 });
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'auth.session', 'admin'])->group(function () {
+    Route::get('policies', [\App\Http\Controllers\PolicyController::class, 'edit'])->name('policies.edit');
+    Route::put('policies/{slug}', [\App\Http\Controllers\PolicyController::class, 'update'])->name('policies.update');
+    Route::resource('news', \App\Http\Controllers\Admin\NewsController::class)->except(['show']);
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('members/{member}/toggle-status', [\App\Http\Controllers\Admin\MemberController::class, 'toggleStatus'])->name('members.toggle-status');
     Route::resource('members', \App\Http\Controllers\Admin\MemberController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);

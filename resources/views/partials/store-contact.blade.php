@@ -1,5 +1,5 @@
 @if(!request()->routeIs('admin.*') && $storeSettings->floating_contact_enabled && count($storeSettings->contactLinks()))
-<details id="floating-store-contact" class="fixed bottom-5 right-4 z-40 max-w-[calc(100vw-2rem)] text-sm" style="bottom:max(1.25rem,env(safe-area-inset-bottom))">
+<details id="floating-store-contact" class="fixed bottom-5 right-4 z-40 max-w-[calc(100vw-2rem)] text-sm">
     <summary class="ml-auto w-fit cursor-pointer rounded-full bg-orange-600 px-5 py-3 font-semibold text-white shadow-lg">ติดต่อร้าน</summary>
     <div class="absolute bottom-full right-0 mb-3 w-72 max-w-[calc(100vw-2rem)] rounded-2xl border border-slate-700 bg-slate-900 p-4 shadow-xl">
         <h2 class="mb-3 break-words font-bold">{{ $storeSettings->name }}</h2>
