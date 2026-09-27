@@ -83,6 +83,11 @@ class GachaCategoryAccountsStockTest extends TestCase
         $this->assertSame(3, $valBox->gameAccountsInStockCount());
         $this->assertSame(5, $ffBox->gameAccountsInStockCount());
 
+        $this->get(route('gacha.index'))->assertOk()
+            ->assertSee('เหลือ 3 ไอดี')
+            ->assertSee('เหลือ 5 ไอดี')
+            ->assertDontSee('เหลือ 1 ไอดี');
+
         // Verify Admin index table shows the counts
         $response = $this->actingAs($admin)->get(route('admin.gacha.index'));
         $response->assertOk();

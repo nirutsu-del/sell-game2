@@ -69,7 +69,5 @@
 @else
 <footer class="mt-12 border-t border-slate-800 px-4 py-8 text-sm text-slate-500"><div class="mx-auto flex max-w-6xl flex-wrap justify-between gap-4"><p>✦ {{ $storeSettings->name }} · ร้านค้าเกมของคุณ</p><div class="flex gap-5"><a href="{{ route('news.index') }}">ข่าวสาร</a><a href="{{ route('orders.index') }}">ประวัติคำสั่งซื้อ</a><a href="{{ route('contact') }}">ติดต่อร้าน</a></div></div></footer>
 @endif
-@include('partials.policy-links')
 @include('partials.store-contact')
-<p class="px-4 pb-5 text-center text-xs text-slate-500">วันและเวลาที่แสดงใช้เวลาไทย (Asia/Bangkok · UTC+7)</p>
 </body></html>

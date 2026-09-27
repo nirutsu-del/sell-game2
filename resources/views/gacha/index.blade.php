@@ -74,12 +74,12 @@
             @forelse($boxes as $box)
                 @php
                     $eligible = $box->eligibleItems();
-                    $availableCount = $eligible->where('reward_type', 'game_account')->unique('game_account_id')->count();
+                    $availableCount = $box->gameAccountsInStockCount();
                     $hasCredit = $eligible->contains('reward_type', 'credit');
                     $ready = $eligible->isNotEmpty();
                     $stockLabel = $availableCount > 0
-                        ? 'เหลือ '.$availableCount.' ไอดี'.($hasCredit ? ' + รางวัลเครดิต' : '')
-                        : ($hasCredit ? 'พร้อมสุ่มรางวัลเครดิต' : 'รางวัลหมดชั่วคราว');
+                        ? 'เหลือ '.$availableCount.' ไอดี'
+                        : ($hasCredit ? 'พร้อมสุ่ม' : 'รางวัลหมดชั่วคราว');
                     $topAccount = $eligible
                         ->where('reward_type', 'game_account')
                         ->filter(fn($i) => $i->account && $i->account->status === 'available')
