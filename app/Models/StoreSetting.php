@@ -2,9 +2,9 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 class StoreSetting extends Model {
-    protected $fillable = ['name','description','logo','promptpay_qr','truemoney_qr','promptpay_instructions','truemoney_instructions','facebook_url','line_url','discord_url','opening_hours','floating_contact_enabled','announcement','announcement_enabled'];
+    protected $fillable = ['name','description','logo','promptpay_qr','truemoney_qr','promptpay_instructions','truemoney_instructions','facebook_url','line_url','discord_url','opening_hours','floating_contact_enabled'];
     protected function casts(): array {
-        return ['floating_contact_enabled'=>'boolean','announcement_enabled'=>'boolean'];
+        return ['floating_contact_enabled'=>'boolean'];
     }
     public function contactLinks(): array {
         $links = [];

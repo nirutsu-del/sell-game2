@@ -7,7 +7,7 @@ class AuthController extends Controller {
  public function logoutForm(){return view('auth.logout');}
  public function register(Request $r){$d=$r->validate(['name'=>'required|string|max:100','email'=>'required|email|unique:users','password'=>'required|string|min:8|confirmed']);$user=User::create($d);Auth::login($user);$r->session()->regenerate();return redirect()->route('user.dashboard');}
  public function login(Request $r){
-     $d = $r->validate(['email'=>'required|email','password'=>'required']);
+     $d = $r->validate(['email'=>'required|email','password'=>'required|string']);
      if(!Auth::attempt($d,$r->boolean('remember'))) {
          return back()->withErrors(['email'=>'อีเมลหรือรหัสผ่านไม่ถูกต้อง'])->onlyInput('email');
      }

@@ -19,9 +19,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (\Illuminate\Validation\ValidationException $exception, \Illuminate\Http\Request $request) {
             // Form errors must return to their own page, even after background polling.
             $destination = match ($request->route()?->getName()) {
-                'admin.news.store' => route('admin.news.create'),
-                'admin.news.update' => route('admin.news.edit', $request->route('news')),
-                'admin.policies.update' => route('admin.policies.edit'),
                 'admin.gacha.store' => route('admin.gacha.create'),
                 'admin.gacha.update' => route('admin.gacha.edit', $request->route('gacha')),
                 'admin.gacha.items.add', 'admin.gacha.items.rates' => route('admin.gacha.items', $request->route('gacha')),

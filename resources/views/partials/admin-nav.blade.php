@@ -11,9 +11,7 @@
         <a class="{{ request()->routeIs('admin.gacha.*') ? 'is-active' : '' }}" href="{{ route('admin.gacha.index') }}">กล่องสุ่ม</a>
         <a class="{{ request()->routeIs('admin.topups.*') ? 'is-active' : '' }}" href="{{ route('admin.topups.index') }}">เติมเงิน</a>
         <a class="{{ request()->routeIs('admin.contacts.*') ? 'is-active' : '' }}" href="{{ route('admin.contacts.index') }}">ข้อความ</a>
-        <a class="{{ request()->routeIs('admin.news.*') ? 'is-active' : '' }}" href="{{ route('admin.news.index') }}">ข่าวสาร</a>
         <a class="{{ request()->routeIs('admin.reports.*') ? 'is-active' : '' }}" href="{{ route('admin.reports.sales') }}">รายงาน</a>
-        <a class="{{ request()->routeIs('admin.policies.*') ? 'is-active' : '' }}" href="{{ route('admin.policies.edit') }}">นโยบายร้าน</a>
         <a class="{{ request()->routeIs('admin.settings.*') ? 'is-active' : '' }}" href="{{ route('admin.settings.edit') }}">ตั้งค่าร้าน</a>
         <a class="{{ request()->routeIs('password.*') ? 'is-active' : '' }}" href="{{ route('password.edit') }}">เปลี่ยนรหัสผ่าน</a>
         <a href="{{ route('logout.form') }}">ออกจากระบบ</a>

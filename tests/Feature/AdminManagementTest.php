@@ -13,6 +13,21 @@ class AdminManagementTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_dashboard_wallet_total_excludes_all_admins(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin', 'balance' => '9999999557.00']);
+        User::factory()->create(['role' => 'admin', 'balance' => '500.00']);
+
+        $this->actingAs($admin)->get(route('admin.dashboard'))->assertOk()
+            ->assertViewHas('stats', fn ($stats) => (float) $stats['walletBalance'] === 0.0);
+
+        User::factory()->create(['role' => 'user', 'balance' => '125.50']);
+        User::factory()->create(['role' => 'user', 'balance' => '74.75', 'status' => 'suspended']);
+
+        $this->get(route('admin.dashboard'))->assertOk()
+            ->assertViewHas('stats', fn ($stats) => (float) $stats['walletBalance'] === 200.25)
+            ->assertSee('฿200.25');
+    }
     public function test_admin_can_create_an_account(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);

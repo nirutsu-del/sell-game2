@@ -20,7 +20,7 @@ class DashboardController extends Controller
                 'availableAccounts' => GameAccount::where('status', 'available')->count(),
                 'soldAccounts' => GameAccount::where('status', 'sold')->count(),
                 'pendingTopups' => TopupTransaction::where('status', 'pending')->count(),
-                'walletBalance' => User::sum('balance'),
+                'walletBalance' => User::where('role', '!=', 'admin')->sum('balance'),
             ],
             'recentPurchases' => PurchaseHistory::with(['account', 'user'])->when($request->filled('purchase'),fn($q)=>$q->whereKey($request->integer('purchase')))->latest()->take(8)->get(),
             'pendingTopups' => TopupTransaction::with('user')->where('status', 'pending')->latest()->take(8)->get(),

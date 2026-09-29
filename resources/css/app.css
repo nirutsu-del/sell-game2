@@ -109,3 +109,18 @@ tr + tr td { border-top:1px solid #202d43; }
     *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
     .animate-chest-rumble,.animate-glow-pulse { animation:none !important; }
 }
+
+.topup-review-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    height: 44px;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    list-style: none;
+}
+.topup-review-action::-webkit-details-marker { display: none; }

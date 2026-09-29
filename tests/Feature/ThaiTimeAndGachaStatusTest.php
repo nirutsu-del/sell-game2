@@ -1,6 +1,6 @@
 <?php
 namespace Tests\Feature;
-use App\Models\{Category, GameAccount, GachaBox, GachaItem, News, TopupTransaction, User};
+use App\Models\{Category, GameAccount, GachaBox, GachaItem, TopupTransaction, User};
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,10 +15,6 @@ class ThaiTimeAndGachaStatusTest extends TestCase {
         $user->notify(new \App\Notifications\StoreNotification('Time test','Message','topup',$topup->id));
         $user->notifications()->update(['created_at'=>'2026-09-07 18:30:00']);
         $this->get(route('notifications.index'))->assertOk()->assertSee('08/09/2026 01:30');
-        $news = News::create(['title'=>'Time news','slug'=>'time-news','content'=>'Content','is_published'=>true,'published_at'=>'2026-09-07 18:30:00']);
-        $this->get(route('news.show',$news))->assertOk()->assertSee('08/09/2026');
-        $news->update(['published_at'=>null]);
-        $this->get(route('news.show',$news))->assertOk();
     }
     public function test_credit_only_box_is_ready_and_zero_weight_is_empty(): void {
         $box = GachaBox::create(['name'=>'Credit box','price_per_spin'=>30,'is_active'=>true]);

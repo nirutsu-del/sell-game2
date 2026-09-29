@@ -46,13 +46,8 @@ class TopupController extends Controller
             }
 
             $verified = $request->validate([
-                'funds_received'=>'accepted',
-                'received_amount'=>'required|numeric|decimal:0,2|min:1|max:100000',
                 'transfer_reference'=>'nullable|string|min:3|max:100',
             ]);
-            if (number_format((float)$verified['received_amount'],2,'.','') !== $topup->amount) {
-                throw ValidationException::withMessages(['received_amount'=>'ยอดเข้าจริงไม่ตรงกับยอดที่แจ้ง ห้ามอนุมัติ กรุณาตรวจสอบหรือติดต่อผู้ใช้']);
-            }
 
             $verified['transfer_reference'] = filled($verified['transfer_reference'] ?? null) ? trim($verified['transfer_reference']) : null;
             if ($verified['transfer_reference'] !== null && !DB::table('topup_transfer_references')->insertOrIgnore([

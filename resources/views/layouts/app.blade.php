@@ -6,9 +6,6 @@
 @if(app()->environment('staging'))
 <aside class="bg-amber-300 px-4 py-3 text-center font-bold text-slate-950" role="status">STAGING — ระบบทดสอบ ข้อมูลจำลอง ห้ามชำระเงินจริง</aside>
 @endif
-@if(!request()->routeIs('admin.*') && $storeSettings->announcement_enabled && filled($storeSettings->announcement))
-<aside aria-label="ประกาศร้าน" class="border-b border-orange-500/30 bg-orange-500/15 px-4 py-3 text-center text-sm text-orange-200"><p class="mx-auto max-w-6xl whitespace-pre-line break-words">{{ $storeSettings->announcement }}</p></aside>
-@endif
 <header class="site-header">
     <div class="mx-auto max-w-6xl px-4">
         <div class="site-header-row">
@@ -44,10 +41,10 @@
 <main id="main-content" class="mx-auto max-w-6xl px-4 py-7">
     @if(request()->routeIs('admin.*'))
         <div class="vault-admin-heading"><span>พื้นที่จัดการร้าน</span><a href="{{ route('shop.index') }}">เปิดหน้าร้าน ↗</a></div>
-    @elseif(auth()->check() && !request()->routeIs('shop.index','catalog.*','products.*','accounts.*','gacha.*','contact','news.*','policies.*','wallet.index'))
+    @elseif(auth()->check() && !request()->routeIs('shop.index','catalog.*','products.*','accounts.*','gacha.*','contact','wallet.index'))
         @include('partials.account-nav')
     @endif
-    @if(request()->routeIs('products.show','accounts.show','news.*'))
+    @if(request()->routeIs('products.show','accounts.show'))
     <form action="{{ route('catalog.index') }}" class="global-search mb-8">
         <span aria-hidden="true">⌕</span><input name="q" value="{{ request('q') }}" aria-label="ค้นหาทั้งร้าน" placeholder="ค้นหาไอดีเกม สินค้า หรือบริการ…" maxlength="100"><button aria-label="ค้นหา">ค้นหา</button>
     </form>
@@ -67,7 +64,7 @@
 @if(request()->routeIs('shop.index'))
 @include('partials.home-footer')
 @else
-<footer class="mt-12 border-t border-slate-800 px-4 py-8 text-sm text-slate-500"><div class="mx-auto flex max-w-6xl flex-wrap justify-between gap-4"><p>✦ {{ $storeSettings->name }} · ร้านค้าเกมของคุณ</p><div class="flex gap-5"><a href="{{ route('news.index') }}">ข่าวสาร</a><a href="{{ route('orders.index') }}">ประวัติคำสั่งซื้อ</a><a href="{{ route('contact') }}">ติดต่อร้าน</a></div></div></footer>
+<footer class="mt-12 border-t border-slate-800 px-4 py-8 text-sm text-slate-500"><div class="mx-auto flex max-w-6xl flex-wrap justify-between gap-4"><p>✦ {{ $storeSettings->name }} · ร้านค้าเกมของคุณ</p><div class="flex gap-5"><a href="{{ route('orders.index') }}">ประวัติคำสั่งซื้อ</a><a href="{{ route('contact') }}">ติดต่อร้าน</a></div></div></footer>
 @endif
 @include('partials.store-contact')
 </body></html>

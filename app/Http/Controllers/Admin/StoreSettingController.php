@@ -38,13 +38,11 @@ class StoreSettingController extends Controller {
             'facebook_url'=>$urlRules,'line_url'=>$urlRules,'discord_url'=>$urlRules,
             'opening_hours'=>'nullable|string|max:300',
             'floating_contact_enabled'=>'required|boolean',
-            'announcement_enabled'=>'required|boolean',
-            'announcement'=>'nullable|required_if:announcement_enabled,1|string|max:1000',
         ]);
         $settings = StoreSetting::firstOrNew(['id'=>1]);
         $settings->id = 1;
         $settings->fill($data)->save();
-        return redirect()->route('admin.settings.edit')->with('success','บันทึกช่องทางติดต่อและประกาศร้านแล้ว');
+        return redirect()->route('admin.settings.edit')->with('success','บันทึกช่องทางติดต่อร้านแล้ว');
     }
     public function updateBanner(Request $request, StoreBanner $banner) { return $this->saveBanner($request,$banner); }
     private function saveBanner(Request $request, StoreBanner $banner) {

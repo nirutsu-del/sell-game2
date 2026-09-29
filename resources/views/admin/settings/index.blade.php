@@ -42,14 +42,7 @@
             <p class="text-xs text-slate-400">ปุ่มจะปรากฏเมื่อเปิดใช้งานและมีลิงก์อย่างน้อยหนึ่งช่องทาง</p>
         </div>
     </section>
-    <section class="rounded-2xl border border-slate-700 bg-slate-900 p-5">
-        <h2 class="text-xl font-bold">ประกาศร้าน</h2>
-        <p class="mt-2 text-sm text-slate-400">แสดงแถบประกาศด้านบนหน้าร้าน เช่น โปรโมชัน เวลาทำการ หรือแจ้งหยุดรับงาน ข้อความนี้ไม่ปิดระบบซื้อสินค้า</p>
-        <label class="mt-4">ข้อความประกาศ<textarea name="announcement" rows="3" maxlength="1000">{{ old('announcement',$settings->announcement) }}</textarea></label>
-        <input type="hidden" name="announcement_enabled" value="0">
-        <label class="mt-4"><input type="checkbox" name="announcement_enabled" value="1" @checked(old('announcement_enabled',$settings->announcement_enabled))> เปิดแสดงประกาศ</label>
-    </section>
-    <button class="market-button">บันทึกช่องทางติดต่อและประกาศ</button>
+    <button class="market-button">บันทึกช่องทางติดต่อ</button>
 </form>
 <section class="mt-12">
     <h2 class="text-2xl font-bold">แบนเนอร์หน้าแรก</h2><p class="mt-2 text-sm text-slate-400">เลขลำดับน้อยแสดงก่อน ปิดแบนเนอร์เพื่อซ่อนจากหน้าร้านโดยเก็บข้อมูลไว้ แนะนำภาพแนวนอนอัตราส่วนประมาณ 3:1</p>

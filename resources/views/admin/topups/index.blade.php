@@ -20,20 +20,13 @@
                 <td class="p-4">
                     @if($topup->status === 'pending')
                     @php($restoreForm = $errors->any() && (string) old('review_topup') === (string) $topup->id)
-                    <div class="flex flex-wrap justify-end gap-2">
-                    <details name="topup-review" @if($restoreForm && old('review_action') === 'approve') open @endif>
-                    <summary class="w-fit cursor-pointer rounded bg-emerald-700 px-3 py-2">อนุมัติ</summary>
-                    <form action="{{ route('admin.topups.approve', $topup) }}" method="POST" class="mt-3 w-80 space-y-3 rounded-lg border border-slate-700 p-4">
+                    <div class="flex flex-wrap items-start justify-end gap-2">
+                    <form action="{{ route('admin.topups.approve', $topup) }}" method="POST">
                         @csrf
-                        <input type="hidden" name="review_topup" value="{{ $topup->id }}">
-                        <input type="hidden" name="review_action" value="approve">
-                        <label class="block">ยอดเข้าจริง (บาท)<input aria-label="ยอดเข้าจริง {{ $topup->reference_no }}" name="received_amount" value="{{ $restoreForm ? old('received_amount') : '' }}" type="number" min="1" max="100000" step="0.01" required class="block w-full rounded bg-slate-800 p-2"></label>
-                        <label class="block"><input type="checkbox" name="funds_received" value="1" required> ตรวจบัญชีรับเงินและยอดแล้ว พบยอดเข้าจริง</label>
-                        <button class="rounded bg-emerald-700 px-3 py-2">ยืนยันอนุมัติ</button>
+                        <button type="submit" class="topup-review-action rounded bg-emerald-700">อนุมัติ</button>
                     </form>
-                    </details>
                     <details name="topup-review" @if($restoreForm && old('review_action') === 'reject') open @endif>
-                    <summary class="w-fit cursor-pointer rounded bg-red-900 px-3 py-2">ปฏิเสธ</summary>
+                    <summary class="topup-review-action rounded bg-red-900">ปฏิเสธ</summary>
                     <form action="{{ route('admin.topups.reject', $topup) }}" method="POST" class="mt-3 w-80 rounded-lg border border-slate-700 p-4" onsubmit="return confirm('ยืนยันการปฏิเสธและส่งเหตุผลให้ลูกค้า?')">
                         @csrf
                         <input type="hidden" name="review_topup" value="{{ $topup->id }}">

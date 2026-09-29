@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Category, GameAccount, GachaBox, GachaSpin, News};
+use App\Models\{Category, GameAccount, GachaBox, GachaSpin};
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
     public function index(Request $r)
     {
+        $r->validate([
+            'category' => ['nullable', 'integer', 'exists:categories,id'],
+            'min_price' => ['nullable', 'numeric', 'min:0'],
+            'max_price' => ['nullable', 'numeric', 'min:0'],
+        ]);
         $q = GameAccount::with('category')->where('status', 'available');
-        if ($r->category) $q->where('category_id', $r->category);
-        if ($r->min_price) $q->where('price', '>=', $r->min_price);
-        if ($r->max_price) $q->where('price', '<=', $r->max_price);
+        if ($r->filled('category')) $q->where('category_id', $r->category);
+        if ($r->filled('min_price')) $q->where('price', '>=', $r->min_price);
+        if ($r->filled('max_price')) $q->where('price', '<=', $r->max_price);
 
         return view('store.index', [
             'accounts' => $q->latest()->paginate(12)->withQueryString(),
@@ -68,14 +73,4 @@ class StoreController extends Controller
         return view('gacha.show', compact('box', 'recentSpins', 'boxWinners'));
     }
 
-    public function news()
-    {
-        return view('news.index', ['items' => News::where('is_published', true)->latest('published_at')->paginate(9)]);
-    }
-
-    public function newsShow(News $news)
-    {
-        abort_unless($news->is_published, 404);
-        return view('news.show', compact('news'));
-    }
 }

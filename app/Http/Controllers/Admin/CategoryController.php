@@ -57,7 +57,7 @@ class CategoryController extends Controller
             'slug' => ['nullable', 'string', 'max:100', 'regex:/^[a-z0-9-]+$/', 'unique:categories,slug,' . ($category?->id ?? 'NULL')],
         ]);
 
-        $data['slug'] = $data['slug'] ?: Str::lower(Str::random(12));
+        $data['slug'] = ($data['slug'] ?? null) ?: ($category?->slug ?? Str::lower(Str::random(12)));
         $cursor = !empty($data['parent_id']) ? Category::find($data['parent_id']) : null;
         $visited = [];
         while ($cursor) {
